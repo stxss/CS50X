@@ -4,11 +4,11 @@ Type /help for information on how to use this bot!
 /start - to start the bot
 /help - to prompt the help menu
 
-/tv - to trim the video
-/tvo - to trim the video only (no sound)
-/ta - to trim the audio only (no video)
-/iv - to isolate the video
-/ia - to isolate audio
-/sp - to separate video and audio files
+/transcribe - transcribe the audio/voice file
+/translate - translate the text
+/join - create a video from the audio and an image of your choice
+/trim - trim audio file 
+/timestamp - recreate the text from the audio/voice file with timestamps
+/search - search a word/text 
 
 /share - to share

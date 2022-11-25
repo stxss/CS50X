@@ -26,29 +26,29 @@ async def help_command(client, message):
     h = f.read()
     await message.reply(h)
 
-@app.on_message(filters.command("tv"))
+@app.on_message(filters.command("transcribe"))
 async def help_command(client, message):
-    await message.reply("trim the video")
+    await message.reply("transcribe text")
 
-@app.on_message(filters.command("tvo"))
+@app.on_message(filters.command("translate"))
 async def help_command(client, message):
-    await message.reply("trim the video only (no sound)")
+    await message.reply("translate text")
 
-@app.on_message(filters.command("ta"))    
+@app.on_message(filters.command("join"))    
 async def help_command(client, message):
-    await message.reply("trim the audio only (no video)")
+    await message.reply("create a video from the audio + image")
 
-@app.on_message(filters.command("iv"))
+@app.on_message(filters.command("trim"))
 async def help_command(client, message):
-    await message.reply("isolate the video")
+    await message.reply("trim audio")
 
-@app.on_message(filters.command("ia"))
+@app.on_message(filters.command("timestamp"))
 async def help_command(client, message):
-    await message.reply("isolate audio")
+    await message.reply("recreate the text from the audio/voice file with timestamps")
 
-@app.on_message(filters.command("sp"))
+@app.on_message(filters.command("search"))
 async def help_command(client, message):
-    await message.reply("separate video and audio files")
+    await message.reply("search a string of your choice")
 
 @app.on_message(filters.command("share"))
 async def help_command(client, message):
