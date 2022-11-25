@@ -57,7 +57,7 @@ async def help_command(client, message):
 
 "File handling"
 
-@app.on_message(filters.audio)
+@app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
     await message.reply("So that's an audio")
 
