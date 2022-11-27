@@ -82,37 +82,67 @@ async def filter_audio(client, message):
 
     
 
-    print(message.voice, message.audio)
-    audiofile = await message.download()
-    sound = open(audiofile, "rb")
-    
-    if message.audio:
-        mimetype = "audio/mpeg"
-    elif message.voice:
-        mimetype = "audio/ogg"
+#    print(message.voice, message.audio)
+#    audiofile = await message.download()
+#    sound = open(audiofile, "rb")
+#    
+#    if message.audio:
+#        mimetype = "audio/mpeg"
+#    elif message.voice:
+#        mimetype = "audio/ogg"
+#
+#    source = {
+#        "buffer": sound,
+#        "mimetype": mimetype
+#    }        
+#        
+#    response = await asyncio.create_task(
+#        deepgram.transcription.prerecorded(
+#            source,
+#            {
+#                "punctuate": True 
+#            }
+#        )
+#    )
+#
+#    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+#    
+#    await message.reply(reply)
+#
+#    dir = config.folder_path
+#    for f in os.listdir(dir):
+#        os.remove(os.path.join(dir, f))
+#
+#
+@app.on_callback_query(func=lambda callback: callback.data)
+async def check_callback_one(callback):
+    if callback.data == "transcription":
+        audiofile = await callback.message.download()
+        sound = open(audiofile, "rb")
 
-    source = {
-        "buffer": sound,
-        "mimetype": mimetype
-    }        
-        
-    response = await asyncio.create_task(
-        deepgram.transcription.prerecorded(
-            source,
-            {
-                "punctuate": True 
-            }
+        if callback.message.audio:
+            mimetype = "audio/mpeg"
+        elif callback.message.voice:
+            mimetype = "audio/ogg"
+
+        source = {
+            "buffer": sound,
+            "mimetype": mimetype
+        }        
+
+        response = await asyncio.create_task(
+            deepgram.transcription.prerecorded(
+                source,
+                {
+                    "punctuate": True 
+                }
+            )
         )
-    )
 
-    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
-    
-    await message.reply(reply)
+        reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
 
-    dir = config.folder_path
-    for f in os.listdir(dir):
-        os.remove(os.path.join(dir, f))
-
+        await callback.message.reply(reply)
+    #elif callback.data == "audio_trim":
 
 
 app.run()
