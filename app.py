@@ -71,7 +71,8 @@ async def filter_audio(client, message):
     
     if message.audio:
         mimetype = "audio/mpeg"
-    
+    elif message.voice:
+        mimetype = "audio/ogg"
     source = {
         "buffer": sound,
         "mimetype": mimetype
