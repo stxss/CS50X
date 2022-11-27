@@ -111,7 +111,7 @@ async def filter_audio(client, message):
         os.remove(os.path.join(dir, f))
 
 @app.on_callback_query()
-async def checker(update: Update, context: CallbackContext):
+async def checker():
 
 
 app.run()
