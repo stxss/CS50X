@@ -66,13 +66,21 @@ async def filter_audio(client, message):
     print(message.voice, message.audio)
 
     if message.audio:
+        FILE = 
+
+        
         await message.reply("So that's an audio")
     elif  message.voice:
+        
+        
+        
         await message.reply("So that's a voice message")
-    #source = {
-    #    "buffer": audio,
-    #    "mimetype": MIMETYPE
-    #}
+
+
+    source = {
+        "buffer": audio,
+        "mimetype": MIMETYPE
+    }
     #await message.reply("So that's an audio")
 
 
