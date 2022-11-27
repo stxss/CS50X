@@ -1,5 +1,6 @@
 from deepgram import Deepgram
 import asyncio, json
+import requests
 #from asyncio import run
 
 from os import getenv
@@ -66,8 +67,9 @@ async def filter_audio(client, message):
     print(message.voice, message.audio)
 
     if message.audio:
-
-        audiofile = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/<file_path>'
+        
+        file_url = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/getFile'
+        file_content = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/<file_path>'
 
         sound = open(audiofile, "rb")
         mimetype = "audio/mpeg"
