@@ -68,6 +68,12 @@ async def filter_audio(client, message):
     if message.audio:
         sound = open(message.audio, "rb")
         mimetype = "audio/mpeg"
+        
+        source = {
+            "buffer": sound,
+            "mimetype": mimetype
+        }        
+        
         response = await asyncio.create_task(
             deepgram.transcription.prerecorded(
                 source,
@@ -76,7 +82,10 @@ async def filter_audio(client, message):
                 }
             )
         )
+        
         print(json.dumps(response, indent=4))
+        print(response["results"]["channels"][0]["alternatives"][0]["transcript"])
+        
         await message.reply("So that's an audio")
     #elif  message.voice:
     #    
@@ -85,10 +94,7 @@ async def filter_audio(client, message):
     #    await message.reply("So that's a voice message")
 
 
-    source = {
-        "buffer": sound,
-        "mimetype": mimetype
-    }
+
 
 
     #await message.reply("So that's an audio")
