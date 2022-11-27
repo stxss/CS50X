@@ -8,7 +8,7 @@ from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
 from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup)
-from pyrogram.handlers import (callback_query_handler, inline_query_handler)
+from pyrogram.handlers import (callback_query_handler)
 
 
 load_dotenv()
@@ -82,7 +82,7 @@ async def filter_audio(client, message):
 
     
 
-
+    
     print(message.voice, message.audio)
     audiofile = await message.download()
     sound = open(audiofile, "rb")
@@ -116,8 +116,5 @@ async def filter_audio(client, message):
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
-
-#@app.on_message(filters.command("inline"))
-#async def choice_one(client, message):
     
 app.run()
