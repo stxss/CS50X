@@ -1,10 +1,10 @@
 from deepgram import Deepgram
 import asyncio, json
 import requests
+import config
+import os
 
-
-
-from os import getenv
+from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
 
@@ -93,9 +93,9 @@ async def filter_audio(client, message):
         
         await message.reply(reply)
 
-
-
-
+        dir = config.folder_path
+        for f in os.listdir(dir):
+            os.remove(os.path.join(dir, f))
 
     #await message.reply("So that's an audio")
 
