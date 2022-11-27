@@ -6,7 +6,7 @@ import os
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
-from pyrogram import Client, filters
+from pyrogram import Client, filters, types
 
 load_dotenv()
 
@@ -66,6 +66,10 @@ async def help_command(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
+
+    transcribe = types.InlineKeyboardButton("Transcribe", callback_data="transcribe")
+    trim = types.InlineKeyboardButton("Trim",)
+
     print(message.voice, message.audio)
     audiofile = await message.download()
     sound = open(audiofile, "rb")
