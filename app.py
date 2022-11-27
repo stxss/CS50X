@@ -71,13 +71,13 @@ async def filter_audio(client, message):
         file_url = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/getFile'
         file_content = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/' + '{file_path}'
 
-        resp = requests.post(url= file_url, params={"file_id": message.audio.file_id})
-        json_response = json.loads(resp.content)
+        response = requests.post(url= file_url, params={"file_id": message.audio.file_id})
+        json_response = json.loads(response.content)
 
-        if resp.status_code != 200 or not json_response("ok"):
+        if response.status_code != 200 or not json_response("ok"):
             raise FileNotFoundError()
-        resp = requests.post(url= file_url.format(file_path=json_response["result"]["file_path"]), params={"file_id": message.audio["file_id"]})
-        if resp.status_code != 200:
+        response = requests.post(url= file_content.format(file_path=json_response["result"]["file_path"]))
+        if response.status_code != 200:
             raise FileNotFoundError()
         print("all good?")
         
