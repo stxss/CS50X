@@ -74,7 +74,7 @@ async def filter_audio(client, message):
         response = requests.post(url= file_url, params={"file_id": message.audio.file_id})
         json_response = json.loads(response.content)
 
-        if response.status_code != 200 or not json_response("ok"):
+        if response.status_code != 200 or not json_response.get("ok"):
             raise FileNotFoundError()
         response = requests.post(url= file_content.format(file_path=json_response["result"]["file_path"]))
         if response.status_code != 200:
