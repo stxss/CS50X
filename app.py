@@ -68,7 +68,7 @@ async def help_command(client, message):
 async def filter_audio(client, message):
 
     transcribe = types.InlineKeyboardButton("Transcribe", callback_data="transcribe")
-    trim = types.InlineKeyboardButton("Trim",)
+    trim = types.InlineKeyboardButton("Trim audio", callback_data="trim audio")
 
     print(message.voice, message.audio)
     audiofile = await message.download()
