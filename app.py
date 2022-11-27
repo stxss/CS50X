@@ -64,6 +64,12 @@ async def help_command(client, message):
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
     print(message.voice, message.audio)
+
+    #if message.
+    #source = {
+    #    "buffer": audio,
+    #    "mimetype": MIMETYPE
+    #}
     await message.reply("So that's an audio")
 
 
