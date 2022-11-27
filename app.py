@@ -66,7 +66,10 @@ async def filter_audio(client, message):
     print(message.voice, message.audio)
 
     if message.audio:
-        sound = open(message.audio, "rb")
+
+        audiofile = "https://api.telegram.org/file/bot<token>/<file_path>"
+
+        sound = open(audiofile, "rb")
         mimetype = "audio/mpeg"
         
         source = {
