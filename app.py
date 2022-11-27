@@ -71,25 +71,35 @@ async def filter_audio(client, message):
         file_url = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/getFile'
         file_content = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/' + '{file_path}'
 
+        resp = requests.post(url= file_url, params={"file_id": message.audio.file_id})
+        json_response = json.loads(resp.content)
+
+        if resp.status_code != 200 or not json_response("ok"):
+            raise FileNotFoundError()
+        resp = requests.post(url= file_url.format(file_path=json_response["result"]["file_path"]), params={"file_id": message.audio["file_id"]})
+        if resp.status_code != 200:
+            raise FileNotFoundError()
+        print("all good?")
+        
         #sound = open(, "rb")
-        mimetype = "audio/mpeg"
+        #mimetype = "audio/mpeg"
+        #
+        #source = {
+        #    "buffer": sound,
+        #    "mimetype": mimetype
+        #}        
+        #
+        #response = await asyncio.create_task(
+        #    deepgram.transcription.prerecorded(
+        #        source,
+        #        {
+        #            "punctuate": True 
+        #        }
+        #    )
+        #)
         
-        source = {
-            "buffer": sound,
-            "mimetype": mimetype
-        }        
-        
-        response = await asyncio.create_task(
-            deepgram.transcription.prerecorded(
-                source,
-                {
-                    "punctuate": True 
-                }
-            )
-        )
-        
-        print(json.dumps(response, indent=4))
-        print(response["results"]["channels"][0]["alternatives"][0]["transcript"])
+        #print(json.dumps(response, indent=4))
+        #print(response["results"]["channels"][0]["alternatives"][0]["transcript"])
         
         await message.reply("So that's an audio")
     #elif  message.voice:
