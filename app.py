@@ -1,7 +1,6 @@
 from deepgram import Deepgram
 import asyncio, json
 import requests
-#from asyncio import run
 
 from os import getenv
 from dotenv import load_dotenv
