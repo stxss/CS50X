@@ -65,12 +65,15 @@ async def help_command(client, message):
 async def filter_audio(client, message):
     print(message.voice, message.audio)
 
-    #if message.
+    if message["_"] == "Audio":
+        await message.reply("So that's an audio")
+    elif  message["_"] == "Voice":
+        await message.reply("So that's a voice message")
     #source = {
     #    "buffer": audio,
     #    "mimetype": MIMETYPE
     #}
-    await message.reply("So that's an audio")
+    #await message.reply("So that's an audio")
 
 
 app.run()
