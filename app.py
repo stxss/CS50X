@@ -68,8 +68,6 @@ async def filter_audio(client, message):
     print(message.voice, message.audio)
 
     if message.audio:
-
-        
         audiofile = await message.download()
         sound = open(audiofile, "rb")
         mimetype = "audio/mpeg"
@@ -87,8 +85,7 @@ async def filter_audio(client, message):
                 }
             )
         )
-        
-        #print(json.dumps(response, indent=4))
+
         reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
         
         await message.reply(reply)
@@ -96,8 +93,6 @@ async def filter_audio(client, message):
         dir = config.folder_path
         for f in os.listdir(dir):
             os.remove(os.path.join(dir, f))
-
-    #await message.reply("So that's an audio")
 
 
 app.run()
