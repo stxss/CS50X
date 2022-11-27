@@ -80,9 +80,14 @@ async def filter_audio(client, message):
     )
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)
 
-    
+
+@app.on_chosen_inline_result()
+async def choice_one(client, message):
+    ...
 
 
+@...
+async def filter_audio(client, message):
     print(message.voice, message.audio)
     audiofile = await message.download()
     sound = open(audiofile, "rb")
@@ -110,14 +115,11 @@ async def filter_audio(client, message):
     
     await message.reply(reply)
 
-
-
     dir = config.folder_path
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
 
-#@app.on_message(filters.command("inline"))
-#async def choice_one(client, message):
-    
+
+
 app.run()
