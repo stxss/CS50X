@@ -68,35 +68,36 @@ async def filter_audio(client, message):
 
     if message.audio:
         
-        file_url = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/getFile'
-        file_content = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/' + '{file_path}'
+        #file_url = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/getFile'
+        #file_content = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/' + '{file_path}'
 
-        response = requests.post(url= file_url, params={"file_id": message.audio.file_id})
-        json_response = json.loads(response.content)
-
-        if response.status_code != 200 or not json_response.get("ok"):
-            raise FileNotFoundError()
-        response = requests.post(url= file_content.format(file_path=json_response["result"]["file_path"]))
-        if response.status_code != 200:
-            raise FileNotFoundError()
-        print("all good?")
+#        response = requests.post(url= file_url, params={"file_id": message.audio.file_id})
+#        json_response = json.loads(response.content)
+#
+#        if response.status_code != 200 or not json_response.get("ok"):
+#            raise FileNotFoundError()
+#        response = requests.post(url= file_content.format(file_path=json_response["result"]["file_path"]))
+#        if response.status_code != 200:
+#            raise FileNotFoundError()
+#        print("all good?")
         
-        #sound = open(, "rb")
-        #mimetype = "audio/mpeg"
-        #
-        #source = {
-        #    "buffer": sound,
-        #    "mimetype": mimetype
-        #}        
-        #
-        #response = await asyncio.create_task(
-        #    deepgram.transcription.prerecorded(
-        #        source,
-        #        {
-        #            "punctuate": True 
-        #        }
-        #    )
-        #)
+        audiofile = message.download()
+        sound = open(, "rb")
+        mimetype = "audio/mpeg"
+        
+        source = {
+            "buffer": sound,
+            "mimetype": mimetype
+        }        
+        
+        response = await asyncio.create_task(
+            deepgram.transcription.prerecorded(
+                source,
+                {
+                    "punctuate": True 
+                }
+            )
+        )
         
         #print(json.dumps(response, indent=4))
         #print(response["results"]["channels"][0]["alternatives"][0]["transcript"])
