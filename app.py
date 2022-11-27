@@ -114,8 +114,8 @@ async def filter_audio(client, message):
 #        os.remove(os.path.join(dir, f))
 #
 #
-@app.on_callback_query(func=lambda callback: callback.data)
-async def check_callback_one(callback):
+@app.on_callback_query()
+async def check_callback_one(client, callback):
     if callback.data == "transcription":
         audiofile = await callback.message.download()
         sound = open(audiofile, "rb")
