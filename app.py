@@ -25,6 +25,7 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 async def help_command(client, message):
     print(message.chat.username, message.text)
     await message.reply("Hi, I'll help you trim your videos")
+    await message.reply()
 
 @app.on_message(filters.command("help"))
 async def help_command(client, message):
@@ -73,7 +74,7 @@ async def filter_audio(client, message):
         mimetype = "audio/mpeg"
     elif message.voice:
         mimetype = "audio/ogg"
-        
+
     source = {
         "buffer": sound,
         "mimetype": mimetype
