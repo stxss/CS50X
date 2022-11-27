@@ -66,16 +66,16 @@ async def help_command(client, message):
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
     print(message.voice, message.audio)
-
+    audiofile = await message.download()
+    sound = open(audiofile, "rb")
+    
     if message.audio:
-        audiofile = await message.download()
-        sound = open(audiofile, "rb")
-        mimetype = "audio/mpeg"
-        
-        source = {
-            "buffer": sound,
-            "mimetype": mimetype
-        }        
+        mimetype = 
+    
+    source = {
+        "buffer": sound,
+        "mimetype": mimetype
+    }        
         
         response = await asyncio.create_task(
             deepgram.transcription.prerecorded(
