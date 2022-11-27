@@ -68,7 +68,15 @@ async def help_command(client, message):
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
 
-
+    choices = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("Transcribe", callback_data="transcription"),
+                InlineKeyboardButton("Trim audio", callback_data="audio_trim")
+            ]
+        ]
+    )
+    await message.reply("Please choose what you want to do with the file", reply_markup=choices)
 
     print(message.voice, message.audio)
     audiofile = await message.download()
@@ -97,20 +105,14 @@ async def filter_audio(client, message):
     
     await message.reply(reply)
 
+
+
     dir = config.folder_path
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
 
-@app.on_message(filters.command("inline"))
-async def choice_one(client, message):
-    choices = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("Transcribe", callback_data="transcription"),
-                InlineKeyboardButton("Trim audio", callback_data="audio_trim")
-            ]
-        ]
-    )
-    await message.reply("Please choose what you want to do with the file", reply_markup=choices)
+#@app.on_message(filters.command("inline"))
+#async def choice_one(client, message):
+    
 app.run()
