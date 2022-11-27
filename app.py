@@ -81,7 +81,7 @@ async def filter_audio(client, message):
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)
 
     
-@app.on_callback_query(filters.regex("Transcribe"))
+
 
     print(message.voice, message.audio)
     audiofile = await message.download()
@@ -116,5 +116,8 @@ async def filter_audio(client, message):
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
+
+#@app.on_message(filters.command("inline"))
+#async def choice_one(client, message):
     
 app.run()
