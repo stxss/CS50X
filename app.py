@@ -110,7 +110,8 @@ async def filter_audio(client, message):
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
-
+@app.on_callback_query()
+async def checker(update: Update, context: CallbackContext):
 
 
 app.run()
