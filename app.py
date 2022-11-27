@@ -15,6 +15,8 @@ app = Client(
     bot_token = getenv("API_KEY")
 )
 
+deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
+
 "Command handling"
 
 @app.on_message(filters.command("start"))
