@@ -102,4 +102,6 @@ async def filter_audio(client, message):
         os.remove(os.path.join(dir, f))
 
 
+@app.on_callback_query
+
 app.run()
