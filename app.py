@@ -6,7 +6,7 @@ import os
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
-from pyrogram import Client, filters
+from pyrogram import Client, filters, types
 from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup)
 from pyrogram.handlers import (callback_query_handler)
 
@@ -70,21 +70,20 @@ async def help_command(client, message):
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
 
-    choices = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("Transcribe", callback_data="transcription"),
-                InlineKeyboardButton("Trim audio", callback_data="audio_trim")
-            ]
-        ]
-    )
+    transcribe = InlineKeyboardButton("Transcribe", callback_data="transcription"),
+    trim = InlineKeyboardButton("Trim audio", callback_data="audio_trim")
+    
+    choices = types.InlineKeyboardMarkup(transcribe, trim)
+    choices.add(transcribe)
+    choices.add(trim)
+
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)
 
-@app.on_callback_query()
-async def transcription(client, )
+#@app.on_callback_query()
+#async def transcription(client, )
+#
 
-
-@...
+@app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
     print(message.voice, message.audio)
     audiofile = await message.download()
