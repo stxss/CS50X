@@ -1,4 +1,6 @@
-from asyncio import run
+from deepgram import Deepgram
+import asyncio, json
+#from asyncio import run
 
 from os import getenv
 from dotenv import load_dotenv
