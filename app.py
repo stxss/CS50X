@@ -82,8 +82,7 @@ async def filter_audio(client, message):
 
 
 @app.on_chosen_inline_result()
-async def choice_one(client, message):
-    ...
+async def choice_transcription(client, message):
 
 
 @...
