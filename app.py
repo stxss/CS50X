@@ -19,7 +19,7 @@ app = Client(
 
 @app.on_message(filters.command("start"))
 async def help_command(client, message):
-    #print(message.chat.username, message.text)
+    print(message.chat.username, message.text)
     await message.reply("Hi, I'll help you trim your videos")
 
 @app.on_message(filters.command("help"))
@@ -61,6 +61,7 @@ async def help_command(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
+    print(message)
     await message.reply("So that's an audio")
 
 
