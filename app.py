@@ -81,8 +81,8 @@ async def filter_audio(client, message):
 #            raise FileNotFoundError()
 #        print("all good?")
         
-        audiofile = message.download()
-        sound = open(, "rb")
+        audiofile = message.download(progress(current, total))
+        sound = open(audiofile, "rb")
         mimetype = "audio/mpeg"
         
         source = {
