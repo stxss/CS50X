@@ -67,21 +67,9 @@ async def filter_audio(client, message):
     print(message.voice, message.audio)
 
     if message.audio:
-        
-        #file_url = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/getFile'
-        #file_content = f'https://api.telegram.org/file/bot{getenv("API_KEY")}/' + '{file_path}'
 
-#        response = requests.post(url= file_url, params={"file_id": message.audio.file_id})
-#        json_response = json.loads(response.content)
-#
-#        if response.status_code != 200 or not json_response.get("ok"):
-#            raise FileNotFoundError()
-#        response = requests.post(url= file_content.format(file_path=json_response["result"]["file_path"]))
-#        if response.status_code != 200:
-#            raise FileNotFoundError()
-#        print("all good?")
         
-        audiofile = message.download(progress(current, total))
+        audiofile = await message.download()
         sound = open(audiofile, "rb")
         mimetype = "audio/mpeg"
         
@@ -100,14 +88,9 @@ async def filter_audio(client, message):
         )
         
         #print(json.dumps(response, indent=4))
-        #print(response["results"]["channels"][0]["alternatives"][0]["transcript"])
+        reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
         
-        await message.reply("So that's an audio")
-    #elif  message.voice:
-    #    
-    #    
-    #    
-    #    await message.reply("So that's a voice message")
+        await message.reply(reply)
 
 
 
