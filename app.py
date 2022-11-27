@@ -7,7 +7,9 @@ import os
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
-from pyrogram.types import (ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup)
+from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup)
+from pyrogram.handlers import (callback_query_handler, inline_query_handler)
+
 
 load_dotenv()
 
