@@ -70,29 +70,29 @@ async def filter_audio(client, message):
     sound = open(audiofile, "rb")
     
     if message.audio:
-        mimetype = 
+        mimetype = "audio/mpeg"
     
     source = {
         "buffer": sound,
         "mimetype": mimetype
     }        
         
-        response = await asyncio.create_task(
-            deepgram.transcription.prerecorded(
-                source,
-                {
-                    "punctuate": True 
-                }
-            )
+    response = await asyncio.create_task(
+        deepgram.transcription.prerecorded(
+            source,
+            {
+                "punctuate": True 
+            }
         )
+    )
 
-        reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
-        
-        await message.reply(reply)
+    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+    
+    await message.reply(reply)
 
-        dir = config.folder_path
-        for f in os.listdir(dir):
-            os.remove(os.path.join(dir, f))
+    dir = config.folder_path
+    for f in os.listdir(dir):
+        os.remove(os.path.join(dir, f))
 
 
 app.run()
