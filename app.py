@@ -65,9 +65,9 @@ async def help_command(client, message):
 async def filter_audio(client, message):
     print(message.voice, message.audio)
 
-    if message["_"] == "Audio":
+    if message.audio:
         await message.reply("So that's an audio")
-    elif  message["_"] == "Voice":
+    elif  message.voice:
         await message.reply("So that's a voice message")
     #source = {
     #    "buffer": audio,
