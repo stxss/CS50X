@@ -79,9 +79,11 @@ async def filter_audio(client, message):
 
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)
 
-#@app.on_callback_query()
-#async def transcription(client, )
-#
+@app.on_callback_query(text =["Transcribe", "Trim audio"])
+async def choice_one(call: types.CallbackQuery):
+    if call == "Transcribe":
+        await call.message
+
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
