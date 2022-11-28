@@ -80,7 +80,7 @@ async def filter_audio(client, message):
     )
 
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
-
+    await choices_first(choices, callback=choices.callback_data)
 #    audiofile = await message.download()
 #    sound = open(audiofile, "rb")
 #
@@ -114,35 +114,8 @@ async def filter_audio(client, message):
 
 @app.on_callback_query()
 async def choices_first(message, callback: CallbackQuery):
-    message=reply_to_message,
     if callback.data == "transcribe":
-        
-        audiofile = await callback.message.download()
-        sound = open(audiofile, "rb")
-
-        if callback.message.audio:
-            mimetype = "audio/mpeg"
-        elif callback.message.voice:
-            mimetype = "audio/ogg"
-
-        source = {
-            "buffer": sound,
-            "mimetype": mimetype
-        }        
-
-        response = await asyncio.create_task(
-            deepgram.transcription.prerecorded(
-                source,
-                {
-                    "punctuate": True 
-                }
-            )
-        )
-
-        reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
-
-        await callback.message.reply(reply)
-        #await callback.message.reply("transcribe")
+        await callback.message.reply("transcribe")
     elif callback.data == "trim":
         await callback.message.reply("trim")
 
