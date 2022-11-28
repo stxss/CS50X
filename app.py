@@ -30,9 +30,8 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 @app.on_message(filters.command("start"))
 async def help_command(client, message):
-    print(message.chat.username, message.text)
+    #print(message.chat.username, message.text)
     await message.reply("Hi, I'll help you trim your videos")
-    await message.reply()
 
 @app.on_message(filters.command("help"))
 async def help_command(client, message):
