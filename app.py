@@ -105,19 +105,20 @@ async def filter_audio(client, message):
 
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
 
-    await message.reply(reply)
+    #await message.reply(reply)
 
     dir = config.folder_path
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
 
-#@app.on_callback_query()
-#async def choices_first(client, callback: CallbackQuery):
-#    if callback.data == "transcribe":
-#        await callback.message.answer("transcribe")
-#    elif callback.data == "trim":
-#        await callback.message.answer("trim")
+@app.on_callback_query()
+async def choices_first(client, callback: CallbackQuery):
+    if callback.data == "transcribe":
+        await callback.message.reply(reply)
+        await callback.message.reply("transcribe")
+    elif callback.data == "trim":
+        await callback.message.reply("trim")
 
 
 app.run()
