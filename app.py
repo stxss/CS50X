@@ -82,14 +82,15 @@ async def filter_audio(client, message):
 
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
 
-    audiofile = await message.download("audiofile")
-    sound = open(audiofile, "rb")
 
     if message.audio:
+        audiofile = await message.download(f"{message.chat.id}/audiofile.mp3")
         mimetype = "audio/mpeg"
     elif message.voice:
+        audiofile = await message.download(f"{message.chat.id}/voicefile.ogg")
         mimetype = "audio/ogg"
 
+    sound = open(audiofile, "rb")
     source = {
         "buffer": sound,
         "mimetype": mimetype
@@ -117,13 +118,13 @@ async def filter_audio(client, message):
     
 
 
-#@app.on_callback_query()
-#async def choices_first(callback: CallbackQuery, file_id=filter_audio.file_id):
-#    if callback.data == "transcribe":
-#        
-#        await callback.message.reply()
-#    elif callback.data == "trim":
-#        await callback.message.reply("trim")
+@app.on_callback_query()
+async def choices_first(callback: CallbackQuery, file_id=filter_audio.file_id):
+    if callback.data == "transcribe":
+        
+        await callback.message.reply()
+    elif callback.data == "trim":
+        await callback.message.reply("trim")
 
 
 app.run()
