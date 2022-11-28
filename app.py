@@ -115,9 +115,9 @@ async def filter_audio(client, message):
 
     #await message.reply(reply)
 
-    #dir = config.folder_path
-    #for f in os.listdir(dir):
-    #    os.remove(os.path.join(dir, f))
+    dir = config.folder_path
+    for f in os.listdir(dir):
+        os.remove(os.path.join(config.folder_path, f))
     
 
 @app.on_message(~filters.audio | ~filters.voice)
@@ -130,6 +130,7 @@ async def choice_trim(message, callback: CallbackQuery):
     if callback.data=="trim":
         await callback.message.reply("trim") 
     elif callback.data=="transcribe":
+        await callback.answer(cache_time=60)
         with open("reply_to_user.txt", "r") as f:
             reply = f.read()
         await callback.message.reply(reply) 
