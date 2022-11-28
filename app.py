@@ -80,7 +80,7 @@ async def filter_audio(client, message):
         ]
     )
 
-    await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
+    await message.reply_text("Please choose what you want to do with the file",quote=True, reply_markup=choices)  
 
 
     if message.audio:
@@ -116,7 +116,7 @@ async def filter_audio(client, message):
 
 
 @app.on_callback_query()
-async def choices_first(callback: CallbackQuery):
+async def choices_first(callback: CallbackQuery, message):
     if callback.data == "transcribe":
         
         sound = open("audiofile.mp3", "rb")
