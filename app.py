@@ -80,7 +80,7 @@ async def filter_audio(client, message):
     )
 
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
-    await choices_first(choices, callback=choices.callback_data)
+    await choices_first(choices, callback=CallbackQuery)
 #    audiofile = await message.download()
 #    sound = open(audiofile, "rb")
 #
