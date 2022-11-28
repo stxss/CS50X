@@ -41,15 +41,15 @@ async def help_command(client, message):
 
 @app.on_message(filters.command("transcribe"))
 async def help_command(client, message):
-    await message.reply("transcribe text")
+    await message.reply("Please, send an audio file or a voice message!")
 
 @app.on_message(filters.command("translate"))
 async def help_command(client, message):
-    await message.reply("translate text")
+    await message.reply("Please, a text to translate")
 
 @app.on_message(filters.command("join"))    
 async def help_command(client, message):
-    await message.reply("create a video from the audio + image")
+    await message.reply("Please, send an image and a voice file ")
 
 @app.on_message(filters.command("trim"))
 async def help_command(client, message):
