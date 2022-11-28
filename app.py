@@ -124,8 +124,9 @@ async def filter_audio(client, message):
 #    await callback.message.reply("trim") 
 
 
-@app.on_callback_query(filters.inl)
+@app.on_callback_query(filters.inline_keyboard)
 async def choice_trim(message, callback: CallbackQuery):
-    await callback.message.reply("trim")
+    if callback.data=="trim":
+        await callback.message.reply("trim")
 
 app.run()
