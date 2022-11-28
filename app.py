@@ -115,7 +115,7 @@ async def filter_audio(client, message):
     
 
 
-@app.on_callback_query(filters="transcribe")
+@app.callback_query_handler(filters="transcribe")
 async def choice_transcribe(message, callback: CallbackQuery):
     await callback.message.reply("transcribe")
 
