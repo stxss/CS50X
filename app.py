@@ -69,27 +69,27 @@ async def help_command(client, message):
 "File handling"
 
 
-@app.on_message(filters.audio | filters.voice)
-async def filter_audio(client, message):
-    print(message)
-    choices = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                InlineKeyboardButton("Trim audio", callback_data="trim")
-            ]
-        ]
-    )
-
-    await message.reply_text("Please choose what you want to do with the file",quote=True, reply_markup=choices)  
-
-
-    if message.audio:
-        audiofile = await message.download(f"downloads/{message.chat.id}/audiofile.mp3")
-        mimetype = "audio/mpeg"
-    elif message.voice:
-        audiofile = await message.download(f"downloads/{message.chat.id}/voicefile.ogg")
-        mimetype = "audio/ogg"
+#@app.on_message(filters.audio | filters.voice)
+#async def filter_audio(client, message):
+#    print(message)
+#    choices = InlineKeyboardMarkup(
+#        [
+#            [
+#                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+#                InlineKeyboardButton("Trim audio", callback_data="trim")
+#            ]
+#        ]
+#    )
+#
+#    await message.reply_text("Please choose what you want to do with the file",quote=True, reply_markup=choices)  
+#
+#
+#    if message.audio:
+#        audiofile = await message.download(f"downloads/{message.chat.id}/audiofile.mp3")
+#        mimetype = "audio/mpeg"
+#    elif message.voice:
+#        audiofile = await message.download(f"downloads/{message.chat.id}/voicefile.ogg")
+#        mimetype = "audio/ogg"
 
 #    sound = open(audiofile, "rb")
 #    source = {
@@ -114,6 +114,54 @@ async def filter_audio(client, message):
     #for f in os.listdir(dir):
     #    os.remove(os.path.join(dir, f))
     
+
+@app.on_message(filters.audio)
+async def filter_audio(client, message):
+    print(message)
+    choices = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("Transcribe audio", callback_data="transcribe_audio"),
+                InlineKeyboardButton("Trim audio", callback_data="trim_audio")
+            ]
+        ]
+    )
+
+    await message.reply_text("Please choose what you want to do with the file",quote=True, reply_markup=choices)  
+
+
+    if message.audio:
+        audiofile = await message.download(f"downloads/{message.chat.id}/audiofile.mp3")
+        mimetype = "audio/mpeg"
+    #elif message.voice:
+    #    audiofile = await message.download(f"downloads/{message.chat.id}/voicefile.ogg")
+    #    mimetype = "audio/ogg"
+
+#    sound = open(audiofile, "rb")
+#    source = {
+#        "buffer": sound,
+#        "mimetype": mimetype
+#    }        
+#
+#    response = await asyncio.create_task(
+#        deepgram.transcription.prerecorded(
+#            source,
+#            {
+#                "punctuate": True 
+#            }
+#        )
+#    )
+#    print(json.dumps(response, indent=4))
+#    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
+#
+#    await message.reply(reply)
+
+    #dir = config.folder_path
+    #for f in os.listdir(dir):
+    #    os.remove(os.path.join(dir, f))
+    
+
+
 @app.on_message(~filters.audio | ~filters.voice)
 async def invalid_file(client, message):
     await message.reply("Invalid file!! Please retry")
