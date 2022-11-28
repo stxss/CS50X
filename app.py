@@ -69,7 +69,7 @@ async def help_command(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
-
+    print(message.id)
     choices = InlineKeyboardMarkup(
         [
             [
@@ -112,12 +112,13 @@ async def filter_audio(client, message):
         os.remove(os.path.join(dir, f))
 
 
-#@app.on_callback_query()
-#async def choices_first(callback: CallbackQuery):
-#    if callback.data == "transcribe":
-#        await callback.message.reply("transcribe")
-#    elif callback.data == "trim":
-#        await callback.message.reply("trim")
+@app.on_callback_query()
+async def choices_first(callback: CallbackQuery):
+    if callback.data == "transcribe":
+        
+        await callback.message.reply("transcribe")
+    elif callback.data == "trim":
+        await callback.message.reply("trim")
 
 
 app.run()
