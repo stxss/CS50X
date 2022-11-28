@@ -69,7 +69,7 @@ async def help_command(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
-    message_to_callback = message.id
+    print(message.id)
     choices = InlineKeyboardMarkup(
         [
             [
