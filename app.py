@@ -77,11 +77,8 @@ async def filter_audio(client, message):
             InlineKeyboardButton("Trim audio", callback_data="trim")
         ]
     )
-    
 
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
-
-    if callback.data == "transcribe":
 
     audiofile = await message.download()
     sound = open(audiofile, "rb")
@@ -114,16 +111,12 @@ async def filter_audio(client, message):
         os.remove(os.path.join(dir, f))
 
 
-@app.on_callback_query()
-async def choices_first(callback: CallbackQuery):
-    if callback.data == "transcribe":
-        await callback.message.answer("transcribe")
-    elif callback.data == "trim":
-        await callback.message.answer("trim")
-
-
-
-
+#@app.on_callback_query()
+#async def choices_first(client, callback: CallbackQuery):
+#    if callback.data == "transcribe":
+#        await callback.message.answer("transcribe")
+#    elif callback.data == "trim":
+#        await callback.message.answer("trim")
 
 
 app.run()
