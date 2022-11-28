@@ -73,8 +73,8 @@ async def filter_audio(client, message):
     choices = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Transcribe", callback_data="transcription"),
-                InlineKeyboardButton("Trim audio", callback_data="audio_trim")
+                InlineKeyboardButton("Transcribe", command="transcribe"),
+                InlineKeyboardButton("Trim audio", command="trim")
             ]
         ]
     )
