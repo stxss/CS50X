@@ -70,45 +70,44 @@ async def help_command(client, message):
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
 
+    tran = InlineKeyboardButton("Transcribe", callback_data="transcribe")
+
     choices = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Transcribe", command="transcribe"),
-                InlineKeyboardButton("Trim audio", command="trim")
+                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+                InlineKeyboardButton("Trim audio", callback_data="trim")
             ]
         ]
     )
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)
 
-    
+    await tran.click(0)
+    audiofile = await message.download()
+    sound = open(audiofile, "rb")
 
-    if InlineKeyboardButton("Transcribe"):
+    if message.audio:
+        mimetype = "audio/mpeg"
+    elif message.voice:
+        mimetype = "audio/ogg"
 
-        audiofile = await message.download()
-        sound = open(audiofile, "rb")
+    source = {
+        "buffer": sound,
+        "mimetype": mimetype
+    }        
 
-        if message.audio:
-            mimetype = "audio/mpeg"
-        elif message.voice:
-            mimetype = "audio/ogg"
-
-        source = {
-            "buffer": sound,
-            "mimetype": mimetype
-        }        
-
-        response = await asyncio.create_task(
-            deepgram.transcription.prerecorded(
-                source,
-                {
-                    "punctuate": True 
-                }
-            )
+    response = await asyncio.create_task(
+        deepgram.transcription.prerecorded(
+            source,
+            {
+                "punctuate": True 
+            }
         )
+    )
 
-        reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
 
-        await message.reply(reply)
+    await message.reply(reply)
 
     dir = config.folder_path
     for f in os.listdir(dir):
