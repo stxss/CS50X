@@ -7,7 +7,7 @@ import os
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
-from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, Message)
+from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery)
 from pyrogram.handlers import (callback_query_handler)
 
 
@@ -70,19 +70,14 @@ async def help_command(client, message):
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
 
-    tran = InlineKeyboardButton("Transcribe", callback_data="transcribe")
+    choices = InlineKeyboardMarkup()
+    transcription = InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+    trimming = InlineKeyboardButton("Trim audio", callback_data="trim")
 
-    choices = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                InlineKeyboardButton("Trim audio", callback_data="trim")
-            ]
-        ]
-    )
+    choices.add(transcription, trimming)
+
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)
-
-    await tran.click(0)
+    
     audiofile = await message.download()
     sound = open(audiofile, "rb")
 
@@ -112,6 +107,20 @@ async def filter_audio(client, message):
     dir = config.folder_path
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
+
+
+@app.on_callback_query()
+async def choices_first(callback: CallbackQuery):
+    if callback.data == "transcribe":
+
+        await app.filter_audio(chat_id=callback.message.chat.id)
+        #await callback.message.answer("transcribe")
+    elif callback.data == "trim":
+        await callback.message.answer("trim")
+
+
+
+
 
 
 app.run()
