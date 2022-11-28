@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from pyrogram import Client, filters
 from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, Update)
 from pyrogram.handlers import (callback_query_handler)
+from pyrogram.raw import (GetFile)
 
 
 load_dotenv()
@@ -106,16 +107,20 @@ async def filter_audio(client, message):
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
 
     #await message.reply(reply)
+    file_id = GetFile(file_id)
+    file_url = f"https://api.telegram.org/bot{getenv(API_KEY)}/getFile?file_id=the_file_id"
+     
 
     dir = config.folder_path
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
+    
 
 
 @app.on_callback_query()
-async def choices_first(callback: CallbackQuery, message=Message):
+async def choices_first(callback: CallbackQuery, file_id=filter_audio.file_id):
     if callback.data == "transcribe":
-        new = file_url(https://api.telegram.org/bot{getenv(API_KEY)}/getFile?file_id=the_file_id)
+        
         await callback.message.reply()
     elif callback.data == "trim":
         await callback.message.reply("trim")
