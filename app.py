@@ -67,9 +67,7 @@ async def help_command(client, message):
 
 
 "File handling"
-@app.on_message(~filters.audio | ~filters.voice)
-async def invalid_file(client, message):
-    await message.reply("Invalid file!! Please retry")
+
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
@@ -116,6 +114,10 @@ async def filter_audio(client, message):
     #for f in os.listdir(dir):
     #    os.remove(os.path.join(dir, f))
     
+@app.on_message(~filters.audio | ~filters.voice)
+async def invalid_file(client, message):
+    await message.reply("Invalid file!! Please retry")
+
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
