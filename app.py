@@ -2,7 +2,7 @@ from deepgram import Deepgram
 import asyncio, json
 import requests
 import config
-import os
+import os, sys
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
@@ -20,6 +20,8 @@ app = Client(
     api_hash = getenv("APP_API_HASH"),
     bot_token = getenv("API_KEY")
 )
+
+path = config.path
 
 deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
@@ -108,7 +110,7 @@ async def filter_audio(client, message):
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
 
-    with open("reply_to_user.txt", "w") as w:
+    with open("reply_to_user.txt", "a") as w:
         w.write(reply)
 
     #await message.reply(reply)
@@ -131,6 +133,5 @@ async def choice_trim(message, callback: CallbackQuery):
         with open("reply_to_user.txt", "r") as f:
             reply = f.read()
         await callback.message.reply(reply) 
-
 
 app.run()
