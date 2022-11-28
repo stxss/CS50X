@@ -90,22 +90,24 @@ async def filter_audio(client, message):
         audiofile = await message.download(f"downloads/{message.chat.id}/voicefile.ogg")
         mimetype = "audio/ogg"
 
-    sound = open(audiofile, "rb")
-    source = {
-        "buffer": sound,
-        "mimetype": mimetype
-    }        
-
-    response = await asyncio.create_task(
-        deepgram.transcription.prerecorded(
-            source,
-            {
-                "punctuate": True 
-            }
-        )
-    )
-    print(json.dumps(response, indent=4))
-    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
+#    sound = open(audiofile, "rb")
+#    source = {
+#        "buffer": sound,
+#        "mimetype": mimetype
+#    }        
+#
+#    response = await asyncio.create_task(
+#        deepgram.transcription.prerecorded(
+#            source,
+#            {
+#                "punctuate": True 
+#            }
+#        )
+#    )
+#    print(json.dumps(response, indent=4))
+#    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
+#
+#    await message.reply(reply)
 
     #dir = config.folder_path
     #for f in os.listdir(dir):
@@ -116,7 +118,26 @@ async def filter_audio(client, message):
 @app.on_callback_query()
 async def choices_first(callback: CallbackQuery):
     if callback.data == "transcribe":
+        
+        sound = open("audiofile.mp3", "rb")
 
+        source = {
+            "buffer": sound,
+            "mimetype": mimetype
+        }        
+
+        response = await asyncio.create_task(
+            deepgram.transcription.prerecorded(
+                source,
+                {
+                    "punctuate": True 
+                }
+            )
+        )
+        print(json.dumps(response, indent=4))
+        reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
+
+        await message.reply(reply)
         await callback.message.reply()
     elif callback.data == "trim":
         await callback.message.reply("trim")
