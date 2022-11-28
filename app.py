@@ -70,14 +70,19 @@ async def help_command(client, message):
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
 
-    choices = InlineKeyboardMarkup()
-    transcription = InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-    trimming = InlineKeyboardButton("Trim audio", callback_data="trim")
-
-    choices.add(transcription, trimming)
-
-    await message.reply("Please choose what you want to do with the file", reply_markup=choices)
+    choices = InlineKeyboardMarkup
+    (
+        [  
+            InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+            InlineKeyboardButton("Trim audio", callback_data="trim")
+        ]
+    )
     
+
+    await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
+
+    if callback.data == "transcribe":
+
     audiofile = await message.download()
     sound = open(audiofile, "rb")
 
@@ -112,9 +117,7 @@ async def filter_audio(client, message):
 @app.on_callback_query()
 async def choices_first(callback: CallbackQuery):
     if callback.data == "transcribe":
-
-        await app.filter_audio(chat_id=callback.message.chat.id)
-        #await callback.message.answer("transcribe")
+        await callback.message.answer("transcribe")
     elif callback.data == "trim":
         await callback.message.answer("trim")
 
