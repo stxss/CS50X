@@ -84,10 +84,10 @@ async def filter_audio(client, message):
 
 
     if message.audio:
-        audiofile = await message.download(f"{message.chat.id}/audiofile.mp3")
+        audiofile = await message.download(f"downloads/{message.chat.id}/audiofile.mp3")
         mimetype = "audio/mpeg"
     elif message.voice:
-        audiofile = await message.download(f"{message.chat.id}/voicefile.ogg")
+        audiofile = await message.download(f"downloads/{message.chat.id}/voicefile.ogg")
         mimetype = "audio/ogg"
 
     sound = open(audiofile, "rb")
@@ -105,12 +105,7 @@ async def filter_audio(client, message):
         )
     )
     print(json.dumps(response, indent=4))
-    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
-
-    #await message.reply(reply)
-    #file_id = file_id
-    #file_url = f"https://api.telegram.org/bot{getenv(API_KEY)}/getFile?file_id=the_file_id"
-     
+    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
 
     #dir = config.folder_path
     #for f in os.listdir(dir):
@@ -119,9 +114,9 @@ async def filter_audio(client, message):
 
 
 @app.on_callback_query()
-async def choices_first(callback: CallbackQuery, file_id=filter_audio.file_id):
+async def choices_first(callback: CallbackQuery):
     if callback.data == "transcribe":
-        
+
         await callback.message.reply()
     elif callback.data == "trim":
         await callback.message.reply("trim")
