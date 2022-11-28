@@ -118,7 +118,7 @@ async def filter_audio(client, message):
 
     dir = config.folder_path
     for f in os.listdir(dir):
-        os.remove(os.path.join(config.folder_path, f))
+        os.remove(os.path.join(dir, f))
     
 
 @app.on_message(~filters.audio | ~filters.voice)
