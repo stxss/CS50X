@@ -115,7 +115,7 @@ async def filter_audio(client, message):
 @app.on_callback_query()
 async def choices_first(callback: CallbackQuery, message=Message):
     if callback.data == "transcribe":
-        
+        new = getFile()
         await callback.message.reply()
     elif callback.data == "trim":
         await callback.message.reply("trim")
