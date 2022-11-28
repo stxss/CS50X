@@ -67,6 +67,9 @@ async def help_command(client, message):
 
 
 "File handling"
+@app.on_message(~filters.audio | ~filters.voice)
+async def invalid_file(client, message):
+    await message.reply("Invalid file!! Please retry")
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
