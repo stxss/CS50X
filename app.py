@@ -7,7 +7,7 @@ import os
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
-from pyrogram.types import (ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, Update)
+from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, Update)
 from pyrogram.handlers import (callback_query_handler)
 from pyrogram.raw import *
 
@@ -114,19 +114,12 @@ async def filter_audio(client, message):
     #    os.remove(os.path.join(dir, f))
     
 
-
-#@app.on_callback_query(text_contains="transcribe")
-#async def choice_transcribe(message, callback: CallbackQuery):
-#    await callback.message.reply("transcribe")
-
-#@app.on_callback_query(text_contains="trim")
-#async def choice_trim(message, callback: CallbackQuery):
-#    await callback.message.reply("trim") 
-
-
-@app.on_callback_query(filters.inline_keyboard | filters.reply_keyboard)
+@app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
     if callback.data=="trim":
-        await callback.message.reply("trim")
+        await callback.message.reply("trim") 
+    elif callback.data=="transcribe":
+        await callback.message.reply("transcribe") 
+
 
 app.run()
