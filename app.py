@@ -3,6 +3,7 @@ import asyncio, json
 import requests
 import config
 import os
+import ffmpeg
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
