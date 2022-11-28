@@ -70,11 +70,12 @@ async def help_command(client, message):
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
 
-    choices = InlineKeyboardMarkup
-    (
-        [  
-            InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-            InlineKeyboardButton("Trim audio", callback_data="trim")
+    choices = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+                InlineKeyboardButton("Trim audio", callback_data="trim")
+            ]
         ]
     )
 
