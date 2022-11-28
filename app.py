@@ -2,7 +2,7 @@ from deepgram import Deepgram
 import asyncio, json
 import requests
 import config
-import os, sys
+import os
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
