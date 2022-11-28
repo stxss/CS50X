@@ -124,4 +124,5 @@ async def choice_trim(message, callback: CallbackQuery):
     await callback.message.reply("trim") 
 
 
+
 app.run()
