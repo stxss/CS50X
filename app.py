@@ -113,6 +113,7 @@ async def filter_audio(client, message):
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
-@app.
+app.add_handler(callback_query_handler(transcribe))
+app.add_handler(callback_query_handler(transcribe))
 
 app.run()
