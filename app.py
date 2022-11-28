@@ -115,11 +115,11 @@ async def filter_audio(client, message):
     
 
 
-@app.on_callback_query(filters="transcribe")
+@app.on_callback_query(text_contains="transcribe")
 async def choice_transcribe(message, callback: CallbackQuery):
     await callback.message.reply("transcribe")
 
-@app.on_callback_query(filters="trim audio")
+@app.on_callback_query(text_contains="trim")
 async def choice_trim(message, callback: CallbackQuery):
     await callback.message.reply("trim") 
 
