@@ -112,5 +112,9 @@ async def filter_audio(client, message):
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
+@app.on_chosen_inline_result()
+async def choice(client, message):
+    if 
+
 
 app.run()
