@@ -82,7 +82,7 @@ async def filter_audio(client, message):
 
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
 
-    audiofile = await message.download("file")
+    audiofile = await message.download("audiofile")
     sound = open(audiofile, "rb")
 
     if message.audio:
