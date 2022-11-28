@@ -115,7 +115,7 @@ async def filter_audio(client, message):
 @app.on_callback_query()
 async def choices_first(callback: CallbackQuery, message=Message):
     if callback.data == "transcribe":
-        new = getFile()
+        new = file_url(https://api.telegram.org/bot{getenv(API_KEY)}/getFile?file_id=the_file_id)
         await callback.message.reply()
     elif callback.data == "trim":
         await callback.message.reply("trim")
