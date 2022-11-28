@@ -108,10 +108,8 @@ async def filter_audio(client, message):
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
 
-    w = open("reply_to_user.txt", "w")
-    w.write(reply)
-    f.close
-
+    with open("reply_to_user.txt", "w") as w:
+        w.write(reply)
 
     #await message.reply(reply)
 
@@ -130,7 +128,9 @@ async def choice_trim(message, callback: CallbackQuery):
     if callback.data=="trim":
         await callback.message.reply("trim") 
     elif callback.data=="transcribe":
-        await callback.message.reply("transcribe") 
+        with open("reply_to_user.txt", "r") as f:
+            reply = f.read()
+        await callback.message.reply(reply) 
 
 
 app.run()
