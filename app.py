@@ -7,7 +7,7 @@ import os
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
-from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, Update)
+from pyrogram.types import (ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, Update)
 from pyrogram.handlers import (callback_query_handler)
 from pyrogram.raw import *
 
@@ -124,7 +124,7 @@ async def filter_audio(client, message):
 #    await callback.message.reply("trim") 
 
 
-@app.on_callback_query(filters.inline_keyboard)
+@app.on_callback_query(filters.inline_keyboard | filters.reply_keyboard)
 async def choice_trim(message, callback: CallbackQuery):
     if callback.data=="trim":
         await callback.message.reply("trim")
