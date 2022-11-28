@@ -74,19 +74,7 @@ async def help_command(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
-    print(message)
-    choices = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                InlineKeyboardButton("Trim audio", callback_data="trim")
-            ]
-        ]
-    )
-
-    await message.reply_text("Please choose what you want to do with the file",quote=True, reply_markup=choices)  
-
-
+    #print(message)
     if message.audio:
         audiofile = await message.download(f"audiofile.mp3")
         mimetype = "audio/mpeg"
@@ -114,10 +102,17 @@ async def filter_audio(client, message):
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
         w.write(reply)
 
-    #await message.reply(reply)
+    choices = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+                InlineKeyboardButton("Trim audio", callback_data="trim")
+            ]
+        ]
+    )
 
+    await message.reply_text("Please choose what you want to do with the file",quote=True, reply_markup=choices)  
 
-    
 
 @app.on_message(~filters.audio | ~filters.voice)
 async def invalid_file(client, message):
@@ -129,7 +124,6 @@ async def choice_trim(message, callback: CallbackQuery):
     if callback.data=="trim":
         await callback.message.reply("trim") 
     elif callback.data=="transcribe":
-        await callback.answer(cache_time=60)
         with open(os.path.join(config.path, "transcription.txt"), "r") as f:
             reply = f.read()
         await callback.message.reply(reply) 
