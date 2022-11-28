@@ -88,10 +88,10 @@ async def filter_audio(client, message):
 
 
     if message.audio:
-        audiofile = await message.download(f"downloads/{message.chat.id}/audiofile.mp3")
+        audiofile = await message.download(f"audiofile.mp3")
         mimetype = "audio/mpeg"
     elif message.voice:
-        audiofile = await message.download(f"downloads/{message.chat.id}/voicefile.ogg")
+        audiofile = await message.download(f"voicefile.ogg")
         mimetype = "audio/ogg"
 
     sound = open(audiofile, "rb")
@@ -111,14 +111,12 @@ async def filter_audio(client, message):
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
 
-    with open("reply_to_user.txt", "w") as w:
+    with open(os.path.join("/downloads/", "reply_to_user.txt"), "w") as w:
         w.write(reply)
 
     #await message.reply(reply)
 
-    dir = config.folder_path
-    for f in os.listdir(dir):
-        os.remove(os.path.join(dir, f))
+
     
 
 @app.on_message(~filters.audio | ~filters.voice)
@@ -126,14 +124,18 @@ async def invalid_file(client, message):
     await message.reply("Invalid file!! Please retry")
 
 
-#@app.on_callback_query()
-#async def choice_trim(message, callback: CallbackQuery):
-#    if callback.data=="trim":
-#        await callback.message.reply("trim") 
-#    elif callback.data=="transcribe":
-#        await callback.answer(cache_time=60)
-#        with open("reply_to_user.txt", "r") as f:
-#            reply = f.read()
-#        await callback.message.reply(reply) 
-#
+@app.on_callback_query()
+async def choice_trim(message, callback: CallbackQuery):
+    if callback.data=="trim":
+        await callback.message.reply("trim") 
+    elif callback.data=="transcribe":
+        await callback.answer(cache_time=60)
+        with open("reply_to_user.txt", "r") as f:
+            reply = f.read()
+        await callback.message.reply(reply) 
+    
+        dir = config.folder_path
+        for f in os.listdir(dir):
+            os.remove(os.path.join(dir, f))
+
 app.run()
