@@ -7,7 +7,7 @@ import os
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
-from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery)
+from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, Update)
 from pyrogram.handlers import (callback_query_handler)
 
 
@@ -80,7 +80,13 @@ async def filter_audio(client, message):
     )
 
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
+    
     await choices_first(choices, callback=CallbackQuery)
+
+    if choices_first == "transcribe":
+        message.reply("transcribe")
+
+    
 #    audiofile = await message.download()
 #    sound = open(audiofile, "rb")
 #
@@ -113,7 +119,7 @@ async def filter_audio(client, message):
 
 
 @app.on_callback_query()
-async def choices_first(message, callback: CallbackQuery):
+async def choices_first(callback: CallbackQuery):
     if callback.data == "transcribe":
         await callback.message.reply("transcribe")
     elif callback.data == "trim":
