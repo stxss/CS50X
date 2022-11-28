@@ -126,14 +126,14 @@ async def invalid_file(client, message):
     await message.reply("Invalid file!! Please retry")
 
 
-@app.on_callback_query()
-async def choice_trim(message, callback: CallbackQuery):
-    if callback.data=="trim":
-        await callback.message.reply("trim") 
-    elif callback.data=="transcribe":
-        await callback.answer(cache_time=60)
-        with open("reply_to_user.txt", "r") as f:
-            reply = f.read()
-        await callback.message.reply(reply) 
-
+#@app.on_callback_query()
+#async def choice_trim(message, callback: CallbackQuery):
+#    if callback.data=="trim":
+#        await callback.message.reply("trim") 
+#    elif callback.data=="transcribe":
+#        await callback.answer(cache_time=60)
+#        with open("reply_to_user.txt", "r") as f:
+#            reply = f.read()
+#        await callback.message.reply(reply) 
+#
 app.run()
