@@ -81,43 +81,43 @@ async def filter_audio(client, message):
 
     await message.reply("Please choose what you want to do with the file", reply_markup=choices)  
     
-#    audiofile = await message.download()
-#    sound = open(audiofile, "rb")
-#
-#    if message.audio:
-#        mimetype = "audio/mpeg"
-#    elif message.voice:
-#        mimetype = "audio/ogg"
-#
-#    source = {
-#        "buffer": sound,
-#        "mimetype": mimetype
-#    }        
-#
-#    response = await asyncio.create_task(
-#        deepgram.transcription.prerecorded(
-#            source,
-#            {
-#                "punctuate": True 
-#            }
-#        )
-#    )
-#
-#    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
-#
-#    #await message.reply(reply)
-#
+    audiofile = await message.download()
+    sound = open(audiofile, "rb")
+
+    if message.audio:
+        mimetype = "audio/mpeg"
+    elif message.voice:
+        mimetype = "audio/ogg"
+
+    source = {
+        "buffer": sound,
+        "mimetype": mimetype
+    }        
+
+    response = await asyncio.create_task(
+        deepgram.transcription.prerecorded(
+            source,
+            {
+                "punctuate": True 
+            }
+        )
+    )
+    print(json.dumps(response, indent=4))
+    reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+
+    #await message.reply(reply)
+
     dir = config.folder_path
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
 
-@app.on_callback_query()
-async def choices_first(callback: CallbackQuery):
-    if callback.data == "transcribe":
-        await callback.message.reply("transcribe")
-    elif callback.data == "trim":
-        await callback.message.reply("trim")
+#@app.on_callback_query()
+#async def choices_first(callback: CallbackQuery):
+#    if callback.data == "transcribe":
+#        await callback.message.reply("transcribe")
+#    elif callback.data == "trim":
+#        await callback.message.reply("trim")
 
 
 app.run()
