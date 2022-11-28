@@ -110,7 +110,7 @@ async def filter_audio(client, message):
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
 
-    with open("reply_to_user.txt", "a") as w:
+    with open("reply_to_user.txt", "w") as w:
         w.write(reply)
 
     #await message.reply(reply)
