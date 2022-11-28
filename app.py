@@ -114,6 +114,7 @@ async def filter_audio(client, message):
 
 @app.on_callback_query()
 async def choices_first(message, callback: CallbackQuery):
+    message=reply_to_message,
     if callback.data == "transcribe":
         
         audiofile = await callback.message.download()
