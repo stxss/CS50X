@@ -23,6 +23,7 @@ app = Client(
 
 path = config.path
 
+
 deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 "Command handling"
