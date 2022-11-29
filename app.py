@@ -1,9 +1,12 @@
 from deepgram import Deepgram
+
 import asyncio, json
 import requests
 import config
 import os
+import sys
 import ffmpeg
+
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
@@ -133,3 +136,4 @@ async def choice_trim(message, callback: CallbackQuery):
             os.remove(os.path.join(dir, f))
 
 app.run()
+
