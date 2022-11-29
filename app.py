@@ -113,6 +113,7 @@ async def filter_audio(client, message):
                 "utt_split": 0.8,
                 "paragraphs": True,
                 "diarize": True,
+                "detect_language": True,
             },
         )
     )
