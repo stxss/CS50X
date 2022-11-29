@@ -113,10 +113,11 @@ async def filter_audio(client, message):
     #    reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["text"]
     #    reply_w_timestamp += "\n\n"
     list_range = len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"])
-    
+    print(list_range)
     for i in range(0, list_range + 1):
         for j in range(0, list_range + 1):
             try:
+                print(i,j)
                 start_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]
                 start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
                 
