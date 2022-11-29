@@ -144,7 +144,7 @@ async def filter_audio(client, message):
                     "paragraphs"
                 ]["paragraphs"][i]["sentences"][j]["start"]
                 start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
-
+                print(u"\u041f\u0430\u0432\u0435\u043b")
                 end_time = response["results"]["channels"][0]["alternatives"][0][
                     "paragraphs"
                 ]["paragraphs"][i]["sentences"][j]["end"]
