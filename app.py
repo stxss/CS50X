@@ -115,19 +115,18 @@ async def filter_audio(client, message):
     list_range = len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"])
     print(list_range)
 
-    n = 0
-    #for i in range(0, list_range + 1):
-    for i in (response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"]):
-        print(i)
-        #for j in range(0, list_range + 2):
-        for j in (response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"]):
+    
+    for i in range(0, list_range + 1):
+        print(i)        
+        for j in range(0, list_range + 2):
             try:
                 #print(i)
-                print("-----------------")
-                print(j["sentences"])
-                print(j["sentences"][n]["text"])
-                print("-----------------")
-                print("-----------------")
+                #print("-----------------")
+                #print(j["sentences"])
+                #print("-----------------")
+                #print(j["sentences"][n]["text"])
+                #print("-----------------")
+                #print("-----------------")
                 start_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]
                 start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
                 
@@ -137,7 +136,7 @@ async def filter_audio(client, message):
                 text = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
                 
                 reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
-                n += 1
+
             except:
                 continue
 
