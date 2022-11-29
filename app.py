@@ -12,8 +12,14 @@ import datetime
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
-from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, Update)
-from pyrogram.handlers import (callback_query_handler)
+from pyrogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message,
+    CallbackQuery,
+    Update,
+)
+from pyrogram.handlers import callback_query_handler
 from pyrogram.raw import *
 
 
@@ -21,9 +27,9 @@ load_dotenv()
 
 app = Client(
     "ClipCutBot",
-    api_id = getenv("APP_API_ID"),
-    api_hash = getenv("APP_API_HASH"),
-    bot_token = getenv("API_KEY")
+    api_id=getenv("APP_API_ID"),
+    api_hash=getenv("APP_API_HASH"),
+    bot_token=getenv("API_KEY"),
 )
 
 path = config.path
@@ -33,10 +39,12 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 "Command handling"
 
+
 @app.on_message(filters.command("start"))
 async def help_command(client, message):
-    #print(message.chat.username, message.text)
+    # print(message.chat.username, message.text)
     await message.reply("Hi, I'll help you trim your videos")
+
 
 @app.on_message(filters.command("help"))
 async def help_command(client, message):
@@ -44,29 +52,36 @@ async def help_command(client, message):
     h = f.read()
     await message.reply(h)
 
+
 @app.on_message(filters.command("transcribe"))
 async def help_command(client, message):
     await message.reply("Please, send an audio file or a voice message!")
+
 
 @app.on_message(filters.command("translate"))
 async def help_command(client, message):
     await message.reply("Please, a text to translate")
 
-@app.on_message(filters.command("join"))    
+
+@app.on_message(filters.command("join"))
 async def help_command(client, message):
     await message.reply("Please, send an image and a voice file ")
+
 
 @app.on_message(filters.command("trim"))
 async def help_command(client, message):
     await message.reply("trim audio")
 
+
 @app.on_message(filters.command("timestamp"))
 async def help_command(client, message):
     await message.reply("recreate the text from the audio/voice file with timestamps")
 
+
 @app.on_message(filters.command("search"))
 async def help_command(client, message):
     await message.reply("search a string of your choice")
+
 
 @app.on_message(filters.command("share"))
 async def help_command(client, message):
@@ -78,7 +93,7 @@ async def help_command(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
-    #print(message)
+    # print(message)
     if message.audio:
         audiofile = await message.download(f"audiofile.mp3")
         mimetype = "audio/mpeg"
@@ -87,59 +102,60 @@ async def filter_audio(client, message):
         mimetype = "audio/ogg"
 
     sound = open(audiofile, "rb")
-    source = {
-        "buffer": sound,
-        "mimetype": mimetype
-    }        
+    source = {"buffer": sound, "mimetype": mimetype}
 
     response = await asyncio.create_task(
         deepgram.transcription.prerecorded(
             source,
             {
-                "punctuate": True, "utterances": False, "utt_split": 0.8, "paragraphs": True, "diarize": True,
-            }
+                "punctuate": True,
+                "utterances": False,
+                "utt_split": 0.8,
+                "paragraphs": True,
+                "diarize": True,
+            },
         )
     )
-    
 
     print(json.dumps(response, indent=4))
-    reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["transcript"]    
-    
+    reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
+        "transcript"
+    ]
+
     reply_w_timestamp = ""
 
-    #for i in range(len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"])):
+    # for i in range(len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"])):
     #    reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["start"]) + " to "
-    #    reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["end"]) + "\n" 
+    #    reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["end"]) + "\n"
     #    reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["text"]
     #    reply_w_timestamp += "\n\n"
-    list_range = len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"])
+    list_range = len(
+        response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
+            "paragraphs"
+        ]
+    )
     print(list_range)
 
-    
     for i in range(0, list_range + 1):
-        print(i)        
         for j in range(0, list_range + 2):
             try:
-                #print(i)
-                #print("-----------------")
-                #print(j["sentences"])
-                #print("-----------------")
-                #print(j["sentences"][n]["text"])
-                #print("-----------------")
-                #print("-----------------")
-                start_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]
+                start_time = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["start"]
                 start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
-                
-                end_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["end"]
-                end = str(datetime.timedelta(seconds=round(end_time, 3)))[:-3]
-                
-                text = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
-                
-                reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
 
+                end_time = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["end"]
+                end = str(datetime.timedelta(seconds=round(end_time, 3)))[:-3]
+
+                text = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["text"]
+
+                reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
             except:
                 continue
-
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
         w.write(reply)
@@ -151,15 +167,21 @@ async def filter_audio(client, message):
         [
             [
                 InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                InlineKeyboardButton("Trim audio", callback_data="trim")
+                InlineKeyboardButton("Trim audio", callback_data="trim"),
             ],
             [
-                InlineKeyboardButton("Transcribe w/ timestamps", callback_data="timestamp")
-            ]
+                InlineKeyboardButton(
+                    "Transcribe w/ timestamps", callback_data="timestamp"
+                )
+            ],
         ]
     )
 
-    await message.reply_text("Please choose what you want to do with the file",quote=True, reply_markup=choices)  
+    await message.reply_text(
+        "Please choose what you want to do with the file",
+        quote=True,
+        reply_markup=choices,
+    )
 
 
 @app.on_message(~filters.audio | ~filters.voice)
@@ -170,24 +192,26 @@ async def invalid_file(client, message):
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
 
-    if callback.data=="trim":
-        await callback.message.reply("trim") 
-    
-    elif callback.data=="transcribe":
+    if callback.data == "trim":
+        await callback.message.reply("trim")
+
+    elif callback.data == "transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r") as f1:
             reply = f1.read()
         await callback.message.reply(reply)
         os.remove("downloads\\transcription.txt")
-    elif callback.data=="timestamp":
-        with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "r") as f2:
+
+    elif callback.data == "timestamp":
+        with open(
+            os.path.join(config.path, "transcription_w_timestamp.txt"), "r"
+        ) as f2:
             reply = f2.read()
-            
         await callback.message.reply(reply)
         os.remove("downloads\\transcription_w_timestamp.txt")
-        
-        #dir = config.folder_path
-        #for f in os.listdir(dir):
+
+        # dir = config.folder_path
+        # for f in os.listdir(dir):
         #    os.remove(os.path.join(dir, f))
 
-app.run()
 
+app.run()
