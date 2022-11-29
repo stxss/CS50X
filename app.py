@@ -95,7 +95,7 @@ async def filter_audio(client, message):
         deepgram.transcription.prerecorded(
             source,
             {
-                "punctuate": True, "utterances": True, "paragraphs": True
+                "punctuate": True, "utterances": True, "utt_split": 0.9, "paragraphs": True
             }
         )
     )
