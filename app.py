@@ -54,37 +54,37 @@ async def help_command(client, message):
 
 
 @app.on_message(filters.command("transcribe"))
-async def help_command(client, message):
+async def transcribe(client, message):
     await message.reply("Please, send an audio file or a voice message!")
 
 
 @app.on_message(filters.command("translate"))
-async def help_command(client, message):
+async def translate(client, message):
     await message.reply("Please, a text to translate")
 
 
-@app.on_message(filters.command("join"))
-async def help_command(client, message):
-    await message.reply("Please, send an image and a voice file ")
-
-
 @app.on_message(filters.command("trim"))
-async def help_command(client, message):
+async def trim(client, message):
     await message.reply("trim audio")
 
 
+@app.on_message(filters.command("join"))
+async def join(client, message):
+    await message.reply("Please, send an image and a voice file ")
+
+
 @app.on_message(filters.command("timestamp"))
-async def help_command(client, message):
+async def timestamp(client, message):
     await message.reply("recreate the text from the audio/voice file with timestamps")
 
 
 @app.on_message(filters.command("search"))
-async def help_command(client, message):
+async def search(client, message):
     await message.reply("search a string of your choice")
 
 
 @app.on_message(filters.command("share"))
-async def help_command(client, message):
+async def share(client, message):
     await message.reply("Share command")
 
 
