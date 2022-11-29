@@ -206,14 +206,13 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
-    print(callback.data)
-    if callback.data == "trim":
-    #    if message.audio:
-    #        await callback.message.reply("trim audio")
-    #    elif message.voice:
-    #        await callback.message.reply("trim voice")
 
-        await callback.message.reply("trim")
+    if callback.data == "trim_audio":
+
+        await callback.message.reply("trim audio")
+    elif callback.data == "trim_voice":
+        
+        await callback.message.reply("trim voice")
 
     elif callback.data == "transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8") as f1:
