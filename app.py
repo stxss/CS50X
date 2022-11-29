@@ -95,7 +95,7 @@ async def filter_audio(client, message):
         deepgram.transcription.prerecorded(
             source,
             {
-                "punctuate": True, "utterances": True, "utt_split": 0.9, "paragraphs": True
+                "punctuate": True, "utterances": True, "utt_split": 0.8, "paragraphs": True
             }
         )
     )
@@ -103,7 +103,7 @@ async def filter_audio(client, message):
 
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
-    reply_w_timestamp = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["sentences"]
+    reply_w_timestamp = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["transcript"]
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
         w.write(reply)
