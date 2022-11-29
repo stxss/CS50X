@@ -112,15 +112,16 @@ async def filter_audio(client, message):
     #    reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["text"]
     #    reply_w_timestamp += "\n\n"
     list_range = len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"])
-    print(type(list_range), list_range)
+    
     for i in range(0, list_range + 1):
         for j in range(0, list_range + 1):
-            print(i,j)
-            reply_w_timestamp += "[" + str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][i]["start"]) + " to "
-            reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][i]["end"]) + "]" +"\n" 
-            reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][i]["text"]
-            reply_w_timestamp += "\n\n"
-
+            try:
+                reply_w_timestamp += "[" + str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]) + " to "
+                reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["end"]) + "]" +"\n" 
+                reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
+                reply_w_timestamp += "\n\n"
+            except:
+                continue
 
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
