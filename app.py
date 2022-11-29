@@ -194,9 +194,9 @@ async def invalid_file(client, message):
 async def choice_trim(message, callback: CallbackQuery):
 
     if callback.data == "trim":
-        if callback.message.audio:
+        if message.audio:
             await callback.message.reply("trim audio")
-        elif callback.message.voice:
+        elif message.voice:
             await callback.message.reply("trim voice")
 
             await callback.message.reply("trim")
