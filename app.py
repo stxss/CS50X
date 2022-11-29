@@ -101,15 +101,22 @@ async def filter_audio(client, message):
     )
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
+    reply_w_timestamp = "hehe"
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
         w.write(reply)
+
+    with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "w") as wt:
+        wt.write(reply_w_timestamp)
 
     choices = InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton("Transcribe", callback_data="transcribe"),
                 InlineKeyboardButton("Trim audio", callback_data="trim")
+            ]
+            [
+                InlineKeyboardButton("Transcribe w/ timestamps", callback_data="timestamp")
             ]
         ]
     )
@@ -129,7 +136,11 @@ async def choice_trim(message, callback: CallbackQuery):
     elif callback.data=="transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r") as f:
             reply = f.read()
-        await callback.message.reply(reply) 
+        await callback.message.reply(reply)
+    elif callback.data=="timestamp":
+        with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "r") as f:
+            reply = f.read()
+        await callback.message.reply(reply)  
     
         dir = config.folder_path
         for f in os.listdir(dir):
