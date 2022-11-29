@@ -117,14 +117,14 @@ async def filter_audio(client, message):
     for i in range(0, list_range + 1):
         for j in range(0, list_range + 1):
             try:
-                #reply_w_timestamp += "[" + str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]) + " to "
-                #reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["end"]) + "]" +"\n" 
-                #reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
-                #reply_w_timestamp += "\n\n"
                 start_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]
-                start = str(datetime.timedelta(seconds=start_time))[:-3]
-                end = '{0:02.0f}:{1:02.0f}'.format(*divmod(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["end"] * 60, 60))
+                start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
+                
+                end_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["end"]
+                end = str(datetime.timedelta(seconds=round(end_time, 3)))[:-3]
+                
                 text = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
+                
                 reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
             except:
                 continue
