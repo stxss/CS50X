@@ -99,9 +99,20 @@ async def filter_audio(client, message):
             }
         )
     )
+
+    response_w_timestamps = await asyncio.create_task(
+        deepgram.transcription.prerecorded(
+            source,
+            {
+                {"punctuate": True, "utterances": True} 
+            }
+        )
+    )
+
+
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
-    reply_w_timestamp = response["results"]["channels"][0]["alternatives"][0]["words"]
+    reply_w_timestamp = response_w_timestamps["results"]["channels"][0]["alternatives"][0]["words"]
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
         w.write(reply)
