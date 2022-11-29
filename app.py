@@ -105,9 +105,9 @@ async def filter_audio(client, message):
     reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["transcript"]    
     
     for i in range(len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"])):
-        reply_w_timestamp = str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["start"]) + " to "
-        reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["end"]) + "\n" 
-        reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["text"]
+        reply_w_timestamp = str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["start"]) + " to "
+        reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["end"]) + "\n" 
+        reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["text"]
 
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
@@ -138,7 +138,6 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
-    
 
     if callback.data=="trim":
         await callback.message.reply("trim") 
@@ -146,16 +145,14 @@ async def choice_trim(message, callback: CallbackQuery):
     elif callback.data=="transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r") as f1:
             reply = f1.read()
-            dir = config.folder_path
-            os.remove(os.path.join(dir, f1))
         await callback.message.reply(reply)
-    
+        os.remove("downloads\\transcription.txt")
     elif callback.data=="timestamp":
         with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "r") as f2:
             reply = f2.read()
-            dir = config.folder_path
-            os.remove(os.path.join(dir, f2))
-        await callback.message.reply(reply)  
+            
+        await callback.message.reply(reply)
+        os.remove("downloads\\transcription_w_timestamp.txt")
         
         #dir = config.folder_path
         #for f in os.listdir(dir):
