@@ -115,7 +115,7 @@ async def filter_audio(client, message):
     list_range = len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"])
     print(list_range)
     for i in range(0, list_range + 1):
-        for j in range(0, list_range + 1):
+        for j in range(0, list_range + 2):
             try:
                 print(i,j)
                 start_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]
