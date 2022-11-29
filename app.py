@@ -103,11 +103,11 @@ async def filter_audio(client, message):
 
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["transcript"]    
-   
-    reply_w_timestamp = str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["start"]) + " to "
-    reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["end"]) + "\n"
     
-    reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["text"]
+    for i in range(len(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"])):
+        reply_w_timestamp = str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["start"]) + " to "
+        reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["end"]) + "\n" 
+        reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["text"]
 
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
@@ -138,20 +138,24 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
+    dir = config.folder_path
+
     if callback.data=="trim":
         await callback.message.reply("trim") 
     elif callback.data=="transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r") as f:
             reply = f.read()
+            os.remove(os.path.join(dir, f))
         await callback.message.reply(reply)
     elif callback.data=="timestamp":
         with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "r") as f:
             reply = f.read()
-        await callback.message.reply(reply)  
-    
-        dir = config.folder_path
-        for f in os.listdir(dir):
             os.remove(os.path.join(dir, f))
+        await callback.message.reply(reply)  
+        
+        #dir = config.folder_path
+        #for f in os.listdir(dir):
+        #    os.remove(os.path.join(dir, f))
 
 app.run()
 
