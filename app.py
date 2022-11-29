@@ -122,7 +122,7 @@ async def filter_audio(client, message):
                 #reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
                 #reply_w_timestamp += "\n\n"
                 start_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]
-                start = str(datetime.timedelta(seconds=start_time))
+                start = str(datetime.timedelta(seconds=start_time))[:-3]
                 end = '{0:02.0f}:{1:02.0f}'.format(*divmod(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["end"] * 60, 60))
                 text = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
                 reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
