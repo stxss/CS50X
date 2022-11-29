@@ -64,7 +64,7 @@ async def translate(client, message):
 
 
 @app.on_message(filters.command("trim"))
-async def trim(client, message):
+async def trim(message):
     await message.reply("trim audio")
 
 
