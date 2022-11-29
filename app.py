@@ -127,7 +127,7 @@ async def filter_audio(client, message):
         pass
 
     reply_w_timestamp = ""
-    
+
     try:
         list_range = len(
             response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
@@ -194,6 +194,11 @@ async def invalid_file(client, message):
 async def choice_trim(message, callback: CallbackQuery):
 
     if callback.data == "trim":
+        if callback.message.audio:
+            await callback.message.reply("trim audio")
+        elif callback.message.voice:
+            await callback.message.reply("trim voice")
+            
         await callback.message.reply("trim")
 
     elif callback.data == "transcribe":
