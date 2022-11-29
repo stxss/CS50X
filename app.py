@@ -101,7 +101,7 @@ async def filter_audio(client, message):
     )
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["transcript"]     
-    reply_w_timestamp = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+    reply_w_timestamp = response["results"]["channels"][0]["alternatives"][0]["transcript"]["word"]
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
         w.write(reply)
