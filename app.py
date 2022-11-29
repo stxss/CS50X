@@ -164,20 +164,34 @@ async def filter_audio(client, message):
     with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "w", encoding="utf-8") as wt:
         wt.write(reply_w_timestamp)
 
-    choices = InlineKeyboardMarkup(
-        [
+    if message.audio:
+        choices = InlineKeyboardMarkup(
             [
-                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                InlineKeyboardButton("Trim audio", callback_data="trim"),
-            ],
+                [
+                    InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+                    InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "Transcribe w/ timestamps", callback_data="timestamp"
+                    )
+                ],
+            ]
+        )
+    elif message.voice:
+        choices = InlineKeyboardMarkup(
             [
-                InlineKeyboardButton(
-                    "Transcribe w/ timestamps", callback_data="timestamp"
-                )
-            ],
-        ]
-    )
-
+                [
+                    InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+                    InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "Transcribe w/ timestamps", callback_data="timestamp"
+                    )
+                ],
+            ]
+        )
     await message.reply_text(
         "Please choose what you want to do with the file",
         quote=True,
@@ -192,6 +206,7 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
+    print(callback.data)
     if callback.data == "trim":
     #    if message.audio:
     #        await callback.message.reply("trim audio")
