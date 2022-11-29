@@ -118,7 +118,7 @@ async def filter_audio(client, message):
         )
     )
 
-    print(json.dumps(response, indent=4))
+    #print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
         "transcript"
     ]
