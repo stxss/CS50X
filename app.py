@@ -104,10 +104,12 @@ async def filter_audio(client, message):
     print(json.dumps(response, indent=4))
     reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["transcript"]    
    
-    reply_w_timestamp = str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["start"]) + " to "
-    reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["end"]) + "\n"
-    
-    reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["text"]
+    #reply_w_timestamp = str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["start"]) + " to "
+    #reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["end"]) + "\n"
+    #
+    #reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][0]["text"]
+
+    reply_w_timestamp = response.toWebVTT()
 
     with open(os.path.join(config.path, "transcription.txt"), "w") as w:
         w.write(reply)
