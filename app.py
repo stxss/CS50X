@@ -145,17 +145,17 @@ async def choice_trim(message, callback: CallbackQuery):
     elif callback.data=="transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r") as f:
             reply = f.read()
-            os.remove(os.path.join(dir, f))
+            os.remove(os.path("downloads\\transcription.txt", f))
         await callback.message.reply(reply)
     elif callback.data=="timestamp":
         with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "r") as f:
             reply = f.read()
-            os.remove(os.path.join(dir, f))
+            os.remove(os.path("downloads\\transcription_w_timestamp.txt"))
         await callback.message.reply(reply)  
         
-        #dir = config.folder_path
-        #for f in os.listdir(dir):
-        #    os.remove(os.path.join(dir, f))
+        dir = config.folder_path
+        for f in os.listdir(dir):
+            os.remove(os.path.join(dir, f))
 
 app.run()
 
