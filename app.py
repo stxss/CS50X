@@ -144,7 +144,7 @@ async def filter_audio(client, message):
                     "paragraphs"
                 ]["paragraphs"][i]["sentences"][j]["start"]
                 start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
-                
+
                 end_time = response["results"]["channels"][0]["alternatives"][0][
                     "paragraphs"
                 ]["paragraphs"][i]["sentences"][j]["end"]
@@ -197,14 +197,14 @@ async def choice_trim(message, callback: CallbackQuery):
         await callback.message.reply("trim")
 
     elif callback.data == "transcribe":
-        with open(os.path.join(config.path, "transcription.txt"), "r") as f1:
+        with open(os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8") as f1:
             reply = f1.read()
         await callback.message.reply(reply)
         os.remove("downloads\\transcription.txt")
 
     elif callback.data == "timestamp":
         with open(
-            os.path.join(config.path, "transcription_w_timestamp.txt"), "r"
+            os.path.join(config.path, "transcription_w_timestamp.txt"), "r", encoding="utf-8"
         ) as f2:
             reply = f2.read()
         await callback.message.reply(reply)
