@@ -119,9 +119,12 @@ async def filter_audio(client, message):
     )
 
     #print(json.dumps(response, indent=4))
-    reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
-        "transcript"
-    ]
+    try:
+        reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
+            "transcript"
+        ]
+    except KeyError:
+        pass
 
     reply_w_timestamp = ""
 
@@ -130,12 +133,14 @@ async def filter_audio(client, message):
     #    reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["end"]) + "\n"
     #    reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][0]["sentences"][i]["text"]
     #    reply_w_timestamp += "\n\n"
-    list_range = len(
-        response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
-            "paragraphs"
-        ]
-    )
-    print(list_range)
+    try:
+        list_range = len(
+            response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
+                "paragraphs"
+            ]
+        )
+    except KeyError:
+        await message.reply("Something went wrong or your audio was invalid/corrupt.\nPlease try again")
 
     for i in range(0, list_range + 1):
         for j in range(0, list_range + 2):
