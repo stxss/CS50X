@@ -6,7 +6,7 @@ import config
 import os
 import sys
 import ffmpeg
-import time
+import datetime
 
 
 from os import getenv, listdir, remove
@@ -121,7 +121,9 @@ async def filter_audio(client, message):
                 #reply_w_timestamp += str(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["end"]) + "]" +"\n" 
                 #reply_w_timestamp += response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
                 #reply_w_timestamp += "\n\n"
-                start = '{0:02.0f}:{1:02.0f}'.format(*divmod(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"] * 60, 60))
+                start_time = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"]
+                start = str(datetime.timedelta(minutes=start_time))
+                #start = '{0:02.0f}:{1:02.0f}'.format(*divmod(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["start"] * 60, 60))
                 end = '{0:02.0f}:{1:02.0f}'.format(*divmod(response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["end"] * 60, 60))
                 text = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"][i]["sentences"][j]["text"]
                 reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
