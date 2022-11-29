@@ -138,24 +138,28 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
-    dir = config.folder_path
+    
 
     if callback.data=="trim":
         await callback.message.reply("trim") 
+    
     elif callback.data=="transcribe":
-        with open(os.path.join(config.path, "transcription.txt"), "r") as f:
-            reply = f.read()
-            os.remove(os.path("downloads\\transcription.txt", f))
+        with open(os.path.join(config.path, "transcription.txt"), "r") as f1:
+            reply = f1.read()
+            dir = config.folder_path
+            os.remove(os.path.join(dir, f1))
         await callback.message.reply(reply)
+    
     elif callback.data=="timestamp":
-        with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "r") as f:
-            reply = f.read()
-            os.remove(os.path("downloads\\transcription_w_timestamp.txt"))
+        with open(os.path.join(config.path, "transcription_w_timestamp.txt"), "r") as f2:
+            reply = f2.read()
+            dir = config.folder_path
+            os.remove(os.path.join(dir, f2))
         await callback.message.reply(reply)  
         
-        dir = config.folder_path
-        for f in os.listdir(dir):
-            os.remove(os.path.join(dir, f))
+        #dir = config.folder_path
+        #for f in os.listdir(dir):
+        #    os.remove(os.path.join(dir, f))
 
 app.run()
 
