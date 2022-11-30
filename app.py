@@ -19,7 +19,8 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     Message,
     CallbackQuery,
-    Update,
+    Update, 
+    Chat,
 )
 from pyrogram.handlers import callback_query_handler
 from pyrogram.raw import *
@@ -205,6 +206,7 @@ async def filter_audio(client, message):
 async def invalid_file(client, message):
     await message.reply("Invalid file!! Please retry")
 
+print(Chat.)
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
@@ -214,7 +216,7 @@ async def choice_trim(message, callback: CallbackQuery):
     elif callback.data == "trim_voice":
         #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         #trim_length = await app.listen(message.id)
-        await app.ask("Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id=message)
+        await app.ask("Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id=message.chat.id)
         #helpers.trim()
 
     elif callback.data == "transcribe":
