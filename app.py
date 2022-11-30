@@ -213,7 +213,7 @@ async def choice_trim(message, callback: CallbackQuery):
         helpers.trim()
     elif callback.data == "trim_voice":
         #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
-        trim_length = await app.listen(chat.id)
+        #trim_length = await app.listen(message.id)
         await app.ask("Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)")
         #helpers.trim()
 
