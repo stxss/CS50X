@@ -1,10 +1,6 @@
 import re
-import app
 
-
-async def voice_trimmer():
-    message = await app.ask(text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",chat_id=chat_id.chat_id, timeout=30)
-
+async def trim_voice(message):
     pattern = re.compile("^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))-(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$")
     check = message.text
 
