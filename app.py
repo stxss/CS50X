@@ -215,7 +215,7 @@ async def choice_trim(message, callback: CallbackQuery):
         #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         trim_length = await Client.listen(message.chat.id)
         await Client.ask("Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)")
-        helpers.trim()
+        #helpers.trim()
 
     elif callback.data == "transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8") as f1:
