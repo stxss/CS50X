@@ -100,7 +100,7 @@ async def share(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
-    print(message)
+    chat_id = message.chat.id
     if message.audio:
         audiofile = await message.download(f"audiofile.mp3")
         mimetype = "audio/mpeg"
@@ -220,7 +220,7 @@ async def choice_trim(message, callback: CallbackQuery):
     elif callback.data == "trim_voice":
         await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         #trim_length = await app.listen(message.id)
-        await app.ask(text="Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id=message.chat.id)
+        await app.ask(text="Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id=chat_id)
         #helpers.trim()
 
     elif callback.data == "transcribe":
