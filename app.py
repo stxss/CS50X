@@ -1,4 +1,3 @@
-from __future__ import chat_id
 from deepgram import Deepgram
 
 import asyncio, json
@@ -10,7 +9,7 @@ import ffmpeg
 import datetime
 import helpers
 import pyromod.listen
-
+import chat_id
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
