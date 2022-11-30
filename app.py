@@ -99,7 +99,7 @@ async def share(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
-    # print(message)
+    #print(message)
     if message.audio:
         audiofile = await message.download(f"audiofile.mp3")
         mimetype = "audio/mpeg"
