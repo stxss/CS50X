@@ -7,14 +7,14 @@ async def trim_voice(message):
     while True:
         try:
             pattern.match(check)
+            await message.reply(message.text)
+            break
         except:    
             reply_if_fail = "Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40"
             #await message.reply("Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40")
             await message.reply(reply_if_fail)
             continue
-        else:
-            await message.reply(message.text)
-            break
+
             
 
     
