@@ -7,14 +7,12 @@ async def trim_voice(message):
     reply_if_fail = ""
     while True:
         if pattern.match(check):
-            await message.reply(message.text)
-            break 
+            return message.reply(message.text)
         else:
             reply_if_fail = "Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40"
             #await message.reply("Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40")
-            await message.reply(reply_if_fail)
-            await asyncio.sleep(10)
-            continue
+            return message.reply(reply_if_fail)
+
 
             
 
