@@ -40,6 +40,7 @@ app = Client(
 
 path = config.path
 
+chat_id = ""
 
 deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
