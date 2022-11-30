@@ -13,7 +13,7 @@ import pyromod.listen
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
-from pyrogram import Client, filters
+from pyrogram import Client, filters, methods
 #from pyrogram.types import (
 #    InlineKeyboardButton,
 #    InlineKeyboardMarkup,
@@ -213,13 +213,14 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
+    print(app.get_chat())
     if callback.data == "trim_audio":
         await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         helpers.trim()
     elif callback.data == "trim_voice":
-        #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
+        await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         #trim_length = await app.listen(message.id)
-        await app.ask(text="Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id=message.id)
+        #await app.ask(text="Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id)
         #helpers.trim()
 
     elif callback.data == "transcribe":
