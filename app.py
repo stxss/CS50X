@@ -9,7 +9,7 @@ import ffmpeg
 import datetime
 import helpers
 import pyromod.listen
-
+import chat_id
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
@@ -103,8 +103,8 @@ async def filter_audio(client, message):
     #user_id = message.from_user.id
     #username = message.chat.username
 
-    with open("config.py", "a", encoding="utf-8") as w:
-        w.write("\nchat_id = " + str(chat_id))
+    with open("chat_id.py", "w", encoding="utf-8") as w:
+        w.write("chat_id = " + str(chat_id))
 
 
     if message.audio:
@@ -225,7 +225,7 @@ async def choice_trim(message, callback: CallbackQuery):
         helpers.trim()
     elif callback.data == "trim_voice":
         #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
-        trim_length = await app.listen(chat_id=config.chat_id)
+        trim_length = await app.listen(chat_id=chat_id.chat_id)
 
         #    await callback.message.reply("Something went wrong")
         #helpers.trim()
