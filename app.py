@@ -224,11 +224,12 @@ async def choice_trim(message, callback: CallbackQuery):
         await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         helpers.trim()
     elif callback.data == "trim_voice":
-        #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
-        trim_length = await app.listen(chat_id=chat_id.chat_id, timeout=30)
-
-        #    await callback.message.reply("Something went wrong")
-        #helpers.trim()
+        try:
+            trim_length = await app.ask(text="Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)",chat_id=chat_id.chat_id, timeout=30)
+            await helpers.trim(trim_length)
+        except asyncio.exceptions.TimeoutError:
+            await callback.message.reply("Something went wrong, please try again")
+        
 
     elif callback.data == "transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8") as f1:

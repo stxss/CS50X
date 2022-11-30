@@ -1,2 +1,2 @@
-async def trim(trim_length):
-    await print("trimming in action")
+async def trim(message):
+    await message.reply("trimming in action")
