@@ -8,6 +8,8 @@ import sys
 import ffmpeg
 import datetime
 import helpers
+from convopyro import listen_message
+
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
