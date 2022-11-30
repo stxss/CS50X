@@ -3,6 +3,7 @@ import re
 async def trim(message):
     pattern = re.compile("/^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/")
     check = message.text
+
     if pattern.match(check):
         await message.reply(message.text)
     else:
