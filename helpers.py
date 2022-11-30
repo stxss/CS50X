@@ -1,4 +1,5 @@
 import re
+import asyncio
 
 async def trim_voice(message):
     pattern = re.compile("^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))-(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$")
@@ -12,6 +13,7 @@ async def trim_voice(message):
             reply_if_fail = "Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40"
             #await message.reply("Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40")
             await message.reply(reply_if_fail)
+            await asyncio.sleep(10)
             continue
 
             
