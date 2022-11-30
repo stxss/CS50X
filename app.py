@@ -213,14 +213,13 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
-    print(Chat.)
     if callback.data == "trim_audio":
         await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         helpers.trim()
     elif callback.data == "trim_voice":
         #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         #trim_length = await app.listen(message.id)
-        await app.ask("Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id=message.chat.id)
+        await app.ask("Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)")
         #helpers.trim()
 
     elif callback.data == "transcribe":
