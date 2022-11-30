@@ -95,6 +95,7 @@ async def share(client, message):
 
 "File handling"
 
+# Transcription for audio and voice messages with inline keyboard prompt for next actions to take
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
@@ -217,6 +218,8 @@ async def invalid_file(client, message):
     await message.reply("Invalid file!! Please retry")
 
 
+
+# Callback from inline keyboards handling
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
