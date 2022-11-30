@@ -229,7 +229,7 @@ async def choice_from_inline(message, callback: CallbackQuery):
     elif callback.data == "trim_voice":
         try:
             #trim_length = await app.ask(text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",chat_id=chat_id.chat_id, timeout=30)
-            await helpers.trim()
+            await helpers.voice_trimmer()
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
         
