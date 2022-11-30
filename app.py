@@ -213,6 +213,7 @@ async def choice_trim(message, callback: CallbackQuery):
         helpers.trim()
     elif callback.data == "trim_voice":
         await callback.message.reply("trim voice")
+        helpers.trim()
 
     elif callback.data == "transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8") as f1:
