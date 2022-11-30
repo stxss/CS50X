@@ -8,7 +8,7 @@ import sys
 import ffmpeg
 import datetime
 import helpers
-from convopyro import listen_message
+from pyromod import listen
 
 
 from os import getenv, listdir, remove
