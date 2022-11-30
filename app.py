@@ -14,14 +14,17 @@ import pyromod.listen
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    Message,
-    CallbackQuery,
-    Update, 
-    Chat,
-)
+#from pyrogram.types import (
+#    InlineKeyboardButton,
+#    InlineKeyboardMarkup,
+#    Message,
+#    CallbackQuery,
+#    Update, 
+#    Chat,
+#)
+
+from pyrogram.types import *
+
 from pyrogram.handlers import callback_query_handler
 from pyrogram.raw import *
 
@@ -206,10 +209,11 @@ async def filter_audio(client, message):
 async def invalid_file(client, message):
     await message.reply("Invalid file!! Please retry")
 
-print(Chat.)
+
 
 @app.on_callback_query()
 async def choice_trim(message, callback: CallbackQuery):
+    print(Chat.)
     if callback.data == "trim_audio":
         await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         helpers.trim()
