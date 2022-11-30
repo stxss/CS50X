@@ -41,6 +41,7 @@ app = Client(
 path = config.path
 
 chat_id = ""
+user_id = ""
 
 deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
@@ -100,7 +101,10 @@ async def share(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
+    print(message)
     chat_id = message.chat.id
+    user_id = message.from_user.id
+
     if message.audio:
         audiofile = await message.download(f"audiofile.mp3")
         mimetype = "audio/mpeg"
@@ -221,7 +225,7 @@ async def choice_trim(message, callback: CallbackQuery):
         #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
         #trim_length = await app.listen(message.id)
         #try:
-        await app.ask(text="Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id=chat_id)
+        await app.ask(text="Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)", chat_id=user_id)
         #except:
         #    await callback.message.reply("Something went wrong")
         #helpers.trim()
