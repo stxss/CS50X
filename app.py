@@ -7,7 +7,7 @@ import os
 import sys
 import ffmpeg
 import datetime
-
+import helpers
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
@@ -208,7 +208,7 @@ async def invalid_file(client, message):
 async def choice_trim(message, callback: CallbackQuery):
     if callback.data == "trim_audio":
         await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
-    
+        helpers.trim()
     elif callback.data == "trim_voice":
         await callback.message.reply("trim voice")
 
