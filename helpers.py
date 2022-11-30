@@ -1,3 +1,5 @@
+import re
+
 async def trim(message):
     
 
@@ -5,7 +7,7 @@ async def trim(message):
     
     
     
-    await message.reply(message)
+    await message.reply(message.text)
 
 
 
