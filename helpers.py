@@ -1,5 +1,11 @@
 async def trim(message):
-    await message.reply("trimming in action")
+    
+
+    
+    
+    
+    
+    await message.reply(message)
 
 
 
