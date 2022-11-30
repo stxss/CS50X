@@ -8,7 +8,7 @@ import sys
 import ffmpeg
 import datetime
 import helpers
-import pyromod
+import pyromod.listen
 
 
 from os import getenv, listdir, remove
@@ -213,8 +213,8 @@ async def choice_trim(message, callback: CallbackQuery):
         helpers.trim()
     elif callback.data == "trim_voice":
         #await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
-        trim_length = await Client.listen(message.chat.id)
-        await Client.ask("Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)")
+        trim_length = await app.listen(chat.id)
+        await app.ask("Please send the times of the desired trim in (mm:ss).\n(e.g. 00:13-01:40)")
         #helpers.trim()
 
     elif callback.data == "transcribe":
