@@ -218,7 +218,7 @@ async def invalid_file(client, message):
 
 
 
-@app.on_callback_query()
+@app.on_callback_query(filters.private)
 async def choice_trim(message, callback: CallbackQuery):
     if callback.data == "trim_audio":
         await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
