@@ -70,7 +70,7 @@ async def translate(client, message):
 
 
 @app.on_message(filters.command("trim"))
-async def trim():
+async def trim(client, message):
     await app.send_audio(chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"))
 
 @app.on_message(filters.command("join"))
@@ -238,7 +238,7 @@ async def choice_from_inline(message, callback: CallbackQuery):
         try:
             trim_length = await app.ask(text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",chat_id=chat_id.chat_id, timeout=30)
             await helpers.trim_voice(trim_length, "voice")
-            await trim()
+            await app.send_audio(chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"))
         
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
