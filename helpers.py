@@ -28,6 +28,9 @@ async def trim_voice(message, filetype):
         user_start_mins = int(user_start_time.split(":")[0])
         user_start_sec = int(user_start_time.split(":")[1])
         
+        start_trim_time = user_end_mins * 60 + user_start_sec
+        print(user_start_time, start_trim_time)
+
         # User input end of trim time
         user_end_time = user_duration[1]
         user_end_mins = int(user_end_time.split(":")[0])
@@ -45,10 +48,10 @@ async def trim_voice(message, filetype):
         file_end_time_mins = file_end_time.split(":")[1] 
         file_end_time_sec = file_end_time.split(":")[2] 
         
-        input_stream = ffmpeg.input(in_file)
-        pts = "PTS-STARTPTS"
-        file_trim = (input_stream.filter_("atrim", start=user_start_time, end=user_end_time).filter_("asetpts", pts))
-        output = ffmpeg.output(file_trim, format = "mp3")
+        #input_stream = ffmpeg.input(in_file)
+        #pts = "PTS-STARTPTS"
+        #file_trim = (input_stream.filter_("atrim", start=user_start_time, end=user_end_time).filter_("asetpts", pts))
+        #output = ffmpeg.output(file_trim, format = "mp3")
         
 
 
