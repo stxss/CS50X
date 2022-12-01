@@ -73,3 +73,4 @@ seconds, ms = divmod(ms, 1000)
 minutes, seconds = divmod(seconds, 60)
 print(f'{int(minutes):01d}:{int(seconds):02d}')
 
+print(str(datetime.timedelta(seconds=float(duration)))[:-4])
