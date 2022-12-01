@@ -63,7 +63,7 @@ import ffmpeg
 probe_res = ffmpeg.probe("downloads\\voicefile.ogg")
 duration = probe_res.get("format", {}).get("duration", None)
 
-print(duration)
+print(type(duration))
 
 ms = 194000
 seconds, ms = divmod(ms, 1000)
