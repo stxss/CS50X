@@ -237,15 +237,16 @@ async def choice_from_inline(message, callback: CallbackQuery):
                 try:
                     if pattern.match(check):
                         await callback.message.reply(message.text)
-                        break 
+                        break
                 except:
                     #else:
                     reply_if_fail = "Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40"
                     #await message.reply("Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40")
                     await callback.message.reply(reply_if_fail)
                     break
+            await callback.message.reply("/trim")
             
-            await helpers.trim_voice(trim_length)
+            #await helpers.trim_voice(trim_length)
             # could implement the regex testing here and if the user doesn't answer correctly, 
             # just redirect it to the command and
             # then do th rest of the loop 
