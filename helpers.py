@@ -12,12 +12,18 @@ async def trim_voice(message, filetype):
     check = message.text
     reply_if_fail = ""
     if pattern.match(check):
+        if os.path.exists("out.mp3"):
+            os.remove("out.mp3")
+        
         if filetype == "audio":
             probe_res = ffmpeg.probe("downloads\\audiofile.mp3")
             in_file = "downloads\\audiofile.mp3"            
         elif filetype == "voice":        
             probe_res = ffmpeg.probe("downloads\\voicefile.ogg")
             in_file = "downloads\\voicefile.ogg"
+
+
+
 
         duration = probe_res.get("format", {}).get("duration", None)
         
@@ -28,14 +34,14 @@ async def trim_voice(message, filetype):
         user_start_mins = int(user_start_time.split(":")[0])
         user_start_sec = int(user_start_time.split(":")[1])
         
-        start_trim_time = user_end_mins * 60 + user_start_sec
-        print(user_start_time, start_trim_time)
+        start_trim_time = user_start_mins * 60 + user_start_sec
 
         # User input end of trim time
         user_end_time = user_duration[1]
         user_end_mins = int(user_end_time.split(":")[0])
         user_end_sec = int(user_end_time.split(":")[1])
         
+        end_trim_time = user_end_mins * 60 + user_end_sec
 
         file_start_time = "00:00"
         file_end_time = str(datetime.timedelta(seconds=float(duration)))[:-7]
@@ -48,10 +54,10 @@ async def trim_voice(message, filetype):
         file_end_time_mins = file_end_time.split(":")[1] 
         file_end_time_sec = file_end_time.split(":")[2] 
         
-        #input_stream = ffmpeg.input(in_file)
-        #pts = "PTS-STARTPTS"
-        #file_trim = (input_stream.filter_("atrim", start=user_start_time, end=user_end_time).filter_("asetpts", pts))
-        #output = ffmpeg.output(file_trim, format = "mp3")
+        input_stream = ffmpeg.input(in_file)
+        pts = "PTS-STARTPTS"
+        file_trim = (input_stream.filter_("atrim", start=start_trim_time, end=end_trim_time).filter_("asetpts", pts))
+        output = ffmpeg.output(file_trim, format = "mp3")
         
 
 
