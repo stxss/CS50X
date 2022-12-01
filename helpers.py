@@ -23,9 +23,6 @@ async def trim_voice(message, filetype):
             probe_res = ffmpeg.probe("downloads\\voicefile.ogg")
             in_file = "downloads\\voicefile.ogg"
 
-
-
-
         duration = probe_res.get("format", {}).get("duration", None)
         
         user_duration = check.split("-")
@@ -62,7 +59,7 @@ async def trim_voice(message, filetype):
         output.run()
 
 
-        await app.send_audio(chat_id=chat_id, audio=os.path.join(config.path,"audiofile.mp3"))
+        
         #await message.reply(str(datetime.timedelta(seconds=float(duration)))[:-7])
     else:
         reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
