@@ -207,6 +207,7 @@ async def filter_audio(client, message):
                 ],
             ]
         )
+    await app.send_audio(chat_id=chat_id.chat_id, audio=os.path.join(config.path,"audiofile.mp3"))
     await message.reply_text(
         "Please choose what you want to do with the file",
         quote=True,
@@ -240,7 +241,7 @@ async def choice_from_inline(message, callback: CallbackQuery):
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
         
-        await app.send_audio(chat_id=chat_id.chat_id, audio="downloads\out.mp3")
+        await app.send_audio(chat_id=chat_id.chat_id, audio=os.path.join(config.path,"out.mp3"))
 
     elif callback.data == "transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8") as f1:
