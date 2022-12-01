@@ -1,3 +1,4 @@
+import app
 import re
 import asyncio
 
@@ -24,7 +25,8 @@ def trim_voice(message):
         if not pattern.match(check):
             reply_if_fail = "Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40"
             #return message.reply("Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40")
-            return message.reply(reply_if_fail)
+            message.reply(reply_if_fail)
+            continue 
         else:
             break
                   
