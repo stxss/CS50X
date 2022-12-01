@@ -225,7 +225,7 @@ async def invalid_file(client, message):
 # Callback from inline keyboards handling
 
 @app.on_callback_query()
-async def choice_from_inline(message, callback: CallbackQuery):
+async def choice_from_inline(Client, callback: CallbackQuery):
     if callback.data == "trim_audio":
         try:
             trim_length = await app.ask(text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",chat_id=chat_id.chat_id, timeout=30)
