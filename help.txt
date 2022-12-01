@@ -12,3 +12,5 @@ Type /help for information on how to use this bot!
 /search - search a word/text 
 
 /share - to share
+
+The time represented is h:mm:ss:
