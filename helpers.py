@@ -4,7 +4,7 @@ import ffmpeg
 import config
 import os
 import datetime
-
+import chat_id
 
 path = config.path
 
@@ -58,7 +58,7 @@ async def trim_voice(message, filetype):
         output = ffmpeg.output(file_trim, "downloads\\out.mp3" , format = "mp3")
         output.run()
 
-
+        await message.reply_audio(message.chat.id, "downloads\\out.mp3")
         
         #await message.reply(str(datetime.timedelta(seconds=float(duration)))[:-7])
     else:
