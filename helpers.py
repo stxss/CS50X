@@ -5,6 +5,7 @@ import config
 import os
 import datetime
 import chat_id
+from app import app
 
 path = config.path
 
@@ -58,7 +59,7 @@ async def trim_voice(message, filetype):
         output = ffmpeg.output(file_trim, "downloads\\out.mp3" , format = "mp3")
         output.run()
 
-        await message.audio(message.chat.id, os.path.join(config.path, "out.mp3"))
+        
         
         #await message.reply(str(datetime.timedelta(seconds=float(duration)))[:-7])
     else:
@@ -66,7 +67,7 @@ async def trim_voice(message, filetype):
         await message.reply(reply_if_fail)
             
 
-    
+    await app.send_audio(message.chat.id, "downloads\out.mp3")
     
     
     
