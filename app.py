@@ -243,8 +243,7 @@ async def choice_from_inline(message, callback: CallbackQuery):
                     reply_if_fail = "Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40"
                     #await message.reply("Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40")
                     await callback.message.reply(reply_if_fail)
-                    asyncio.sleep(10)
-                    #continue
+                    break
             
             await helpers.trim_voice(trim_length)
             # could implement the regex testing here and if the user doesn't answer correctly, 
