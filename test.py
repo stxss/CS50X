@@ -58,6 +58,7 @@ import config
 #    ydl.download(['https://www.youtube.com/watch?v=3oFAJtFE8YU'])
 import os
 import ffmpeg
+from ffmpeg import _probe
 
 
 probe = ffmpeg.probe("voicefile.ogg")
