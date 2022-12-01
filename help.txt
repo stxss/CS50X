@@ -13,4 +13,4 @@ Type /help for information on how to use this bot!
 
 /share - to share
 
-The time represented is h:mm:ss:
+The time represented is h:mm:ss.milliseconds
