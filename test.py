@@ -59,8 +59,11 @@ import config
 
 
 
-os.path.system('ffprobe -i voicefile.ogg -show_entries format=duration -v quiet -of csv="p=0"')
-
+for filename in os.listdir(config.path):
+    if filename.endswith(".ogg"):
+        os.system('ffprobe -i voicefile.ogg -show_entries format=duration -v quiet -of csv="p=0"')
+    else:
+        break
 
 
 
