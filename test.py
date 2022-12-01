@@ -1,3 +1,6 @@
+import os
+import config
+
 #from __future__ import unicode_literals
 #import youtube_dl
 #
@@ -55,7 +58,8 @@
 #    ydl.download(['https://www.youtube.com/watch?v=3oFAJtFE8YU'])
 
 
-
+with open(os.path.join(config.path, "voicefile.ogg"), "w", encoding="utf-8") as v:
+            os.system('ffprobe -i v -show_entries format=duration -v quiet -of csv="p=0"')
 
 
 
