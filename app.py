@@ -122,7 +122,6 @@ async def filter_audio(client, message):
         )
     )
 
-    # print(json.dumps(response, indent=4))
     try:
         reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
             "transcript"
@@ -204,8 +203,6 @@ async def filter_audio(client, message):
                 ],
             ]
         )
-
-    # await app.send_audio(chat_id=chat_id, audio=os.path.join(config.path, "out.mp3"))
 
     await message.reply_text(
         "Please choose what you want to do with the file",
