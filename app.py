@@ -240,7 +240,7 @@ async def choice_from_inline(message, callback: CallbackQuery):
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
         
-        #await app.send_audio(chat_id=chat_id, audio="downloads\out.mp3")
+        await app.send_audio(chat_id=chat_id, audio="downloads\out.mp3")
         await callback.message.reply_audio(audio="downloads\out.mp3")
     elif callback.data == "transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8") as f1:
