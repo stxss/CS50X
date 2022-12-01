@@ -39,7 +39,9 @@ async def trim_voice(message):
         file_end_time_mins = file_end_time.split(":")[1] 
         file_end_time_sec = file_end_time.split(":")[2] 
         
-        if user_start_mins >
+        if user_start_mins < file_start_time_mins or user_start_sec < file_start_time_sec:
+            print("error")
+        elif     
 
 
 
