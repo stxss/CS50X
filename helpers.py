@@ -46,8 +46,10 @@ async def trim_voice(message, filetype):
         file_end_time_sec = file_end_time.split(":")[2] 
         
         input_stream = ffmpeg.input(in_file)
-
+        pts = "PTS-STARTPTS"
+        file_trim = (input_stream.filter_("atrim", start=user_start_time, end=user_end_time).filter_("asetpts", pts))
         
+
 
 
 
