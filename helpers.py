@@ -7,12 +7,18 @@ import datetime
 
 path = config.path
 
-async def trim_voice(message):
+async def trim_voice(message, filetype):
     pattern = re.compile("^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))-(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$")
     check = message.text
     reply_if_fail = ""
-    if pattern.match(check):        
-        probe_res = ffmpeg.probe("downloads\\voicefile.ogg")
+    if pattern.match(check):
+        if filetype == "audio":
+            probe_res = ffmpeg.probe("downloads\\audiofile.mp3")
+            in_file = "downloads\\audiofile.mp3"            
+        elif filetype == "voice":        
+            probe_res = ffmpeg.probe("downloads\\voicefile.ogg")
+            in_file = "downloads\\voicefile.ogg"
+
         duration = probe_res.get("format", {}).get("duration", None)
         
         user_duration = check.split("-")
@@ -39,8 +45,9 @@ async def trim_voice(message):
         file_end_time_mins = file_end_time.split(":")[1] 
         file_end_time_sec = file_end_time.split(":")[2] 
         
-        
+        input_stream = ffmpeg.input(in_file)
 
+        
 
 
 
