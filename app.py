@@ -230,28 +230,26 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         try:
             trim_length = await app.ask(text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",chat_id=chat_id.chat_id, timeout=30)
             await helpers.trim_voice(trim_length, "audio")
-
+            await app.send_audio(chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"))
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
       
-    if callback.data == "trim_voice":
+    elif callback.data == "trim_voice":
         try:
             trim_length = await app.ask(text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",chat_id=chat_id.chat_id, timeout=30)
             await helpers.trim_voice(trim_length, "voice")
             await app.send_audio(chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"))
-        
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
         
-        
-    
-    if callback.data == "transcribe":
+
+    elif callback.data == "transcribe":
         with open(os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8") as f1:
             reply = f1.read()
         await callback.message.reply(reply)
         os.remove("downloads\\transcription.txt")
 
-    if callback.data == "timestamp":
+    elif callback.data == "timestamp":
         with open(
             os.path.join(config.path, "transcription_w_timestamp.txt"), "r", encoding="utf-8"
         ) as f2:
