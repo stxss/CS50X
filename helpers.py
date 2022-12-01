@@ -4,7 +4,7 @@ import ffmpeg
 import config
 import os
 import datetime
-import app
+
 
 path = config.path
 
