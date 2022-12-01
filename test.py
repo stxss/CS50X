@@ -59,7 +59,7 @@ import config
 
 
 
-print(os.system('ffprobe -i "voicefile.ogg" -show_entries format=duration -v quiet -of csv="p=0"'))
+os.system('ffprobe -i "voicefile.ogg" -show_entries format=duration -v quiet -of csv="p=0"')
 
 
 
