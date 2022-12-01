@@ -17,8 +17,6 @@ from dotenv import load_dotenv
 from pyrogram import Client, filters, methods
 
 from pyrogram.types import *
-
-from pyrogram.handlers import callback_query_handler
 from pyrogram.raw import *
 
 
@@ -40,7 +38,6 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 @app.on_message(filters.command("start"))
 async def help_command(client, message):
-    # print(message.chat.username, message.text)
     await message.reply("Hi, I'll help you trim your videos")
 
 
