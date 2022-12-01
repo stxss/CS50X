@@ -5,7 +5,7 @@ import config
 import os
 import datetime
 import chat_id
-from app import app
+
 
 path = config.path
 
@@ -66,16 +66,9 @@ async def trim_voice(message, filetype):
         reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
         await message.reply(reply_if_fail)
             
-
-    await app.send_audio(message.chat.id, "downloads\out.mp3")
     
     
     
-    
-
-
-
-
 
 
 async def join(message):

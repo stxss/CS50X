@@ -72,7 +72,7 @@ async def translate(client, message):
 @app.on_message(filters.command("trim"))
 async def trim(client, message):
     await message.reply("trim audio")
-
+    await app.send_audio(chat_id=chat_id, audio=os.path.join(config.path, "out.mp3"))
 
 @app.on_message(filters.command("join"))
 async def join(client, message):
@@ -263,6 +263,6 @@ async def choice_from_inline(message, callback: CallbackQuery):
         # dir = config.folder_path
         # for f in os.listdir(dir):
         #    os.remove(os.path.join(dir, f))
-
+    
 
 app.run()
