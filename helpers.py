@@ -18,20 +18,20 @@ async def trim_voice(message):
         user_duration = check.split("-")
         
         start_time = user_duration[0]
-        user_start_mins = start_time.split(":")[0]
-        user_start_sec = start_time.split(":")[1]
-        print(start_time, user_start_mins, user_start_sec)
+        user_start_mins = int(start_time.split(":")[0])
+        user_start_sec = int(start_time.split(":")[1])
+        #print(start_time, user_start_mins, user_start_sec)
 
         end_time = user_duration[1]
-        user_end_mins = end_time.split(":")[0]
-        user_end_sec = end_time.split(":")[1]
-        print(end_time, user_end_mins, user_end_sec)
+        user_end_mins = int(end_time.split(":")[0])
+        user_end_sec = int(end_time.split(":")[1])
+        #print(end_time, user_end_mins, user_end_sec)
 
         file_start_time = "0:00:00"
         file_end_time = str(datetime.timedelta(seconds=float(duration)))[:-7]
 
-        #file_start_time_actual = file_start_time[...] 
-        #file_end_time_actual = file_end_time[...] 
+        file_start_time_actual = file_start_time[...] 
+        file_end_time_actual = file_end_time[...] 
         
         await message.reply(str(datetime.timedelta(seconds=float(duration)))[:-7])
     else:
