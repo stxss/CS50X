@@ -12,8 +12,8 @@ async def trim_voice(message, filetype):
     check = message.text
     reply_if_fail = ""
     if pattern.match(check):
-        if os.path.exists("out.mp3"):
-            os.remove("out.mp3")
+        if os.path.exists("downloads\\out.mp3"):
+            os.remove("downloads\\out.mp3")
         
         if filetype == "audio":
             probe_res = ffmpeg.probe("downloads\\audiofile.mp3")
@@ -57,7 +57,7 @@ async def trim_voice(message, filetype):
         input_stream = ffmpeg.input(in_file)
         pts = "PTS-STARTPTS"
         file_trim = (input_stream.filter_("atrim", start=start_trim_time, end=end_trim_time).filter_("asetpts", pts))
-        output = ffmpeg.output(file_trim, "out.mp3" , format = "mp3")
+        output = ffmpeg.output(file_trim, "downloads\\out.mp3" , format = "mp3")
         output.run()
 
 
