@@ -17,11 +17,12 @@ async def trim_voice(message):
         
         user_duration = check.split("-")
         
+        # User input start of trim time 
         user_start_time = user_duration[0]
         user_start_mins = int(user_start_time.split(":")[0])
         user_start_sec = int(user_start_time.split(":")[1])
         
-
+        # User input end of trim time
         user_end_time = user_duration[1]
         user_end_mins = int(user_end_time.split(":")[0])
         user_end_sec = int(user_end_time.split(":")[1])
@@ -38,14 +39,11 @@ async def trim_voice(message):
         file_end_time_mins = file_end_time.split(":")[1] 
         file_end_time_sec = file_end_time.split(":")[2] 
         
-        if user_start_time < file_start_time:
-            ...
-        elif user_end_time > file_end_time: 
-            ...
+        if user_start_mins >
 
 
 
-            
+
         await message.reply(str(datetime.timedelta(seconds=float(duration)))[:-7])
     else:
         reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
