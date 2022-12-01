@@ -226,25 +226,11 @@ async def invalid_file(client, message):
 async def choice_from_inline(message, callback: CallbackQuery):
     if callback.data == "trim_audio":
         await callback.message.reply("Please send the times of the desired trim in (mm:ss). (e.g. 00:13-01:40)")
-        
+      
     elif callback.data == "trim_voice":
         try:
             trim_length = await app.ask(text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",chat_id=chat_id.chat_id, timeout=30)
-            pattern = re.compile("^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))-(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$")
-            check = trim_length
-            reply_if_fail = ""
-            while True:
-                try:
-                    if pattern.match(check):
-                        await callback.message.reply(message.text)
-                        break
-                except:
-                    #else:
-                    reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
-                    #await message.reply("Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40")
-                    await callback.message.reply(reply_if_fail)
-                    break
-            #await helpers.trim_voice(trim_length)
+            await helpers.trim_voice(trim_length)
             # could implement the regex testing here and if the user doesn't answer correctly, 
             # just redirect it to the command and
             # then do th rest of the loop 
