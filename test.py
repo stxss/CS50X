@@ -56,11 +56,11 @@ import config
 #ydl_opts= {}
 #with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 #    ydl.download(['https://www.youtube.com/watch?v=3oFAJtFE8YU'])
-
+import os
 import ffmpeg
 
-print(ffmpeg._probe())
-probe = ffmpeg._probe("downloads\\voicefile.ogg")
+
+probe = ffmpeg.probe("voicefile.ogg")
 duration = probe.get("format", {}).get("duration", None)
 
 print(duration)
