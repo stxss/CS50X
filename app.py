@@ -5,7 +5,6 @@ import requests
 import config
 import os
 import sys
-import ffmpeg
 import datetime
 import helpers
 import pyromod.listen
