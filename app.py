@@ -10,6 +10,7 @@ import datetime
 import helpers
 import pyromod.listen
 import chat_id
+import re
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
@@ -229,6 +230,21 @@ async def choice_from_inline(message, callback: CallbackQuery):
     elif callback.data == "trim_voice":
         try:
             trim_length = await app.ask(text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",chat_id=chat_id.chat_id, timeout=30)
+            pattern = re.compile("^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))-(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$")
+            check = trim_length
+            reply_if_fail = ""
+            while True:
+                try:
+                    if pattern.match(check):
+                        await callback.message.reply(message.text)
+                        break 
+                except:
+                    #else:
+                    reply_if_fail = "Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40"
+                    #await message.reply("Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40")
+                    await callback.message.reply(reply_if_fail)
+                    continue
+            
             await helpers.trim_voice(trim_length)
             # could implement the regex testing here and if the user doesn't answer correctly, 
             # just redirect it to the command and
