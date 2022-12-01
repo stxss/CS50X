@@ -70,8 +70,7 @@ async def translate(client, message):
 
 
 @app.on_message(filters.command("trim"))
-async def trim(client, message):
-    await message.reply("trim audio")
+async def trim():
     await app.send_audio(chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"))
 
 @app.on_message(filters.command("join"))
