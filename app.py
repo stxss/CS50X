@@ -15,14 +15,6 @@ import re
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 from pyrogram import Client, filters, methods
-#from pyrogram.types import (
-#    InlineKeyboardButton,
-#    InlineKeyboardMarkup,
-#    Message,
-#    CallbackQuery,
-#    Update, 
-#    Chat,
-#)
 
 from pyrogram.types import *
 
@@ -101,8 +93,6 @@ async def share(client, message):
 async def filter_audio(client, message):
     print(message)
     chat_id = message.chat.id
-    #user_id = message.from_user.id
-    #username = message.chat.username
 
     with open("chat_id.py", "w", encoding="utf-8") as w:
         w.write("chat_id = " + str(chat_id))
