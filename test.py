@@ -59,7 +59,8 @@ import config
 
 import ffmpeg
 
-probe = ffmpeg.probe("downloads\\voicefile.ogg")
+
+probe = _probe("downloads\\voicefile.ogg")
 duration = probe.get("format", {}).get("duration", None)
 
 print(duration)
