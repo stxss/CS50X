@@ -28,9 +28,6 @@ async def trim_voice(message, filetype):
         if filetype == "audio" or filetype == "voice":
             probe_res = ffmpeg.probe("downloads\\audiofile.mp3")
             in_file = "downloads\\audiofile.mp3"
-        #elif filetype == "voice":
-        #    probe_res = ffmpeg.probe("downloads\\voicefile.ogg")
-        #    in_file = "downloads\\voicefile.ogg"
 
         duration = probe_res.get("format", {}).get("duration", None)
 
@@ -64,7 +61,8 @@ async def trim_voice(message, filetype):
 
 
 async def join(message, filetype):
-    ...    
+    if message == "audio" and filetype == "image":
+        
 
 
 async def translate(message):

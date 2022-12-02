@@ -103,9 +103,6 @@ async def filter_audio(client, message):
     if message.audio or message.voice:
         audiofile = await message.download(f"audiofile.mp3")
         mimetype = "audio/mpeg"
-    #elif message.voice:
-    #    audiofile = await message.download(f"voicefile.ogg")
-    #    mimetype = "audio/ogg"
 
     sound = open(audiofile, "rb")
     source = {"buffer": sound, "mimetype": mimetype}
@@ -197,27 +194,6 @@ async def filter_audio(client, message):
             ]
         )
 
-#    elif message.voice:
-#        choices = InlineKeyboardMarkup(
-#            [
-#                [
-#                    InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-#                    InlineKeyboardButton(
-#                        "Transcribe w/ timestamps", callback_data="timestamp"
-#                    )                    
-#
-#                ],
-#                [
-#                    InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
-#                    InlineKeyboardButton("Join", callback_data="join"),
-#                ],
-#                [
-#                    InlineKeyboardButton("Translate", callback_data="translate"),
-#                    InlineKeyboardButton("Share", callback_data="share"),                    
-#                ],                
-#            ]
-#        )
-
     await message.reply_text(
         "Please choose what you want to do with the file",
         quote=True,
@@ -263,22 +239,6 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
 
-    #elif callback.data == "trim_voice":
-    #    try:
-    #        trim_length = await app.ask(
-    #            text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",
-    #            chat_id=chat_id.chat_id,
-    #            timeout=30,
-    #        )
-    #        await helpers.trim_voice(trim_length, "voice")
-    #      
-    #        await app.send_audio(
-    #            chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3")
-    #        )
-
-        except asyncio.exceptions.TimeoutError:
-            await callback.message.reply("Something went wrong, please try again")
-
     elif callback.data == "transcribe":
         with open(
             os.path.join(config.path, "transcription.txt"), "r", encoding="utf-8"
@@ -301,7 +261,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         if chat_id.sent_img == False:
             await app.send_message(chat_id=chat_id.chat_id,text="Please send an image")
         else:
-            helpers.join()
+            helpers.join("audio", "image")
 
     elif callback.data == "translate":
         ...
