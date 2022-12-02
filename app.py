@@ -233,9 +233,16 @@ async def filter_audio(client, message):
     )
 
 
-@app.on_message(~filters.audio | ~filters.voice | ~filters.photo)
+@app.on_message(~filters.audio | ~filters.voice | ~filters.media)
 async def invalid_file(client, message):
-    await message.reply("Invalid file!! Please retry")
+    
+    if message.voice or message.audio:
+        pass
+    elif message.media:
+        if message.media != "MessageMediaType.PHOTO" or message.media != "MessageMediaType.VOICE" or message.media != "MessageMediaType.AUDIO":
+            await message.reply("Invalid file!! Please retry")
+    
+    print(message.media)
 
 
 # Callback from inline keyboards handling
