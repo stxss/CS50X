@@ -74,8 +74,8 @@ async def trim(client, message):
             ]
         )
 
-    await message.(
-        "Please choose what you want to do with the file"
+    await app.send_message(chat_id=chat_id.chat_id,
+        text="Please choose what you want to do with the file"
     )
 
     await app.send_audio(
