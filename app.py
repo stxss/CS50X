@@ -97,11 +97,13 @@ async def filter_audio(client, message):
 
     if os.path.exists(os.path.join(config.path, "imagefile.jpg")):
         with open("chat_id.py", "w", encoding="utf-8") as w:
-            w.write("chat_id = " + str(chat_id) + "\n\n")
+            #w.write("chat_id = " + str(chat_id) + "\n\n")
+            w.write(f"chat_id = int({chat_id})\n\n")
             w.write("sent_img = True")
     else:
         with open("chat_id.py", "w", encoding="utf-8") as w:
-            w.write("chat_id = " + str(chat_id) + "\n\n")
+            #w.write("chat_id = " + str(chat_id) + "\n\n")
+            w.write(f"chat_id = int({chat_id})\n\n")
             w.write("sent_img = False")
 
 
@@ -213,7 +215,7 @@ async def invalid_file(client, message):
         maintain_chat_id = str(message.chat.id)
         imagefile = await message.download(f"imagefile.jpg")
         with open("chat_id.py", "w", encoding="utf-8") as w:
-            w.write("chat_id = " + maintain_chat_id + "\n\n")
+            w.write(f"chat_id = int({maintain_chat_id})\n\n")
             w.write("sent_img = True")
 
         await message.reply("Please, send an audio file and click 'Join'")
@@ -265,7 +267,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
     elif callback.data == "join":
         print(chat_id.sent_img)
         if not chat_id.sent_img == True:
-            await app.send_message(chat_id=int(chat_id.chat_id), text="Please send an image")
+            await app.send_message(chat_id=chat_id.chat_id, text="Please send an image")
         else:
             try:
                 await helpers.create("audio", "image")
