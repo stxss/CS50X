@@ -62,8 +62,11 @@ async def trim_voice(message, filetype):
 
 async def join(message, filetype):
     if message == "audio" and filetype == "image":
+        input_image = ffmpeg.input("downloads\\audiofile.mp3")
+        input_audio = ffmpeg.input("downloads\\imagefile.jpg")
+
+        out_video = ffmpeg.output(input_image, input_audio, v=1, a=1).output("downloads\\video.mp4")
+        out_video.run()
         
-
-
 async def translate(message):
     ...

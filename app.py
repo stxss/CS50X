@@ -262,7 +262,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             await app.send_message(chat_id=chat_id.chat_id,text="Please send an image")
         else:
             helpers.join("audio", "image")
-
+            await app.send_video(
+                chat_id=chat_id.chat_id, audio=os.path.join(config.path, "video.mp4")
+            )
     elif callback.data == "translate":
         ...
     elif callback.data == "share":
