@@ -268,7 +268,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         with open("chat_id.py", "r", encoding="utf-8") as f:
             for line in f:
                 if line.startswith("chat_id"):
-                    chat_id_for_join = line
+                    chat_id_for_join = line[9:]
                 #if line.startswith("sent_img"):
                 #    sent_img_val = line
             print(chat_id_for_join.strip())
