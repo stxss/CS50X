@@ -271,8 +271,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                     chat_id_for_join = line[9:]
                 if line.startswith("sent_img"):
                     sent_img_val = line[10:]
-            print(chat_id_for_join.strip(), sent_img_val)
-            #sent_img_val.strip()
+
         if not sent_img_val.strip() == "True":
             await app.send_message(chat_id=chat_id_for_join.strip(), text="Please send an image")
         else:
