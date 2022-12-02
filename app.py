@@ -267,7 +267,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         if chat_id.sent_img == False:
             await app.send_message(chat_id=chat_id.chat_id,text="Please send an image")
         else:
-            helpers.create("audio", "image")
+            await helpers.create("audio", "image")
             await app.send_video(
                 chat_id=chat_id.chat_id, video=os.path.join(config.path, "video.mp4")
             )
