@@ -97,13 +97,13 @@ async def filter_audio(client, message):
 
     if os.path.exists(os.path.join(config.path, "imagefile.jpg")):
         with open("chat_id.py", "w", encoding="utf-8") as w:
-            #w.write("chat_id = " + str(chat_id) + "\n\n")
-            w.write(f"chat_id = int({chat_id})\n\n")
+            #w.write("chat_id = " + str(chat_id) + "\n")
+            w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = True")
     else:
         with open("chat_id.py", "w", encoding="utf-8") as w:
-            #w.write("chat_id = " + str(chat_id) + "\n\n")
-            w.write(f"chat_id = int({chat_id})\n\n")
+            #w.write("chat_id = " + str(chat_id) + "\n")
+            w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = False")
 
 
@@ -215,7 +215,7 @@ async def invalid_file(client, message):
         maintain_chat_id = str(message.chat.id)
         imagefile = await message.download(f"imagefile.jpg")
         with open("chat_id.py", "w", encoding="utf-8") as w:
-            w.write(f"chat_id = int({maintain_chat_id})\n\n")
+            w.write(f"chat_id = {maintain_chat_id}\n")
             w.write("sent_img = True")
 
         await message.reply("Please, send an audio file and click 'Join'")
@@ -266,17 +266,20 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
     elif callback.data == "join":
         with open("chat_id.py", "r", encoding="utf-8") as f:
-            chat_id_for_image = f.read() 
-            sent_image_val = 
-        print(chat_id.sent_img)
-        print(chat_id.chat_id)
+            for line in f:
+                if line.startswith("chat_id"):
+                    chat_id_for_join = line
+                #if line.startswith("sent_img"):
+                #    sent_img_val = line
+            print(chat_id_for_join.strip())
+            #sent_img_val.strip()
         if not chat_id.sent_img == True:
-            await app.send_message(chat_id=chat_id.chat_id, text="Please send an image")
+            await app.send_message(chat_id=chat_id_for_join.strip(), text="Please send an image")
         else:
             try:
                 await helpers.create("audio", "image")
                 await app.send_video(
-                    chat_id=chat_id.chat_id, video=os.path.join(config.path, "video.mp4")
+                    chat_id=chat_id_for_join.strip(), video=os.path.join(config.path, "video.mp4")
                 )
             except:
                 await callback.message.reply("Something went wrong, please try again")
