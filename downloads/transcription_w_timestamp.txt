@@ -1,0 +1,90 @@
+0:00:00.979 to 0:00:01.258
+Hello.
+
+0:00:01.458 to 0:00:07.511
+My name is Stan la Ba, and I am from Portal Portugal, and I'm a recent mechanical engineer in graduate.
+
+0:00:08.184 to 0:00:12.591
+As a final project to Cs present to you luke allocation.
+
+0:00:13.127 to 0:00:18.910
+This was created specifically as a final project for Cs fifties introduction to programming with Python.
+
+0:00:19.130 to 0:00:26.843
+This program's focus is to scan a given location and output a number of attractions or establishments specified by the user.
+
+0:00:28.857 to 0:00:36.600
+A real world simulation would be, for example, let's say you are walking by Berlin, and you want to get a place to stay for night.
+
+0:00:36.900 to 0:00:40.800
+You can use this program to tailor your preferences and get the top results.
+
+0:00:41.315 to 0:00:49.155
+So you want the five best lodging places in berlin in a thirty kilometer radius, sorted by number of reviews.
+
+0:00:50.930 to 0:00:54.090
+Or let's say, you aren't really sure which one to see.
+
+0:00:54.250 to 0:00:55.770
+So you want to see what you can choose from.
+
+0:00:56.864 to 0:00:57.364
+Perfect.
+
+0:00:57.581 to 0:01:04.116
+You open up this program where you prompted with simple questions like your desired location.
+
+0:01:05.970 to 0:01:10.190
+Your desired radius of search and desired type of attraction.
+
+0:01:10.730 to 0:01:19.345
+If you don't know what exactly which you're looking for, there's always the option to leave the line blank or type the word attractions to see a table of available options.
+
+0:01:19.959 to 0:01:27.261
+As a bonus, if you're feeling extra and indecisive, you can just input the word random and the random option will be chosen for you.
+
+0:01:28.153 to 0:01:34.392
+The program will output the number of fund results and prompt for how many of those results you want to see.
+
+0:01:36.500 to 0:01:38.620
+Then it will prompt for a sorting filter.
+
+0:01:38.780 to 0:01:41.900
+You can choose between name, rating and number of reviews.
+
+0:01:42.420 to 0:01:47.210
+In the case that you don't want to choose a specific filter, the default is number of reviews.
+
+0:01:47.865 to 0:01:51.912
+And then you will get your desired output outputs in this case.
+
+0:01:52.726 to 0:02:01.680
+Five lodging places or five hotels in Berlin in the thirty kilometer radius that you specified sorted by number of reviews.
+
+0:02:02.234 to 0:02:07.782
+And then finally, the program asks you if you want to do another search, where you can choose between yes or no.
+
+0:02:07.941 to 0:02:10.237
+If choosing yes, the program simply restarts.
+
+0:02:10.456 to 0:02:12.806
+Whilst no just exits the program.
+
+0:02:14.301 to 0:02:18.570
+And I just want to say thank you to everyone involved in the making of this course.
+
+0:02:18.905 to 0:02:24.545
+It was really probably the best introduction to Python I could have asked for and thank you for watching.
+
+0:02:26.074 to 0:02:26.154
+Yeah.
+
+0:02:26.354 to 0:02:26.634
+Deep.
+
+0:02:26.994 to 0:02:27.074
+Okay.
+
+0:02:28.634 to 0:02:29.134
+Thousand.
+
