@@ -264,7 +264,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
     elif callback.data == "join":
         print(chat_id.sent_img)
-        if chat_id.sent_img == False:
+        if chat_id.sent_img == False or chat_id.sent_img == "":
             await app.send_message(chat_id=chat_id.chat_id,text="Please send an image")
         else:
             await helpers.create("audio", "image")
