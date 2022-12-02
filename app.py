@@ -296,7 +296,8 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         os.remove("downloads\\transcription_w_timestamp.txt")
 
     elif callback.data == "join":
-        await app.send_message(text="Please send an image")
+        await app.send_message(chat_id=chat_id.chat_id,text="Please send an image")
+
     elif callback.data == "translate":
         ...
     elif callback.data == "share":
