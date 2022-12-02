@@ -10,7 +10,7 @@ import chat_id
 path = config.path
 
 
-# Choices for joining, 
+# Choices for joining
 
 
 
