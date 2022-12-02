@@ -65,8 +65,7 @@ async def join(message, filetype):
         input_image = ffmpeg.input("downloads\\audiofile.mp3")
         input_audio = ffmpeg.input("downloads\\imagefile.jpg")
 
-        out_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).output("downloads\\video.mp4")
-        out_video.run()
+        ffmpeg.concat(input_image, input_audio, v=1, a=1).output("downloads\\video.mp4").run()
 
 async def translate(message):
     ...
