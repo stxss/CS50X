@@ -177,7 +177,7 @@ async def filter_audio(client, message):
     ) as wt:
         wt.write(reply_w_timestamp)
 
-    if message.audio:
+    if message.audio or message.voice:
         choices = InlineKeyboardMarkup(
             [
                 [
@@ -197,26 +197,26 @@ async def filter_audio(client, message):
             ]
         )
 
-    elif message.voice:
-        choices = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                    InlineKeyboardButton(
-                        "Transcribe w/ timestamps", callback_data="timestamp"
-                    )                    
-
-                ],
-                [
-                    InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
-                    InlineKeyboardButton("Join", callback_data="join"),
-                ],
-                [
-                    InlineKeyboardButton("Translate", callback_data="translate"),
-                    InlineKeyboardButton("Share", callback_data="share"),                    
-                ],                
-            ]
-        )
+#    elif message.voice:
+#        choices = InlineKeyboardMarkup(
+#            [
+#                [
+#                    InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+#                    InlineKeyboardButton(
+#                        "Transcribe w/ timestamps", callback_data="timestamp"
+#                    )                    
+#
+#                ],
+#                [
+#                    InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
+#                    InlineKeyboardButton("Join", callback_data="join"),
+#                ],
+#                [
+#                    InlineKeyboardButton("Translate", callback_data="translate"),
+#                    InlineKeyboardButton("Share", callback_data="share"),                    
+#                ],                
+#            ]
+#        )
 
     await message.reply_text(
         "Please choose what you want to do with the file",
