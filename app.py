@@ -273,12 +273,6 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         os.remove("downloads\\transcription_w_timestamp.txt")
 
     elif callback.data == "join":
-        #with open("chat_id.py", "r", encoding="utf-8") as f:
-        #    for line in f:
-        #        if line.startswith("chat_id"):
-        #            chat_id_for_join = line[9:]
-        #        if line.startswith("sent_img"):
-        #            sent_img_val = line[10:]
 
         if not sent_img_val.strip() == "True":
             await app.send_message(chat_id=chat_id_for_join.strip(), text="Please send an image")
