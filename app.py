@@ -100,12 +100,12 @@ async def filter_audio(client, message):
         w.write("chat_id = " + str(chat_id) + "\n\n")
         w.write("sent_img = False")
 
-    if message.audio:
+    if message.audio or message.voice:
         audiofile = await message.download(f"audiofile.mp3")
         mimetype = "audio/mpeg"
-    elif message.voice:
-        audiofile = await message.download(f"voicefile.ogg")
-        mimetype = "audio/ogg"
+    #elif message.voice:
+    #    audiofile = await message.download(f"voicefile.ogg")
+    #    mimetype = "audio/ogg"
 
     sound = open(audiofile, "rb")
     source = {"buffer": sound, "mimetype": mimetype}
@@ -302,7 +302,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             await app.send_message(chat_id=chat_id.chat_id,text="Please send an image")
         else:
             helpers.join()
-            
+
     elif callback.data == "translate":
         ...
     elif callback.data == "share":

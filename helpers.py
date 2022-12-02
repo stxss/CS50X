@@ -64,7 +64,7 @@ async def trim_voice(message, filetype):
 
 
 async def join(message, filetype):
-    
+    ...    
 
 
 async def translate(message):
