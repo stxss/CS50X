@@ -60,9 +60,7 @@ async def translate(client, message):
 
 @app.on_message(filters.command("trim"))
 async def trim(client, message):
-    await app.send_audio(
-        chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"),
-    )
+    ...
     
     
 
@@ -96,10 +94,11 @@ async def share(client, message):
 async def filter_audio(client, message):
     print(message)
     chat_id = message.chat.id
-    
+
 
     with open("chat_id.py", "w", encoding="utf-8") as w:
-        w.write("chat_id = " + str(chat_id))
+        w.write("chat_id = " + str(chat_id) + "\n\n")
+        w.write("sent_img = False")
 
     if message.audio:
         audiofile = await message.download(f"audiofile.mp3")
@@ -230,7 +229,8 @@ async def filter_audio(client, message):
 async def invalid_file(client, message):
     
     if str(message.media) == "MessageMediaType.PHOTO":
-        await message.reply("All good")
+        chat_id.sent_img = True
+        await message.reply("Please, send an audio file and click 'Join'")
     else:
         await message.reply("Please, send a valid message. It should be either a voice or audio file.")
 
