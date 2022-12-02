@@ -63,6 +63,24 @@ async def trim(client, message):
     await app.send_audio(
         chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3")
     )
+    choices = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+                InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
+            ],
+            [
+                InlineKeyboardButton(
+                    "Transcribe w/ timestamps", callback_data="timestamp"
+                )
+            ],
+        ]
+    )
+    await message.reply(
+        "Please choose what you want to do with the file",
+        quote=True,
+        reply_markup=choices,
+    )
 
 
 @app.on_message(filters.command("join"))
@@ -214,8 +232,6 @@ async def filter_audio(client, message):
 @app.on_message(~filters.audio | ~filters.voice)
 async def invalid_file(client, message):
     await message.reply("Invalid file!! Please retry")
-
-
 
 
 # Callback from inline keyboards handling
