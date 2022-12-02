@@ -198,8 +198,6 @@ async def filter_audio(client, message):
             ]
         )
 
-
-        
         #choices = InlineKeyboardMarkup(
         #    [
         #        [
