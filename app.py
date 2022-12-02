@@ -191,6 +191,10 @@ async def filter_audio(client, message):
                     InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
                     InlineKeyboardButton("Join", callback_data="join"),
                 ],
+                [
+                    InlineKeyboardButton("Translate", callback_data="translate"),
+                    InlineKeyboardButton("Share", callback_data="share"),                    
+                ],
             ]
         )
 
