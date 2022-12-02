@@ -63,7 +63,7 @@ async def trim_voice(message, filetype):
         await message.reply(reply_if_fail)
 
 
-async def join(message):
+async def join(message, filetype):
     ...
 
 
