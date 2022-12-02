@@ -63,7 +63,7 @@ async def trim_voice(message, filetype):
 async def create(message, filetype):
     if message == "audio" and filetype == "image":
         input_audio = ffmpeg.input("downloads\\audiofile.mp3")
-        input_audio = ffmpeg.input("downloads\imagefile.jpg")
+        input_image = ffmpeg.input("downloads\imagefile.jpg")
 
         ffmpeg.concat(input_image, input_audio, v=1, a=1).output("downloads\\video.mp4").run()
 
