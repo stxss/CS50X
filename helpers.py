@@ -10,6 +10,11 @@ import chat_id
 path = config.path
 
 
+# Choices for joining, 
+
+
+
+
 async def trim_voice(message, filetype):
     pattern = re.compile(
         "^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))-(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$"
