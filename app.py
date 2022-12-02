@@ -263,12 +263,13 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         os.remove("downloads\\transcription_w_timestamp.txt")
 
     elif callback.data == "join":
+        print(chat_id.sent_img)
         if chat_id.sent_img == False:
             await app.send_message(chat_id=chat_id.chat_id,text="Please send an image")
         else:
             helpers.join("audio", "image")
             await app.send_video(
-                chat_id=chat_id.chat_id, audio=os.path.join(config.path, "video.mp4")
+                chat_id=chat_id.chat_id, video=os.path.join(config.path, "video.mp4")
             )
     elif callback.data == "translate":
         ...
