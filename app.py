@@ -197,19 +197,6 @@ async def filter_audio(client, message):
             ]
         )
 
-        #choices = InlineKeyboardMarkup(
-        #    [
-        #        [
-        #            InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-        #            InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
-        #        ],
-        #        [
-        #            InlineKeyboardButton(
-        #                "Transcribe w/ timestamps", callback_data="timestamp"
-        #            )
-        #        ],
-        #    ]
-        #)
     elif message.voice:
         choices = InlineKeyboardMarkup(
             [
@@ -230,20 +217,6 @@ async def filter_audio(client, message):
                 ],                
             ]
         )
-
-        #choices = InlineKeyboardMarkup(
-        #    [
-        #        [
-        #            InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-        #            InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
-        #        ],
-        #        [
-        #            InlineKeyboardButton(
-        #                "Transcribe w/ timestamps", callback_data="timestamp"
-        #            )
-        #        ],
-        #    ]
-        #)
 
     await message.reply_text(
         "Please choose what you want to do with the file",
