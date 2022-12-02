@@ -233,10 +233,10 @@ async def filter_audio(client, message):
     )
 
 
-@app.on_message(~filters.audio | ~filters.voice | ~filters.media)
+@app.on_message(~filters.audio | ~filters.voice | filters.media)
 async def invalid_file(client, message):
     
-    if message.voice or message.audio or str(message.media) == "MessageMediaType.PHOTO":
+    if str(message.media) == "MessageMediaType.PHOTO":
         await message.reply("All good")
     else:
         await message.reply("Not good")
