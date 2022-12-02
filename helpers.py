@@ -25,12 +25,12 @@ async def trim_voice(message, filetype):
         if os.path.exists("downloads\\out.mp3"):
             os.remove("downloads\\out.mp3")
 
-        if filetype == "audio":
+        if filetype == "audio" or filetype == "voice":
             probe_res = ffmpeg.probe("downloads\\audiofile.mp3")
             in_file = "downloads\\audiofile.mp3"
-        elif filetype == "voice":
-            probe_res = ffmpeg.probe("downloads\\voicefile.ogg")
-            in_file = "downloads\\voicefile.ogg"
+        #elif filetype == "voice":
+        #    probe_res = ffmpeg.probe("downloads\\voicefile.ogg")
+        #    in_file = "downloads\\voicefile.ogg"
 
         duration = probe_res.get("format", {}).get("duration", None)
 

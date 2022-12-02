@@ -4,6 +4,6 @@ So if I try to make an audio talking about, like how this program works and why 
 0:00:09.550 to 0:00:19.250
 I'm trying to just basically explain and showcase not the product, but like, application that I made the project that I made.
 
-0:00:19.670 to 0:00:30.765
+0:00:19.670 to 0:00:30.805
 So hopefully, you can see how it works and how it's basically develops, I guess, that's that that could be a good way of describing it.
 
