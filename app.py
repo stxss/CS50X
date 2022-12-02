@@ -239,9 +239,7 @@ async def invalid_file(client, message):
     if str(message.media) == "MessageMediaType.PHOTO":
         await message.reply("All good")
     else:
-        await message.reply("Not good")
-    
-    print(message.media)
+        await message.reply("Please, send a valid message. It should be either a voice or audio file.")
 
 
 # Callback from inline keyboards handling
