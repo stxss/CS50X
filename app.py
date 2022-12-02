@@ -228,18 +228,26 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_from_inline(Client, callback: CallbackQuery):
+    with open("chat_id.py", "r", encoding="utf-8") as f:
+            for line in f:
+                if line.startswith("chat_id"):
+                    chat_id_for_join = line[9:]
+                if line.startswith("sent_img"):
+                    sent_img_val = line[10:]
+
+
     if callback.data == "trim_audio":
         try:
             trim_length = await app.ask(
                 text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",
-                chat_id=chat_id.chat_id,
+                chat_id=chat_id_for_join.strip(),
                 timeout=30,
             )
             await helpers.trim_voice(trim_length, "audio")
             await app.send_audio(
-                chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3")
+                chat_id=chat_id_for_join.strip(), audio=os.path.join(config.path, "out.mp3")
             )
-            await app.send_message(chat_id=chat_id.chat_id, 
+            await app.send_message(chat_id=chat_id_for_join.strip(), 
                 text="Please choose what you want to do with the file",
             )  
 
@@ -265,12 +273,12 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         os.remove("downloads\\transcription_w_timestamp.txt")
 
     elif callback.data == "join":
-        with open("chat_id.py", "r", encoding="utf-8") as f:
-            for line in f:
-                if line.startswith("chat_id"):
-                    chat_id_for_join = line[9:]
-                if line.startswith("sent_img"):
-                    sent_img_val = line[10:]
+        #with open("chat_id.py", "r", encoding="utf-8") as f:
+        #    for line in f:
+        #        if line.startswith("chat_id"):
+        #            chat_id_for_join = line[9:]
+        #        if line.startswith("sent_img"):
+        #            sent_img_val = line[10:]
 
         if not sent_img_val.strip() == "True":
             await app.send_message(chat_id=chat_id_for_join.strip(), text="Please send an image")
@@ -282,6 +290,8 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 )
             except:
                 await callback.message.reply("Something went wrong, please try again")
+    
+    
     elif callback.data == "translate":
         ...
     elif callback.data == "share":
