@@ -182,15 +182,33 @@ async def filter_audio(client, message):
             [
                 [
                     InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                    InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
-                ],
-                [
+                    
                     InlineKeyboardButton(
                         "Transcribe w/ timestamps", callback_data="timestamp"
                     )
                 ],
+                [
+                    InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
+                    InlineKeyboardButton("Join", callback_data="join"),
+                ],
             ]
         )
+
+
+        
+        #choices = InlineKeyboardMarkup(
+        #    [
+        #        [
+        #            InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+        #            InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
+        #        ],
+        #        [
+        #            InlineKeyboardButton(
+        #                "Transcribe w/ timestamps", callback_data="timestamp"
+        #            )
+        #        ],
+        #    ]
+        #)
     elif message.voice:
         choices = InlineKeyboardMarkup(
             [
