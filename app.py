@@ -230,6 +230,7 @@ async def invalid_file(client, message):
     
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
+        imagefile = await message.download(f"imagefile.jpg")
         with open("chat_id.py", "w", encoding="utf-8") as w:
             w.write("chat_id = " + maintain_chat_id + "\n\n")
             w.write("sent_img = True")
@@ -299,6 +300,8 @@ async def choice_from_inline(Client, callback: CallbackQuery):
     elif callback.data == "join":
         if chat_id.sent_img == False:
             await app.send_message(chat_id=chat_id.chat_id,text="Please send an image")
+        else:
+            helpers.join()
             
     elif callback.data == "translate":
         ...
