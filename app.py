@@ -233,7 +233,7 @@ async def filter_audio(client, message):
     )
 
 
-@app.on_message(~filters.audio | ~filters.voice)
+@app.on_message(~filters.audio | ~filters.voice | ~filters.photo)
 async def invalid_file(client, message):
     await message.reply("Invalid file!! Please retry")
 
