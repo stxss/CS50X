@@ -4,22 +4,19 @@ Hello.
 0:00:01.458 to 0:00:07.511
 My name is Stan la Ba, and I am from Portal Portugal, and I'm a recent mechanical engineer in graduate.
 
-0:00:08.184 to 0:00:12.569
+0:00:08.184 to 0:00:12.591
 As a final project to Cs present to you luke allocation.
 
 0:00:13.127 to 0:00:18.910
 This was created specifically as a final project for Cs fifties introduction to programming with Python.
 
-0:00:19.130 to 0:00:26.843
+0:00:19.130 to 0:00:26.803
 This program's focus is to scan a given location and output a number of attractions or establishments specified by the user.
 
-0:00:28.857 to 0:00:33.965
-A real world simulation would be, for example, let's say you are walking by Berlin.
+0:00:28.857 to 0:00:36.360
+A real world simulation would be, for example, let's say you are walking by Berlin, and you want to get a place to stay for.
 
-0:00:34.260 to 0:00:36.600
-And you want to get a place to stay for night.
-
-0:00:36.900 to 0:00:40.800
+0:00:36.900 to 0:00:40.780
 You can use this program to tailor your preferences and get the top results.
 
 0:00:41.315 to 0:00:49.155
@@ -43,7 +40,7 @@ Your desired radius of search and desired type of attraction.
 0:01:10.730 to 0:01:19.345
 If you don't know what exactly which you're looking for, there's always the option to leave the line blank or type the word attractions to see a table of available options.
 
-0:01:19.959 to 0:01:27.261
+0:01:19.959 to 0:01:27.221
 As a bonus, if you're feeling extra and indecisive, you can just input the word random and the random option will be chosen for you.
 
 0:01:28.153 to 0:01:34.392
@@ -61,7 +58,7 @@ In the case that you don't want to choose a specific filter, the default is numb
 0:01:47.865 to 0:01:51.912
 And then you will get your desired output outputs in this case.
 
-0:01:52.726 to 0:02:01.680
+0:01:52.726 to 0:02:01.660
 Five lodging places or five hotels in Berlin in the thirty kilometer radius that you specified sorted by number of reviews.
 
 0:02:02.234 to 0:02:07.782
@@ -76,7 +73,7 @@ Whilst no just exits the program.
 0:02:14.301 to 0:02:18.570
 And I just want to say thank you to everyone involved in the making of this course.
 
-0:02:18.905 to 0:02:24.585
+0:02:18.905 to 0:02:24.545
 It was really probably the best introduction to Python I could have asked for and thank you for watching.
 
 0:02:26.074 to 0:02:26.154
