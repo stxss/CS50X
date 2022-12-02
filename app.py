@@ -265,6 +265,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         os.remove("downloads\\transcription_w_timestamp.txt")
 
     elif callback.data == "join":
+        with open("chat_id.py", "r", encoding="utf-8") as f:
+            chat_id_for_image = f.read() 
+            sent_image_val = 
         print(chat_id.sent_img)
         print(chat_id.chat_id)
         if not chat_id.sent_img == True:
