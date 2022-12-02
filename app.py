@@ -60,16 +60,26 @@ async def translate(client, message):
 
 @app.on_message(filters.command("trim"))
 async def trim(client, message):
+    choices = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+                    InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "Transcribe w/ timestamps", callback_data="timestamp"
+                    )
+                ],
+            ]
+        )
 
-
-    await message.reply_text(
-        "Please choose what you want to do with the file",
-        quote=True,
-        reply_markup=choices,
+    await message.(
+        "Please choose what you want to do with the file"
     )
-    
+
     await app.send_audio(
-        chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"),
+        chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"), quote=True, reply_markup=choices,
     )
     
     
