@@ -229,7 +229,12 @@ async def filter_audio(client, message):
 async def invalid_file(client, message):
     
     if str(message.media) == "MessageMediaType.PHOTO":
-        chat_id.sent_img = True
+        maintain_chat_id = chat_id.chat_id
+        with open("chat_id.py", "w", encoding="utf-8") as w:
+            w.write("chat_id = " + str(maintain_chat_id) + "\n\n")
+            w.write("sent_img = True")
+
+        #chat_id.sent_img = True
         await message.reply("Please, send an audio file and click 'Join'")
     else:
         await message.reply("Please, send a valid message. It should be either a voice or audio file.")
