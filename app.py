@@ -74,15 +74,17 @@ async def trim(client, message):
             ],
         ]
     )
+    await message.reply(
+        "Please choose what you want to do with the file",
+        quote=True,
+        reply_markup=choices,
+    )
+    
     await app.send_audio(
         chat_id=chat_id.chat_id, audio=os.path.join(config.path, "out.mp3"), reply_markup=choices
     )
     
-    #await message.reply(
-    #    "Please choose what you want to do with the file",
-    #    quote=True,
-    #    reply_markup=choices,
-    #)
+    
 
 
 @app.on_message(filters.command("join"))
