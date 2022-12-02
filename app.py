@@ -295,6 +295,14 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         await callback.message.reply(reply)
         os.remove("downloads\\transcription_w_timestamp.txt")
 
+    elif callback.data == "join":
+        ...
+    elif callback.data == "translate":
+        ...
+    elif callback.data == "share":
+        ...
+
+
         # dir = config.folder_path
         # for f in os.listdir(dir):
         #    os.remove(os.path.join(dir, f))
