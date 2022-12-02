@@ -182,7 +182,6 @@ async def filter_audio(client, message):
             [
                 [
                     InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                    
                     InlineKeyboardButton(
                         "Transcribe w/ timestamps", callback_data="timestamp"
                     )
@@ -216,15 +215,35 @@ async def filter_audio(client, message):
             [
                 [
                     InlineKeyboardButton("Transcribe", callback_data="transcribe"),
-                    InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
-                ],
-                [
                     InlineKeyboardButton(
                         "Transcribe w/ timestamps", callback_data="timestamp"
-                    )
+                    )                    
+
                 ],
+                [
+                    InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
+                    InlineKeyboardButton("Join", callback_data="join"),
+                ],
+                [
+                    InlineKeyboardButton("Translate", callback_data="translate"),
+                    InlineKeyboardButton("Share", callback_data="share"),                    
+                ],                
             ]
         )
+
+        #choices = InlineKeyboardMarkup(
+        #    [
+        #        [
+        #            InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+        #            InlineKeyboardButton("Trim audio", callback_data="trim_voice"),
+        #        ],
+        #        [
+        #            InlineKeyboardButton(
+        #                "Transcribe w/ timestamps", callback_data="timestamp"
+        #            )
+        #        ],
+        #    ]
+        #)
 
     await message.reply_text(
         "Please choose what you want to do with the file",
