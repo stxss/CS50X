@@ -60,7 +60,7 @@ async def trim_voice(message, filetype):
         await message.reply(reply_if_fail)
 
 
-async def join(message, filetype):
+async def create(message, filetype):
     if message == "audio" and filetype == "image":
         input_image = ffmpeg.input("downloads\\audiofile.mp3")
         input_audio = ffmpeg.input("downloads\\imagefile.jpg")
