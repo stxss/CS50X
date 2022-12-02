@@ -1,30 +1,9 @@
-0:00:00.419 to 0:00:06.692
-guys, we just wanted to say that we've been reflecting on the five year anniversary episode and reading all the comments and everything.
+0:00:00.460 to 0:00:09.251
+So if I try to make an audio talking about, like how this program works and why it's good and why this Api is nice.
 
-0:00:06.772 to 0:00:07.451
-He was trying the say.
+0:00:09.550 to 0:00:19.250
+I'm trying to just basically explain and showcase not the product, but like, application that I made the project that I made.
 
-0:00:07.651 to 0:00:08.090
-Thank you.
-
-0:00:08.504 to 0:00:09.062
-First all.
-
-0:00:09.222 to 0:00:09.302
-Yeah.
-
-0:00:09.501 to 0:00:10.059
-Big thanks.
-
-0:00:10.179 to 0:00:10.418
-Mh.
-
-0:00:10.578 to 0:00:14.446
-I think we also wanted to say that, you know, we we care about the show.
-
-0:00:14.973 to 0:00:17.409
-And I think our focus just going in the
-
-0:00:17.409 to 0:00:20.558
-rest of the year and into next year is just being committed to make
+0:00:19.670 to 0:00:30.765
+So hopefully, you can see how it works and how it's basically develops, I guess, that's that that could be a good way of describing it.
 
