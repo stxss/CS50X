@@ -200,7 +200,7 @@ async def filter_audio(client, message):
 
 
     with open(
-        os.path.join(config.path, "transcription_w_timestamp.txt"),
+        os.path.join(config.path, f"{chat_id}\\transcription_w_timestamp.txt"),
         "w",
         encoding="utf-8",
     ) as wt:
