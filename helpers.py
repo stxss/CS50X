@@ -15,7 +15,7 @@ path = config.path
 
 
 
-async def trim_voice(message, filetype):
+async def trim_voice(message, filetype, user_id):
     pattern = re.compile(
         "^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))-(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$"
     )
@@ -60,7 +60,7 @@ async def trim_voice(message, filetype):
         await message.reply(reply_if_fail)
 
 
-async def create(message, filetype):
+async def create(message, filetype, user_id):
     if message == "audio" and filetype == "image":
         input_audio = ffmpeg.input("downloads\\audiofile.mp3")
         input_image = ffmpeg.input("downloads\imagefile.jpg")
