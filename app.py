@@ -207,9 +207,9 @@ async def filter_audio(client, message):
         choices = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("Transcribe", callback_data="transcribe", user_id=chat_id),
+                    InlineKeyboardButton("Transcribe", callback_data="transcribe"),
                     InlineKeyboardButton(
-                        "Transcribe w/ timestamps", callback_data="timestamp"
+                        "Transcribe w/ timestamps", callback_data="timestamp",
                     )
                 ],
                 [
@@ -256,8 +256,8 @@ async def choice_from_inline(Client, callback: CallbackQuery):
     #                chat_id_for_join = line[9:]
     #            if line.startswith("sent_img"):
     #                sent_img_val = line[10:]
-    print(callback.)
-    with open(f"downloads\\{chat_id}\chat_id.py", "r", encoding="utf-8") as f:
+    #print(callback.from_user.id)
+    with open(f"downloads\\{callback.from_user.id}\chat_id.py", "r", encoding="utf-8") as f:
             for line in f:
                 if line.startswith("chat_id"):
                     chat_id_for_join = line[9:]
