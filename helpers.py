@@ -70,7 +70,7 @@ async def create(message, filetype, user_id):
         width = int(probe["streams"][0]["coded_width"])
         height = int(probe["streams"][0]["coded_height"])
 
-        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter("scale", width, height)
+        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter("scale", width, height).filter("format")
         output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.avc", format="avc")
         output.run()
 
