@@ -66,12 +66,11 @@ async def create(message, filetype, user_id):
         input_audio = ffmpeg.input(f"downloads\\{user_id}\\audiofile.mp3")
         input_image = ffmpeg.input(f"downloads\\{user_id}\\imagefile.jpg")
 
-        #probe = ffmpeg.probe(f"downloads\\{user_id}\\imagefile.jpg")
-        #width = int(video_stream['width'])
-        #height = int(video_stream['height'])
+        probe = ffmpeg.probe(f"downloads\\{user_id}\\imagefile.jpg")
+        width = int(probe["streams"][0]["coded_width"])
+        height = int(probe["streams"][0]["coded_height"])
 
-        ffmpeg.filter("scale", )
-        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1)
+        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter("scale", width, height)
         output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mp4", format="mp4")
         output.run()
 

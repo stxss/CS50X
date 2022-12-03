@@ -12,7 +12,7 @@ import ffmpeg
 
 
 probe = ffmpeg.probe(f"downloads\971531412\imagefile.jpg")
-width = int(probe['width'])
-height = int(probe['height'])
+#width = int(probe['coded_width'])
+#height = int(probe['coded_height'])
 
-print(probe, width, height)
+print(probe["streams"][0]["coded_width"])
