@@ -71,7 +71,7 @@ async def create(message, filetype, user_id):
         height = int(probe["streams"][0]["coded_height"])
 
         final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter("scale", width, height)
-        output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mp4", format="h264")
+        output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mkv", format="mkv")
         output.run()
 
 async def translate(message):
