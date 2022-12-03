@@ -22,7 +22,7 @@ async def trim_voice(message, filetype, user_id):
     check = message.text
     reply_if_fail = ""
     if pattern.match(check):
-        if os.path.exists("downloads\\out.mp3"):
+        if os.path.exists(f"downloads\\{user_id}\\out.mp3"):
             os.remove("downloads\\out.mp3")
 
         if filetype == "audio" or filetype == "voice":

@@ -267,7 +267,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 chat_id=chat_id_for_join.strip(),
                 timeout=30,
             )
-            await helpers.trim_voice(trim_length, "audio")
+            await helpers.trim_voice(trim_length, "audio", chat_id_for_join.strip())
             await app.send_audio(
                 chat_id=chat_id_for_join.strip(), audio=os.path.join(config.path, "out.mp3")
             )
@@ -302,7 +302,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             await app.send_message(chat_id=chat_id_for_join.strip(), text="Please send an image")
         else:
             try:
-                await helpers.create("audio", "image")
+                await helpers.create("audio", "image", chat_id_for_join.strip())
                 await app.send_video(
                     chat_id=chat_id_for_join.strip(), video=os.path.join(config.path, "video.mp4")
                 )
