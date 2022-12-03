@@ -303,7 +303,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         else:
             try:
                 await helpers.create("audio", "image", chat_id_for_join.strip())
-                await app.send_video(
+                await app.send_cached_media(
                     chat_id=chat_id_for_join.strip(), video=os.path.join(config.path, f"{chat_id_for_join.strip()}\\video.mp4")
                 )
             except:
