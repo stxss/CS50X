@@ -250,13 +250,19 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_from_inline(Client, callback: CallbackQuery):
-    with open("chat_id.py", "r", encoding="utf-8") as f:
+    #with open("chat_id.py", "r", encoding="utf-8") as f:
+    #        for line in f:
+    #            if line.startswith("chat_id"):
+    #                chat_id_for_join = line[9:]
+    #            if line.startswith("sent_img"):
+    #                sent_img_val = line[10:]
+    
+    with open(f"downloads\\{chat_id}\chat_id.py", "r", encoding="utf-8") as f:
             for line in f:
                 if line.startswith("chat_id"):
                     chat_id_for_join = line[9:]
                 if line.startswith("sent_img"):
                     sent_img_val = line[10:]
-
 
     if callback.data == "trim_audio":
         try:
