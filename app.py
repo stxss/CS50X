@@ -95,6 +95,9 @@ async def filter_audio(client, message):
     print(message)
     chat_id = message.chat.id
 
+    if message.audio or message.voice:
+        audiofile = await message.download(f"downloads\\{chat_id}\\audiofile.mp3")
+        mimetype = "audio/mpeg"
 
     #if os.path.exists(os.path.join(config.path, "imagefile.jpg")):
     #    with open(f"chat_id.py", "w", encoding="utf-8") as w:
@@ -123,9 +126,9 @@ async def filter_audio(client, message):
     #    audiofile = await message.download(f"audiofile.mp3")
     #    mimetype = "audio/mpeg"
 
-    if message.audio or message.voice:
-        audiofile = await message.download(f"downloads\\{chat_id}\\audiofile.mp3")
-        mimetype = "audio/mpeg"
+    #if message.audio or message.voice:
+    #    audiofile = await message.download(f"downloads\\{chat_id}\\audiofile.mp3")
+    #    mimetype = "audio/mpeg"
 
     sound = open(audiofile, "rb")
     source = {"buffer": sound, "mimetype": mimetype}
