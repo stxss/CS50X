@@ -94,18 +94,29 @@ async def share(client, message):
 async def filter_audio(client, message):
     print(message)
     chat_id = message.chat.id
-    
+
+
+    #if os.path.exists(os.path.join(config.path, "imagefile.jpg")):
+    #    with open(f"chat_id.py", "w", encoding="utf-8") as w:
+    #        #w.write("chat_id = " + str(chat_id) + "\n")
+    #        w.write(f"chat_id = {chat_id}\n")
+    #        w.write("sent_img = True")
+    #else:
+    #    with open("chat_id.py", "w", encoding="utf-8") as w:
+    #        #w.write("chat_id = " + str(chat_id) + "\n")
+    #        w.write(f"chat_id = {chat_id}\n")
+    #        w.write("sent_img = False")
 
     if os.path.exists(os.path.join(config.path, "imagefile.jpg")):
-        with open("chat_id.py", "w", encoding="utf-8") as w:
+        with open(f"downloads\\{chat_id}\\chat_id.py", "w", encoding="utf-8") as w:
             #w.write("chat_id = " + str(chat_id) + "\n")
             w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = True")
     else:
-        with open("chat_id.py", "w", encoding="utf-8") as w:
+        with open(f"downloads\\{chat_id}\\chat_id.py", "w", encoding="utf-8") as w:
             #w.write("chat_id = " + str(chat_id) + "\n")
             w.write(f"chat_id = {chat_id}\n")
-            w.write("sent_img = False")
+            w.write("sent_img = False")    
 
 
     #if message.audio or message.voice:
