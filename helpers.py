@@ -23,11 +23,11 @@ async def trim_voice(message, filetype, user_id):
     reply_if_fail = ""
     if pattern.match(check):
         if os.path.exists(f"downloads\\{user_id}\\out.mp3"):
-            os.remove("downloads\\out.mp3")
+            os.remove(f"downloads\\{user_id}\\out.mp3")
 
         if filetype == "audio" or filetype == "voice":
-            probe_res = ffmpeg.probe("downloads\\audiofile.mp3")
-            in_file = "downloads\\audiofile.mp3"
+            probe_res = ffmpeg.probe(f"downloads\\{user_id}\\audiofile.mp3")
+            in_file = f"downloads\\{user_id}\\audiofile.mp3"
 
         duration = probe_res.get("format", {}).get("duration", None)
 
@@ -52,7 +52,7 @@ async def trim_voice(message, filetype, user_id):
         file_trim = input_stream.filter_(
             "atrim", start=start_trim_time, end=end_trim_time
         ).filter_("asetpts", pts)
-        output = ffmpeg.output(file_trim, "downloads\\out.mp3", format="mp3")
+        output = ffmpeg.output(file_trim, f"downloads\\{user_id}\\out.mp3", format="mp3")
         output.run()
 
     else:
@@ -62,11 +62,11 @@ async def trim_voice(message, filetype, user_id):
 
 async def create(message, filetype, user_id):
     if message == "audio" and filetype == "image":
-        input_audio = ffmpeg.input("downloads\\audiofile.mp3")
-        input_image = ffmpeg.input("downloads\imagefile.jpg")
+        input_audio = ffmpeg.input(f"downloads\\{user_id}\\audiofile.mp3")
+        input_image = ffmpeg.input(f"downloads\\{user_id}\\imagefile.jpg")
 
         final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1)
-        output = ffmpeg.output(final_video, "downloads\\video.mp4", format="mp4")
+        output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mp4", format="mp4")
         output.run()
 
 async def translate(message):

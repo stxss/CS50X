@@ -9,7 +9,7 @@ import ffmpeg
 import datetime
 import helpers
 import pyromod.listen
-import chat_id
+#import chat_id
 import re
 
 from os import getenv, listdir, remove
