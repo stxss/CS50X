@@ -269,7 +269,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             )
             await helpers.trim_voice(trim_length, "audio", chat_id_for_join.strip())
             await app.send_audio(
-                chat_id=chat_id_for_join.strip(), audio=os.path.join(config.path, "out.mp3")
+                chat_id=chat_id_for_join.strip(), audio=os.path.join(config.path, f"{chat_id_for_join.strip()}\\out.mp3")
             )
             await app.send_message(chat_id=chat_id_for_join.strip(), 
                 text="Please choose what you want to do with the file",
@@ -304,7 +304,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             try:
                 await helpers.create("audio", "image", chat_id_for_join.strip())
                 await app.send_video(
-                    chat_id=chat_id_for_join.strip(), video=os.path.join(config.path, "video.mp4")
+                    chat_id=chat_id_for_join.strip(), video=os.path.join(config.path, f"{chat_id_for_join.strip()}\\video.mp4")
                 )
             except:
                 await callback.message.reply("Something went wrong, please try again")
