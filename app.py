@@ -177,10 +177,16 @@ async def filter_audio(client, message):
             except:
                 continue
 
+    #with open(
+    #    os.path.join(config.path, "transcription.txt"), "w", encoding="utf-8"
+    #) as w:
+    #    w.write(reply)
+
     with open(
-        os.path.join(config.path, "transcription.txt"), "w", encoding="utf-8"
+        os.path.join(config.path, f"{chat_id}\\transcription.txt"), "w", encoding="utf-8"
     ) as w:
         w.write(reply)
+
 
     with open(
         os.path.join(config.path, "transcription_w_timestamp.txt"),
