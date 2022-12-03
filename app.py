@@ -110,7 +110,7 @@ async def filter_audio(client, message):
     #        w.write(f"chat_id = {chat_id}\n")
     #        w.write("sent_img = False")
 
-    if os.path.exists(os.path.join(config.path, f"downloads\\{chat_id}\\imagefile.jpg")):
+    if os.path.exists(os.path.join(config.path, f"{chat_id}\\imagefile.jpg")):
         with open(f"downloads\{chat_id}\chat_id.py", "w", encoding="utf-8") as w:
             #w.write("chat_id = " + str(chat_id) + "\n")
             w.write(f"chat_id = {chat_id}\n")
@@ -238,7 +238,7 @@ async def invalid_file(client, message):
     
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
-        imagefile = await message.download(f"imagefile.jpg")
+        imagefile = await message.download(f"downloads\\{maintain_chat_id}\\imagefile.jpg")
         with open("chat_id.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {maintain_chat_id}\n")
             w.write("sent_img = True")
