@@ -66,7 +66,7 @@ async def create(message, filetype, user_id):
         input_image = ffmpeg.input(f"downloads\\{user_id}\\imagefile.jpg")
 
         final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1)
-        output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mp4", format="mp4")
+        output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mp4", format="mpeg")
         output.run()
 
 async def translate(message):
