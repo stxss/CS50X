@@ -65,6 +65,7 @@ async def create(message, filetype):
         input_audio = ffmpeg.input("downloads\\audiofile.mp3")
         input_image = ffmpeg.input("downloads\imagefile.jpg")
 
+        resize = ffmpeg.
         final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1)
         output = ffmpeg.output(final_video, "downloads\\video.mp4", format="mp4")
         output.run()
