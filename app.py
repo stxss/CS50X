@@ -253,13 +253,6 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_from_inline(Client, callback: CallbackQuery):
-    #with open("chat_id.py", "r", encoding="utf-8") as f:
-    #        for line in f:
-    #            if line.startswith("chat_id"):
-    #                chat_id_for_join = line[9:]
-    #            if line.startswith("sent_img"):
-    #                sent_img_val = line[10:]
-    #print(callback.from_user.id)
     with open(f"downloads\\{callback.from_user.id}\chat_id.py", "r", encoding="utf-8") as f:
             for line in f:
                 if line.startswith("chat_id"):
@@ -287,21 +280,21 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
     elif callback.data == "transcribe":
         with open(
-            os.path.join(config.path, f"{chat_id.chat_id}\\transcription.txt"), "r", encoding="utf-8"
+            os.path.join(config.path, f"{chat_id_for_join.strip()}\\transcription.txt"), "r", encoding="utf-8"
         ) as f1:
             reply = f1.read()
         await callback.message.reply(reply)
-        os.remove(f"downloads\{chat_id.chat_id}\\transcription.txt")
+        os.remove(f"downloads\{chat_id_for_join.strip()}\\transcription.txt")
 
     elif callback.data == "timestamp":
         with open(
-            os.path.join(config.path, "transcription_w_timestamp.txt"),
+            os.path.join(config.path, f"{chat_id_for_join.strip()}\\transcription_w_timestamp.txt"),
             "r",
             encoding="utf-8",
         ) as f2:
             reply = f2.read()
         await callback.message.reply(reply)
-        os.remove("downloads\\transcription_w_timestamp.txt")
+        os.remove(f"downloads\{chat_id_for_join.strip()}\\transcription_w_timestamp.txt")
 
     elif callback.data == "join":
 
