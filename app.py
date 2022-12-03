@@ -99,36 +99,14 @@ async def filter_audio(client, message):
         audiofile = await message.download(f"downloads\\{chat_id}\\audiofile.mp3")
         mimetype = "audio/mpeg"
 
-    #if os.path.exists(os.path.join(config.path, "imagefile.jpg")):
-    #    with open(f"chat_id.py", "w", encoding="utf-8") as w:
-    #        #w.write("chat_id = " + str(chat_id) + "\n")
-    #        w.write(f"chat_id = {chat_id}\n")
-    #        w.write("sent_img = True")
-    #else:
-    #    with open("chat_id.py", "w", encoding="utf-8") as w:
-    #        #w.write("chat_id = " + str(chat_id) + "\n")
-    #        w.write(f"chat_id = {chat_id}\n")
-    #        w.write("sent_img = False")
-
     if os.path.exists(os.path.join(config.path, f"{chat_id}\\imagefile.jpg")):
         with open(f"downloads\{chat_id}\chat_id.py", "w", encoding="utf-8") as w:
-            #w.write("chat_id = " + str(chat_id) + "\n")
             w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = True")
     else:
         with open(f"downloads\{chat_id}\chat_id.py", "w", encoding="utf-8") as w:
-            #w.write("chat_id = " + str(chat_id) + "\n")
             w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = False")    
-
-
-    #if message.audio or message.voice:
-    #    audiofile = await message.download(f"audiofile.mp3")
-    #    mimetype = "audio/mpeg"
-
-    #if message.audio or message.voice:
-    #    audiofile = await message.download(f"downloads\\{chat_id}\\audiofile.mp3")
-    #    mimetype = "audio/mpeg"
 
     sound = open(audiofile, "rb")
     source = {"buffer": sound, "mimetype": mimetype}
@@ -188,11 +166,6 @@ async def filter_audio(client, message):
             except:
                 continue
 
-    #with open(
-    #    os.path.join(config.path, "transcription.txt"), "w", encoding="utf-8"
-    #) as w:
-    #    w.write(reply)
-
     with open(
         os.path.join(config.path, f"{chat_id}\\transcription.txt"), "w", encoding="utf-8"
     ) as w:
@@ -220,7 +193,6 @@ async def filter_audio(client, message):
                     InlineKeyboardButton("Join", callback_data="join"),
                 ],
                 [
-                    InlineKeyboardButton("Translate", callback_data="translate"),
                     InlineKeyboardButton("Share", callback_data="share"),                    
                 ],
             ]
@@ -309,9 +281,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
     
-    
-    elif callback.data == "translate":
-        ...
+
     elif callback.data == "share":
         ...
 
