@@ -4,7 +4,7 @@ import ffmpeg
 import config
 import os
 import datetime
-import chat_id
+#import chat_id
 
 
 path = config.path
