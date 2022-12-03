@@ -270,11 +270,11 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
     elif callback.data == "transcribe":
         with open(
-            os.path.join(config.path, f"{chat_id}\\transcription.txt"), "r", encoding="utf-8"
+            os.path.join(config.path, f"{chat_id.chat_id}\\transcription.txt"), "r", encoding="utf-8"
         ) as f1:
             reply = f1.read()
         await callback.message.reply(reply)
-        os.remove(f"downloads\\{chat_id}\\transcription.txt")
+        os.remove(f"downloads\{chat_id.chat_id}\\transcription.txt")
 
     elif callback.data == "timestamp":
         with open(
