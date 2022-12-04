@@ -258,8 +258,6 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                     chat_id=chat_id_for_join.strip(), video=os.path.join(config.path, f"{chat_id_for_join.strip()}\\video.mp4")
                 )
                 os.remove(f"downloads\{chat_id_for_join.strip()}\\video.mp4")
-                shutil.rmtree(os.path.join(config.path, f"\{chat_id_for_join.strip()}\out.mp3"), onerror=remove_readonly)
-
             except:
                 await callback.message.reply("Something went wrong, please try again")
             
