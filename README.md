@@ -4,7 +4,9 @@
 Video Demo:
 
 ##     Description:
-This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). This is a 
+This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). 
+
+This project consists in a multi-purpose bot 
 
 
 A real world simulation would be, for example:
