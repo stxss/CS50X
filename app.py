@@ -260,10 +260,6 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
             
-#app.run()
-def stopTheScript():
-    exec(open("app.py").read())
-    exit()
 
 if __name__ == "__main__":
     app.run()
@@ -274,7 +270,6 @@ if __name__ == "__main__":
         func(dir)
     shutil.rmtree(dir, onerror=remove_readonly)
 
-    Timer(10, stopTheScript).start()
 
 
 
