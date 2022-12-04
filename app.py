@@ -280,15 +280,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 )
             except:
                 await callback.message.reply("Something went wrong, please try again")
-    
 
-    elif callback.data == "share":
-        ...
-
-
-        # dir = config.folder_path
-        # for f in os.listdir(dir):
-        #    os.remove(os.path.join(dir, f))
-
+        dir = config.folder_path
+        for f in os.listdir(dir):
+           os.remove(os.path.join(dir, f))
 
 app.run()
