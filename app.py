@@ -207,7 +207,7 @@ async def filter_audio(client, message):
 
 @app.on_message(~filters.audio | ~filters.voice | filters.media)
 async def invalid_file(client, message):
-    
+    print(message)
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
         imagefile = await message.download(f"downloads\\{maintain_chat_id}\\imagefile.jpg")
@@ -281,8 +281,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
-        #dir = config.folder_path
-        #for f in os.listdir(dir):
-        #   os.remove(os.path.join(dir, f))
+        # dir = config.folder_path
+        # for f in os.listdir(dir):
+        #    os.remove(os.path.join(dir, f))
+
 
 app.run()
