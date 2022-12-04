@@ -197,11 +197,7 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_from_inline(Client, callback: CallbackQuery):
-    
-    dir = config.folder_path
-    def remove_readonly(func, dir, _):
-        os.chmod(dir, stat.S_IWRITE)
-        func(dir)
+
 
     with open(f"downloads\\{callback.from_user.id}\chat_id.py", "r", encoding="utf-8") as f:
             for line in f:
@@ -262,3 +258,11 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 await callback.message.reply("Something went wrong, please try again")
             
 app.run()
+dir = config.folder_path
+def remove_readonly(func, dir, _):
+    os.chmod(dir, stat.S_IWRITE)
+    func(dir)
+shutil.rmtree(dir, onerror=remove_readonly)
+
+if __name__ == "__main__":
+    app.run()
