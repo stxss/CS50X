@@ -1,16 +1,11 @@
 from deepgram import Deepgram
 
-import asyncio, json
-import requests
+import asyncio
 import config
 import os
-import sys
-import ffmpeg
 import datetime
 import helpers
 import pyromod.listen
-#import chat_id
-import re
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
@@ -192,9 +187,6 @@ async def filter_audio(client, message):
                     InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
                     InlineKeyboardButton("Join", callback_data="join"),
                 ],
-                [
-                    InlineKeyboardButton("Share", callback_data="share"),                    
-                ],
             ]
         )
 
@@ -239,7 +231,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 chat_id=chat_id_for_join.strip(),
                 timeout=30,
             )
-            await helpers.trim_voice(trim_length, "audio", chat_id_for_join.strip())
+            await helpers.trim_file(trim_length, "audio", chat_id_for_join.strip())
             await app.send_audio(
                 chat_id=chat_id_for_join.strip(), audio=os.path.join(config.path, f"{chat_id_for_join.strip()}\\out.mp3")
             )

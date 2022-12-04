@@ -12,10 +12,7 @@ path = config.path
 
 # Choices for joining
 
-
-
-
-async def trim_voice(message, filetype, user_id):
+async def trim_file(message, filetype, user_id):
     pattern = re.compile(
         "^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))-(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$"
     )
@@ -73,6 +70,3 @@ async def create(message, filetype, user_id):
         final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter("scale", width, height)
         output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mp4")
         output.run()
-
-async def translate(message):
-    ...
