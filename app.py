@@ -81,7 +81,7 @@ async def filter_audio(client, message):
         mimetype = "audio/mpeg"
 
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
-    # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous funcitons (aka try except block)
+    # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
 
     if os.path.exists(os.path.join(config.path, f"{chat_id}\\imagefile.jpg")):
@@ -167,7 +167,7 @@ async def filter_audio(client, message):
             except:
                 continue
 
-    # Saving the transctiptions to separate files
+    # Saving the transcriptions to separate files
 
     with open(
         os.path.join(config.path, f"{chat_id}\\transcription.txt"), "w", encoding="utf-8"
