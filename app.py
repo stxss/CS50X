@@ -260,13 +260,19 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
             
-app.run()
+#app.run()
 
-dir = config.folder_path
-def remove_readonly(func, dir, _):
-    os.chmod(dir, stat.S_IWRITE)
-    func(dir)
-shutil.rmtree(dir, onerror=remove_readonly)
 
 if __name__ == "__main__":
     app.run()
+    
+    dir = config.folder_path
+    def remove_readonly(func, dir, _):
+        os.chmod(dir, stat.S_IWRITE)
+        func(dir)
+
+    schedule.ever().day.at("12:23").do(shutil.rmtree(dir, onerror=remove_readonly))
+
+    while True:
+        schedule.run_pending()
+        time.sleep(20)
