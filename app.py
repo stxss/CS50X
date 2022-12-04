@@ -274,9 +274,16 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
-        dir = config.folder_path
-        for f in os.listdir(dir):
-           os.remove(os.path.join(dir, f))
+    dir = config.folder_path
+    
+    def remove_readonly(func, dir, _):
+        os.chmod(dir, stat.S_IWRITE)
+        func(dir)
+
+    shutil.rmtree(dir, onerror=remove_readonly)
+    
+        #for f in os.listdir(dir):
+        #   os.remove(os.path.join(dir, f))
 
 
 app.run()
