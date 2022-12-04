@@ -261,6 +261,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 await callback.message.reply("Something went wrong, please try again")
             
 app.run()
+
 dir = config.folder_path
 def remove_readonly(func, dir, _):
     os.chmod(dir, stat.S_IWRITE)
