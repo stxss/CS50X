@@ -15,7 +15,6 @@ from pyrogram import Client, filters, methods
 from pyrogram.types import *
 from pyrogram.raw import *
 
-
 load_dotenv()
 
 app = Client(
@@ -34,7 +33,7 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 @app.on_message(filters.command("start"))
 async def help_command(client, message):
-    await message.reply("Hi, I'll help you trim your videos")
+    await message.reply("Hi, I'll help you transcribe or trim your audiofile and more!")
 
 
 @app.on_message(filters.command("help"))
@@ -46,45 +45,22 @@ async def help_command(client, message):
 
 @app.on_message(filters.command("transcribe"))
 async def transcribe(client, message):
-    await message.reply("Please, send an audio file or a voice message!")
-
-
-@app.on_message(filters.command("translate"))
-async def translate(client, message):
-    await message.reply("Please, a text to translate")
+    await message.reply("Please, send an audio file or a voice message and click 'Transcribe' or 'Transcribe w/timestamps'!")
 
 
 @app.on_message(filters.command("trim"))
 async def trim(client, message):
-    ...
+    await message.reply("Please, send an audio file or a voice message and click 'Trim audio'!")
     
-    
-
 
 @app.on_message(filters.command("join"))
 async def join(client, message):
-    await message.reply("Please, send an image and a voice file ")
-
-
-@app.on_message(filters.command("timestamp"))
-async def timestamp(client, message):
-    await message.reply("recreate the text from the audio/voice file with timestamps")
-
-
-@app.on_message(filters.command("search"))
-async def search(client, message):
-    await message.reply("search a string of your choice")
-
-
-@app.on_message(filters.command("share"))
-async def share(client, message):
-    await message.reply("Share command")
+    await message.reply("Please, send an image and an audiofile and then click 'Join'")
 
 
 "File handling"
 
 # Transcription for audio and voice messages with inline keyboard prompt for next actions to take
-
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
@@ -247,8 +223,8 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             await app.send_message(chat_id=chat_id_for_join.strip(), 
                 text="Please choose what you want to do with the file",
             )  
-    
             os.remove(f"downloads\{chat_id_for_join.strip()}\\out.mp3")
+    
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
 
@@ -280,8 +256,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 await app.send_video(
                     chat_id=chat_id_for_join.strip(), video=os.path.join(config.path, f"{chat_id_for_join.strip()}\\video.mp4")
                 )
+                os.remove(f"downloads\{chat_id_for_join.strip()}\\video.mp4")
+
             except:
                 await callback.message.reply("Something went wrong, please try again")
-
-
+            
 app.run()

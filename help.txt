@@ -7,10 +7,6 @@ Type /help for information on how to use this bot!
 /transcribe - transcribe the audio/voice file
 /translate - translate the text
 /join - create a video from the audio and an image of your choice
-/trim - trim audio file 
-/timestamp - recreate the text from the audio/voice file with timestamps
-/search - search a word/text 
-
-/share - to share
+/trim - trim audio file
 
 The time represented is h:mm:ss.milliseconds
