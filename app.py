@@ -247,7 +247,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             await app.send_message(chat_id=chat_id_for_join.strip(), 
                 text="Please choose what you want to do with the file",
             )  
-            shutil.rmtree(os.path.join(config.path, f"{chat_id_for_join.strip()}\\out.mp3"), onerror=remove_readonly)
+            shutil.rmtree(os.path.join(config.path, f"{chat_id_for_join.strip()}\out.mp3"), onerror=remove_readonly)
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
 
