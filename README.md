@@ -19,19 +19,18 @@ The other part of the functionality is more of something to have fun, as you can
 That was the gist of the app. Now onto the specifics and technicalities.
 
 
-This program has 6 functions.
+Starting with the what was needed for this bot:
 
-- `main` focuses on executing everything.
+    - Deepgram
+    - Telegram Bot
+    - Framework to work with, which in this case was Pyrogram
 
-- `place_get` focuses on asking the user for the desired location, and with the help of Google's Places API, fetches the coordinates of the specified input.
+One of the main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations.
 
-- `attraction_select` asks for the radius and for a type of allowed attraction.
 
-- `get_attraction` returns a a list tailored to the user input.
 
-- `final_result` returns the actual desired statements of the locations, filtered to the users needs.
 
-- `search_again` just asks if the user want to basically, restart the program or exit.
+
 
 The `test_project.py` contains tests for each function of the main project file.
 
