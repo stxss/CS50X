@@ -16,7 +16,7 @@ So, instead of either ignoring the message or boringly listen to all of it or po
 
 The other part of the functionality is more of something to have fun, as you can also trim certain parts of said audiofile or just create your kind of meme. Just send the image and the audio you want to join and there you have your own little video in a matter of seconds!
 
-That was the gist of the app. Now onto the specifics
+That was the gist of the app. Now onto the specifics and technicalities.
 
 
 This program has 6 functions.
