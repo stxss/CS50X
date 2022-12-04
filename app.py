@@ -270,9 +270,6 @@ if __name__ == "__main__":
     def remove_readonly(func, dir, _):
         os.chmod(dir, stat.S_IWRITE)
         func(dir)
+    shutil.rmtree(dir, onerror=remove_readonly)
 
-    schedule.every().day.at("12:26").do(shutil.rmtree(dir, onerror=remove_readonly))
 
-    while True:
-        schedule.run_pending()
-        time.sleep(20)
