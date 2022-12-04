@@ -5,11 +5,10 @@ import config
 import os
 import datetime
 
-
 path = config.path
 
-
 # Choices for joining
+
 
 async def trim_file(message, filetype, user_id):
     pattern = re.compile(
@@ -43,12 +42,19 @@ async def trim_file(message, filetype, user_id):
 
         end_trim_time = user_end_mins * 60 + user_end_sec
 
+        # Recreating the audio file
         input_stream = ffmpeg.input(in_file)
         pts = "PTS-STARTPTS"
+
+        # The actual trim
         file_trim = input_stream.filter_(
             "atrim", start=start_trim_time, end=end_trim_time
         ).filter_("asetpts", pts)
-        output = ffmpeg.output(file_trim, f"downloads\\{user_id}\\out.mp3", format="mp3")
+
+        # Outputting the file
+        output = ffmpeg.output(
+            file_trim, f"downloads\\{user_id}\\out.mp3", format="mp3"
+        )
         output.run()
 
     else:
@@ -58,14 +64,22 @@ async def trim_file(message, filetype, user_id):
 
 async def create(message, filetype, user_id):
     if message == "audio" and filetype == "image":
-     
+
+        # Getting the audio and image files
+
         input_audio = ffmpeg.input(f"downloads\\{user_id}\\audiofile.mp3")
         input_image = ffmpeg.input(f"downloads\\{user_id}\\imagefile.jpg")
+
+        # Setting the width and height of the video
 
         probe = ffmpeg.probe(f"downloads\\{user_id}\\imagefile.jpg")
         width = int(probe["streams"][0]["coded_width"])
         height = int(probe["streams"][0]["coded_height"])
 
-        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter("scale", width, height)
+        # Outputting the final video
+
+        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter(
+            "scale", width, height
+        )
         output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mp4")
         output.run()
