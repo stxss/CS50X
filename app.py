@@ -271,7 +271,7 @@ if __name__ == "__main__":
         os.chmod(dir, stat.S_IWRITE)
         func(dir)
 
-    schedule.ever().day.at("12:23").do(shutil.rmtree(dir, onerror=remove_readonly))
+    schedule.every().day.at("12:26").do(shutil.rmtree(dir, onerror=remove_readonly))
 
     while True:
         schedule.run_pending()
