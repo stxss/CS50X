@@ -273,8 +273,8 @@ if __name__ == "__main__":
         os.chmod(dir, stat.S_IWRITE)
         func(dir)
     shutil.rmtree(dir, onerror=remove_readonly)
-    
-    Timer(86400, stopTheScript).start()
+
+    Timer(10, stopTheScript).start()
 
 
 
