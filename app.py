@@ -3,6 +3,9 @@ from deepgram import Deepgram
 import asyncio
 import config
 import os
+import sys
+import psutil
+import logging
 import datetime
 import time
 import helpers
@@ -271,5 +274,8 @@ if __name__ == "__main__":
         os.chmod(dir, stat.S_IWRITE)
         func(dir)
     shutil.rmtree(dir, onerror=remove_readonly)
+
+
+    
 
 
