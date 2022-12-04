@@ -197,11 +197,12 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_from_inline(Client, callback: CallbackQuery):
-    #dir = config.folder_path
-    #def remove_readonly(func, dir, _):
-    #    os.chmod(dir, stat.S_IWRITE)
-    #    func(dir)
-#    shutil.rmtree(os.path.join(config.path, f"\{chat_id_for_join.strip()}\out.mp3"), onerror=remove_readonly)
+    
+    dir = config.folder_path
+    def remove_readonly(func, dir, _):
+        os.chmod(dir, stat.S_IWRITE)
+        func(dir)
+
     with open(f"downloads\\{callback.from_user.id}\chat_id.py", "r", encoding="utf-8") as f:
             for line in f:
                 if line.startswith("chat_id"):
@@ -257,6 +258,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                     chat_id=chat_id_for_join.strip(), video=os.path.join(config.path, f"{chat_id_for_join.strip()}\\video.mp4")
                 )
                 os.remove(f"downloads\{chat_id_for_join.strip()}\\video.mp4")
+                shutil.rmtree(os.path.join(config.path, f"\{chat_id_for_join.strip()}\out.mp3"), onerror=remove_readonly)
 
             except:
                 await callback.message.reply("Something went wrong, please try again")
