@@ -201,6 +201,9 @@ async def filter_audio(client, message):
 @app.on_message(~filters.audio | ~filters.voice | filters.media)
 async def invalid_file(client, message):
     print(message)
+
+
+
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
         imagefile = await message.download(f"downloads\\{maintain_chat_id}\\imagefile.jpg")
@@ -218,6 +221,11 @@ async def invalid_file(client, message):
 
 @app.on_callback_query()
 async def choice_from_inline(Client, callback: CallbackQuery):
+    dir = config.folder_path
+    def remove_readonly(func, dir, _):
+        os.chmod(dir, stat.S_IWRITE)
+        func(dir)
+
     with open(f"downloads\\{callback.from_user.id}\chat_id.py", "r", encoding="utf-8") as f:
             for line in f:
                 if line.startswith("chat_id"):
@@ -239,7 +247,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             await app.send_message(chat_id=chat_id_for_join.strip(), 
                 text="Please choose what you want to do with the file",
             )  
-
+            shutil.rmtree(os.path.join(config.path, f"{chat_id_for_join.strip()}\\out.mp3"), onerror=remove_readonly)
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
 
@@ -273,17 +281,6 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 )
             except:
                 await callback.message.reply("Something went wrong, please try again")
-
-    dir = config.folder_path
-    
-    def remove_readonly(func, dir, _):
-        os.chmod(dir, stat.S_IWRITE)
-        func(dir)
-
-    shutil.rmtree(dir, onerror=remove_readonly)
-    
-        #for f in os.listdir(dir):
-        #   os.remove(os.path.join(dir, f))
 
 
 app.run()
