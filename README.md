@@ -6,29 +6,11 @@ Video Demo:
 ##     Description:
 This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). 
 
-This project consists in a multi-purpose bot 
+This project consists in a multi-purpose bot that uses a voice recognition API and other useful libraries like FFMPEG.
 
+A practical use would be, for example:
 
-A real world simulation would be, for example:
-
-You are walking by, let's say, Berlin, and you want to get a place to stay for the night. You can use this program to tailor your preferences and get the top results.
-
-
-So you want the best 5 lodging places in Berlin, in a 20 km radius, sorted by number of reviews, or you aren't sure what you want to see, so you want to see what you can choose from?
-
-Perfect! You open up this program, where you're prompted with simple questions like:
-
-- Desired Location
-- Desired Radius of search
-- Desired Type of Attraction
-
-If you don't know what exactly you are looking for, there is always the option to leave the line blank or type the word `attractions` to see a table of available options. As a bonus, if you're feeling extra indecisive, you can just input `random` and a random option will be chosen.
-
-The program will output the number of found results and prompt for how many you want to see.
-
-Then it will prompt for a sorting filter. You can choose between `Name` , `Rating` and `Number of Reviews` . In the case that you don't want to choose a specific filter, the default is  `Number of Reviews`.
-
-Finally, the program asks you if you want to do another search, where you can choose between `yes` or `no`. If choosing `yes/y`, the program restarts, whilst `no/n` exits the program.
+You are texting with someone or they have some news you need to hear but you're at a loud place and can't hear anything
 
 
 This program has 6 functions.
