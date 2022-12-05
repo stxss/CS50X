@@ -1,5 +1,7 @@
 FROM python:3.10
 
+COPY "E:\CS50X\."
+
 ADD app.py .
 
 RUN pip install deepgram-sdk
