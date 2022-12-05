@@ -1,6 +1,12 @@
 FROM python:3.10
 
-COPY "E:\CS50X" /usr/share/python3/clipcut
+WORKDIR /clipcut
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+COPY "E:\CS50X" /clipcut
+
 
 ADD app.py .
 
