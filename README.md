@@ -19,7 +19,6 @@ The other part of the functionality is more of something to have fun, as you can
 That was the gist of the app. Now onto the specifics and technicalities.
 
 
-
 Starting with the what was needed for this bot:
 
     - Deepgram
