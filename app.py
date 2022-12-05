@@ -1,3 +1,4 @@
+import deepgram
 from deepgram import Deepgram  # API for voice recognition
 
 import asyncio
