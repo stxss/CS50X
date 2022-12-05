@@ -1,6 +1,8 @@
 FROM python:3.10
 
-WORKDIR /.
+ENV PYTHONPATH "${PYTHONPATH}:"
+
+WORKDIR .
 
 COPY . .
 
