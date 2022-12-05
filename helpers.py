@@ -1,13 +1,11 @@
 import re
 import asyncio
 import ffmpeg
-#import config
+import config
 import os
 import datetime
-from os import getenv, listdir, remove
-from dotenv import load_dotenv
 
-path = getenv("path")
+path = config.path
 
 # Choices for joining
 
