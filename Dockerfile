@@ -1,6 +1,6 @@
 FROM python:3.10
 
-COPY "E:\CS50X\."
+COPY "E:\CS50X" /usr/share/python3/clipcut
 
 ADD app.py .
 
