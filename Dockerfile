@@ -1,12 +1,12 @@
 FROM python:3.10
 
-WORKDIR /clipcut
+WORKDIR /.
 
-COPY requirements.txt .
+COPY . .
 
 RUN pip install -r requirements.txt
 
-COPY . /clipcut
+#COPY . /clipcut
 
-CMD ["python3", "./clipcut/app.py"]
+CMD ["python3", "./app.py"]
 
