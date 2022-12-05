@@ -3,3 +3,4 @@ Pyrogram==2.0.63
 pyromod==1.5
 python_ffmpeg==1.0.15
 schedule==1.1.0
+python-dotenv~=0.21.0
