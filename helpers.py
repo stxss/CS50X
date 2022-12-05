@@ -4,8 +4,10 @@ import ffmpeg
 import config
 import os
 import datetime
+from os import getenv, listdir, remove
+from dotenv import load_dotenv
 
-path = config.path
+path = getenv("path")
 
 # Choices for joining
 
