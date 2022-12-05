@@ -63,6 +63,9 @@ async def trim_file(message, filetype, user_id):
 
 
 async def create(message, filetype, user_id):
+    if os.path.exists(f"downloads\\{user_id}\\video.mp4"):
+        os.remove(f"downloads\\{user_id}\\video.mp4")
+    
     if message == "audio" and filetype == "image":
 
         # Getting the audio and image files
