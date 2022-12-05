@@ -2,3 +2,4 @@ pyromod~=1.5
 schedule~=1.1.0
 python-dotenv~=0.21.0
 Pyrogram~=2.0.63
+Deepgram @ git+https://github.com/deepgram/deepgram-python-sdk
