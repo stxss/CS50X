@@ -9,6 +9,7 @@ import helpers
 import pyromod.listen
 import shutil, stat
 import schedule
+import hashlib
 from threading import Timer
 
 from os import getenv, listdir, remove
