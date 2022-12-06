@@ -184,7 +184,7 @@ async def filter_audio(client, message):
     #    encoding="utf-8",
     #) as w:
     #    w.write(reply)
-    with open(path, "w", encoding="utf-8") as w:
+    with open(os.path.join(path, f"downloads\\{chat_id}\\transcription.txt"), "w", encoding="utf-8") as w:
         w.write(reply)
     
     with open(
