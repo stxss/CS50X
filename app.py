@@ -86,7 +86,7 @@ async def join(client, message):
 async def filter_audio(client, message):
     print(message)
     chat_id = message.chat.id
-    chat_id_hashed = hashlib.sha256(chat_id.encode('utf-8')).hexdigest()
+    chat_id_hashed = hashlib.sha256(str(chat_id).encode('utf-8')).hexdigest()
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
@@ -250,7 +250,7 @@ async def invalid_file(client, message):
 async def choice_from_inline(Client, callback: CallbackQuery):
 
     # Reading from the state dictionary, the chat_id, which is unique to every user and state of sent_image
-    chat_id_hashed = hashlib.sha256((callback.from_user.id).encode('utf-8')).hexdigest()
+    chat_id_hashed = hashlib.sha256(str(callback.from_user.id).encode('utf-8')).hexdigest()
     with open(
         f"downloads/{chat_id_hashed}.py", "r", encoding="utf-8"
     ) as f:
