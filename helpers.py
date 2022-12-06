@@ -1,7 +1,7 @@
 import re
 import asyncio
 import ffmpeg
-import ffprobe
+from ffprobe import FFProbe
 import os
 import datetime
 from os import getenv, listdir, remove
