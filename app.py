@@ -336,9 +336,10 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 await callback.message.reply("Something went wrong, please try again")
 
            
-
-for f in os.listdir(path):
-    if os.stat(os.path.join(path,f)).st_mtime < now - 7 * 86400:
+now = time.time()
+dir = getenv("PATH")
+for f in os.listdir(dir):
+    if os.stat(os.path.join(path,f)).st_mtime < now - 20:
         os.remove(os.path.join(dir, f))  
 
 
