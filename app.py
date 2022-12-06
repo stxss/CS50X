@@ -96,7 +96,7 @@ async def filter_audio(client, message):
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
 
-    if os.path.exists(os.path.join(os.path.dirname(__file__), f"{chat_id}/imagefile.jpg")):
+    if os.path.exists(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}/imagefile.jpg")):
         with open(f"downloads\{chat_id}\chat_id.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = True")

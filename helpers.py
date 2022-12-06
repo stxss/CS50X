@@ -20,12 +20,12 @@ async def trim_file(message, filetype, user_id):
     check = message.text
     reply_if_fail = ""
     if pattern.match(check):
-        if os.path.exists(f"downloads\\{user_id}\\out.mp3"):
-            os.remove(f"downloads\\{user_id}\\out.mp3")
+        if os.path.exists(f"downloads/{user_id}/out.mp3"):
+            os.remove(f"downloads/{user_id}/out.mp3")
 
         if filetype == "audio" or filetype == "voice":
-            probe_res = ffmpeg.probe(f"downloads\\{user_id}\\audiofile.mp3")
-            in_file = f"downloads\\{user_id}\\audiofile.mp3"
+            probe_res = ffmpeg.probe(f"downloads/{user_id}/audiofile.mp3")
+            in_file = f"downloads/{user_id}/audiofile.mp3"
 
         duration = probe_res.get("format", {}).get("duration", None)
 
@@ -56,7 +56,7 @@ async def trim_file(message, filetype, user_id):
 
         # Outputting the file
         output = ffmpeg.output(
-            file_trim, f"downloads\\{user_id}\\out.mp3", format="mp3"
+            file_trim, f"downloads/{user_id}/out.mp3", format="mp3"
         )
         output.run()
 
@@ -66,19 +66,19 @@ async def trim_file(message, filetype, user_id):
 
 
 async def create(message, filetype, user_id):
-    if os.path.exists(f"downloads\\{user_id}\\video.mp4"):
-        os.remove(f"downloads\\{user_id}\\video.mp4")
+    if os.path.exists(f"downloads/{user_id}/video.mp4"):
+        os.remove(f"downloads/{user_id}/video.mp4")
     
     if message == "audio" and filetype == "image":
 
         # Getting the audio and image files
 
-        input_audio = ffmpeg.input(f"downloads\\{user_id}\\audiofile.mp3")
-        input_image = ffmpeg.input(f"downloads\\{user_id}\\imagefile.jpg")
+        input_audio = ffmpeg.input(f"downloads/{user_id}/audiofile.mp3")
+        input_image = ffmpeg.input(f"downloads/{user_id}/imagefile.jpg")
 
         # Setting the width and height of the video
 
-        probe = ffmpeg.probe(f"downloads\\{user_id}\\imagefile.jpg")
+        probe = ffmpeg.probe(f"downloads/{user_id}/imagefile.jpg")
         width = int(probe["streams"][0]["coded_width"])
         height = int(probe["streams"][0]["coded_height"])
 
@@ -87,5 +87,5 @@ async def create(message, filetype, user_id):
         final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter(
             "scale", width, height
         )
-        output = ffmpeg.output(final_video, f"downloads\\{user_id}\\video.mp4")
+        output = ffmpeg.output(final_video, f"downloads/{user_id}/video.mp4")
         output.run()
