@@ -6,7 +6,6 @@ COPY . .
 
 RUN pip install -r requirements.txt
 RUN pip uninstall -y ffmpeg-python
-RUN pip uninstall -y ffmpeg-python
 RUN pip uninstall -y ffmpeg
 
 RUN pip install ffmpeg-python
