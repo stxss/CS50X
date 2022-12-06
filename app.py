@@ -175,13 +175,14 @@ async def filter_audio(client, message):
                 continue
 
     # Saving the transcriptions to separate files
-    with open(
-        os.path.join(path, f"{chat_id}\\transcription.txt"),
-        "w",
-        encoding="utf-8",
-    ) as w:
+    #with open(
+    #    os.path.join(getenv("path"), f"{chat_id}\\transcription.txt"),
+    #    "w",
+    #    encoding="utf-8",
+    #) as w:
+    #    w.write(reply)
+    with open((f"{chat_id}\\transcription.txt"), "w", encoding="utf-8",) as w:
         w.write(reply)
-
     with open(
         os.path.join(path, f"{chat_id}\\transcription_w_timestamp.txt"),
         "w",
