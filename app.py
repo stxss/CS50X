@@ -286,7 +286,6 @@ async def choice_from_inline(Client, callback: CallbackQuery):
     # Handling the click of the transcription and transcription w/timestamps buttons
     elif callback.data == "transcribe":
         with open(os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id_for_join.strip()}\\transcription.txt"),
-            #os.path.join(path, f"{chat_id_for_join.strip()}\\transcription.txt"),
             "r",
             encoding="utf-8",
         ) as f1:
@@ -298,9 +297,8 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
     elif callback.data == "timestamp":
         with open(
-            os.path.join(
-                path,
-                f"{chat_id_for_join.strip()}\\transcription_w_timestamp.txt",
+            os.path.join(os.path.dirname(__file__),
+                f"downloads\\{chat_id_for_join.strip()}\\transcription_w_timestamp.txt",
             ),
             "r",
             encoding="utf-8",
@@ -329,8 +327,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 # Sending the video back to the user
                 await app.send_video(
                     chat_id=chat_id_for_join.strip(),
-                    video=os.path.join(
-                        path, f"{chat_id_for_join.strip()}\\video.mp4"
+                    video=os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id_for_join.strip()}\\video.mp4"
                     ),
                 )
 
@@ -346,7 +343,7 @@ if __name__ == "__main__":
     app.run()
 
     # If the app is closed/terminated, delete the downloads folder, which contains the chat_id's of the users
-    dir = path
+    dir = getenv("PATH")
 
     def remove_readonly(func, dir, _):
         os.chmod(dir, stat.S_IWRITE)
