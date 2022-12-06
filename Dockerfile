@@ -4,11 +4,11 @@ WORKDIR /.
 
 COPY . .
 
-RUN pip install -r requirements.txt
-RUN pip uninstall -y ffmpeg-python
-RUN pip uninstall -y ffmpeg
+RUN pip3 install -r requirements.txt
+RUN pip3 uninstall -y ffmpeg-python
+RUN pip3 uninstall -y ffmpeg
 
-RUN pip install ffmpeg-python
+RUN pip3 install ffmpeg-python
 #RUN pip install ffprobe
 
 #RUN apt-get -y update
