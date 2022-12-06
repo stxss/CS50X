@@ -98,11 +98,11 @@ async def filter_audio(client, message):
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
 
     if os.path.exists(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_hashed}_imagefile.jpg")):
-        with open(f"downloads/{chat_id_hashed}_chat_id.py", "w", encoding="utf-8") as w:
+        with open(f"downloads/{chat_id_hashed}.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {chat_id_hashed}\n")
             w.write("sent_img = True")
     else:
-        with open(f"downloads/{chat_id_hashed}_chat_id.py", "w", encoding="utf-8") as w:
+        with open(f"downloads/{chat_id_hashed}.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {chat_id_hashed}\n")
             w.write("sent_img = False")
 
@@ -184,11 +184,11 @@ async def filter_audio(client, message):
     #) as w:
     #    w.write(reply)
 
-    with open(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_transcription.txt"), "w", encoding="utf-8") as w:
+    with open(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_hashed}_transcription.txt"), "w", encoding="utf-8") as w:
         w.write(reply)
     
     with open(
-        os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_transcription_w_timestamp.txt"),
+        os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_hashed}_transcription_w_timestamp.txt"),
         "w",
         encoding="utf-8",
     ) as wt:
@@ -228,11 +228,12 @@ async def invalid_file(client, message):
 
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
+        maintain_chat_id_hashed = hashlib.sha256(maintain_chat_id.encode('utf-8')).hexdigest()
         imagefile = await message.download(
-            f"{maintain_chat_id}_imagefile.jpg"
+            f"{maintain_chat_id_hashed}_imagefile.jpg"
         )
         with open("downloads/chat_id.py", "w", encoding="utf-8") as w:
-            w.write(f"chat_id = {maintain_chat_id}\n")
+            w.write(f"chat_id = {maintain_chat_id_hashed}\n")
             w.write("sent_img = True")
 
         await message.reply("Please, send an audio file and click 'Join'")
