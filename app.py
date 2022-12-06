@@ -86,23 +86,24 @@ async def join(client, message):
 async def filter_audio(client, message):
     print(message)
     chat_id = message.chat.id
+    chat_id_hashed = hashlib.sha256(chat_id.encode('utf-8')).hexdigest()
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
-        audiofile = await message.download(f"{chat_id}_audiofile.mp3")
+        audiofile = await message.download(f"{chat_id_hashed}_audiofile.mp3")
         mimetype = "audio/mpeg"
-
+    
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
 
-    if os.path.exists(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_imagefile.jpg")):
-        with open(f"downloads/{chat_id}_chat_id.py", "w", encoding="utf-8") as w:
-            w.write(f"chat_id = {chat_id}\n")
+    if os.path.exists(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_hashed}_imagefile.jpg")):
+        with open(f"downloads/{chat_id_hashed}_chat_id.py", "w", encoding="utf-8") as w:
+            w.write(f"chat_id = {chat_id_hashed}\n")
             w.write("sent_img = True")
     else:
-        with open(f"downloads/{chat_id}_chat_id.py", "w", encoding="utf-8") as w:
-            w.write(f"chat_id = {chat_id}\n")
+        with open(f"downloads/{chat_id_hashed}_chat_id.py", "w", encoding="utf-8") as w:
+            w.write(f"chat_id = {chat_id_hashed}\n")
             w.write("sent_img = False")
 
     # Making use of the Deepgram API, where a mimetype and an audiofile are set
