@@ -33,7 +33,8 @@ app = Client(
     bot_token=getenv("API_KEY"),
 )
 
-path = config.path
+#path = config.path
+path = getenv("path")
 
 deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
@@ -94,7 +95,7 @@ async def filter_audio(client, message):
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
 
-    if os.path.exists(os.path.join(config.path, f"{chat_id}\\imagefile.jpg")):
+    if os.path.exists(os.path.join(path, f"{chat_id}\\imagefile.jpg")):
         with open(f"downloads\{chat_id}\chat_id.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = True")
@@ -175,14 +176,14 @@ async def filter_audio(client, message):
 
     # Saving the transcriptions to separate files
     with open(
-        os.path.join(config.path, f"{chat_id}\\transcription.txt"),
+        os.path.join(path, f"{chat_id}\\transcription.txt"),
         "w",
         encoding="utf-8",
     ) as w:
         w.write(reply)
 
     with open(
-        os.path.join(config.path, f"{chat_id}\\transcription_w_timestamp.txt"),
+        os.path.join(path, f"{chat_id}\\transcription_w_timestamp.txt"),
         "w",
         encoding="utf-8",
     ) as wt:
@@ -268,7 +269,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             # Sending the trimmed audio back to the user
             await app.send_audio(
                 chat_id=chat_id_for_join.strip(),
-                audio=os.path.join(config.path, f"{chat_id_for_join.strip()}\\out.mp3"),
+                audio=os.path.join(path, f"{chat_id_for_join.strip()}\\out.mp3"),
             )
 
             # Removing the file from the folder, because it is of no longer use and so it can no longer be accessed
@@ -280,7 +281,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
     # Handling the click of the transcription and transcription w/timestamps buttons
     elif callback.data == "transcribe":
         with open(
-            os.path.join(config.path, f"{chat_id_for_join.strip()}\\transcription.txt"),
+            os.path.join(path, f"{chat_id_for_join.strip()}\\transcription.txt"),
             "r",
             encoding="utf-8",
         ) as f1:
@@ -293,7 +294,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
     elif callback.data == "timestamp":
         with open(
             os.path.join(
-                config.path,
+                path,
                 f"{chat_id_for_join.strip()}\\transcription_w_timestamp.txt",
             ),
             "r",
@@ -324,7 +325,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 await app.send_video(
                     chat_id=chat_id_for_join.strip(),
                     video=os.path.join(
-                        config.path, f"{chat_id_for_join.strip()}\\video.mp4"
+                        path, f"{chat_id_for_join.strip()}\\video.mp4"
                     ),
                 )
 
@@ -340,7 +341,7 @@ if __name__ == "__main__":
     app.run()
 
     # If the app is closed/terminated, delete the downloads folder, which contains the chat_id's of the users
-    dir = config.folder_path
+    dir = path
 
     def remove_readonly(func, dir, _):
         os.chmod(dir, stat.S_IWRITE)
