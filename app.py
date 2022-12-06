@@ -338,9 +338,10 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
 now = time.time()
 dir = "./downloads"
-for f in os.listdir(dir):
-    if os.stat(os.path.join(f"downloads", f)).st_mtime < now - 30:
-        os.remove(os.path.join(dir, f))  
+async def file_age_check():
+    for f in os.listdir(dir):
+        if os.stat(os.path.join(f"downloads", f)).st_mtime < now - 30:
+           await os.remove(os.path.join(dir, f))  
 
 
 if __name__ == "__main__":
