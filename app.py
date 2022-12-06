@@ -337,12 +337,14 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 await callback.message.reply("Something went wrong, please try again")
 
 
-now = time.time()
-dir = "./downloads"
-
-for f in os.listdir(dir):
-    if os.stat(os.path.join(f"downloads", f)).st_mtime < now - 30:
-        os.remove(os.path.join(dir, f))
+    now = time.time()
+    dir = "./downloads"
+    
+    while True:
+        for f in os.listdir(dir):
+            if os.stat(os.path.join(f"downloads", f)).st_mtime < now - 30:
+                os.remove(os.path.join(dir, f))
+        time.sleep(60.0 - ((time.time() - now) % 60.0))
 
 
 if __name__ == "__main__":
