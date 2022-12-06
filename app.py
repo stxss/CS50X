@@ -274,11 +274,11 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             await app.send_audio(
                 chat_id=chat_id_for_join.strip(),
                 audio=os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_for_join.strip()}_out.mp3"),
+                file_name="trim.mp3"
             )
 
             # Removing the file from the folder, because it is of no longer use and so it can no longer be accessed
             os.remove(f"downloads\{chat_id_for_join.strip()}_out.mp3")
-
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
 
@@ -334,6 +334,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 os.remove(f"downloads\{chat_id_for_join.strip()}_video.mp4")
             except:
                 await callback.message.reply("Something went wrong, please try again")
+
 
 
 if __name__ == "__main__":
