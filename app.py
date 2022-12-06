@@ -337,9 +337,10 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
            
 now = time.time()
-dir = os.path.dirname(__file__)
+#dir = os.path.dirname(__file__)
+dir = "./downloads"
 for f in os.listdir(dir):
-    if os.stat(os.path.join(f"{dir}\\downloads", f)).st_mtime < now - 20:
+    if os.stat(os.path.join(f"downloads", f)).st_mtime < now - 30:
         os.remove(os.path.join(dir, f))  
 
 
