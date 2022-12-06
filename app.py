@@ -343,10 +343,10 @@ if __name__ == "__main__":
     app.run()
 
     # If the app is closed/terminated, delete the downloads folder, which contains the chat_id's of the users
-    dir = getenv("PATH")
-
-    def remove_readonly(func, dir, _):
-        os.chmod(dir, stat.S_IWRITE)
-        func(dir)
-
-    shutil.rmtree(dir, onerror=remove_readonly)
+#    dir = getenv("PATH")
+#
+#    def remove_readonly(func, dir, _):
+#        os.chmod(dir, stat.S_IWRITE)
+#        func(dir)
+#
+#    shutil.rmtree(dir, onerror=remove_readonly)
