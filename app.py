@@ -335,12 +335,13 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
-    try:
-        await app.listen(chat_id=chat_id_for_join, timeout=20)
-    except:
-        dir = "/downloads"
-        for f in os.listdir(dir):
-            os.remove(os.path.join(dir, f))             
+           
+try:
+    await app.listen(chat_id=chat_id_for_join, timeout=20)
+except:
+    dir = "/downloads"
+    for f in os.listdir(dir):
+        os.remove(os.path.join(dir, f))  
 
 if __name__ == "__main__":
 
