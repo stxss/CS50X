@@ -34,7 +34,7 @@ app = Client(
 )
 
 #path = config.path
-path = getenv("path")
+path = getenv("PATH")
 
 deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
