@@ -334,22 +334,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 # Deleting the file as it is no longer needed and can no longer be accessed
                 os.remove(f"downloads\{chat_id_for_join.strip()}_video.mp4")
                 os.remove(f"downloads\{chat_id_for_join.strip()}_audiofile.mp3")
+                os.remove(f"downloads\{chat_id_for_join.strip()}_imagefile.jpg")
             except:
                 await callback.message.reply("Something went wrong, please try again")
-
-
-#    nexttime = time.time()
-#    now = time.time()
-#    dir = "./downloads"
-#
-#    while True:
-#        for f in os.listdir(dir):
-#            if os.stat(os.path.join(f"downloads", f)).st_mtime < now - 30:
-#                os.remove(os.path.join(dir, f))     
-#        nexttime += 10
-#        sleeptime = nexttime - time.time()
-#        if sleeptime > 0:
-#            time.sleep(sleeptime)
 
 
 if __name__ == "__main__":
