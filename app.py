@@ -232,7 +232,7 @@ async def invalid_file(client, message):
         imagefile = await message.download(
             f"{maintain_chat_id_hashed}_imagefile.jpg"
         )
-        with open("downloads/chat_id.py", "w", encoding="utf-8") as w:
+        with open(f"downloads/{maintain_chat_id_hashed}.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {maintain_chat_id_hashed}\n")
             w.write("sent_img = True")
 
