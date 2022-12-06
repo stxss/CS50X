@@ -86,24 +86,23 @@ async def join(client, message):
 async def filter_audio(client, message):
     print(message)
     chat_id = message.chat.id
-    chat_id_hashed = hashlib.sha256(str(chat_id).encode('utf-8')).hexdigest()
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
-        audiofile = await message.download(f"{chat_id_hashed}_audiofile.mp3")
+        audiofile = await message.download(f"{chat_id}_audiofile.mp3")
         mimetype = "audio/mpeg"
     
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
 
-    if os.path.exists(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_hashed}_imagefile.jpg")):
-        with open(f"downloads/{chat_id_hashed}.py", "w", encoding="utf-8") as w:
-            w.write(f"chat_id = {chat_id_hashed}\n")
+    if os.path.exists(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_imagefile.jpg")):
+        with open(f"downloads/{chat_id}_chat_id.py", "w", encoding="utf-8") as w:
+            w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = True")
     else:
-        with open(f"downloads/{chat_id_hashed}.py", "w", encoding="utf-8") as w:
-            w.write(f"chat_id = {chat_id_hashed}\n")
+        with open(f"downloads/{chat_id}_chat_id.py", "w", encoding="utf-8") as w:
+            w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = False")
 
     # Making use of the Deepgram API, where a mimetype and an audiofile are set
@@ -184,11 +183,11 @@ async def filter_audio(client, message):
     #) as w:
     #    w.write(reply)
 
-    with open(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_hashed}_transcription.txt"), "w", encoding="utf-8") as w:
+    with open(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_transcription.txt"), "w", encoding="utf-8") as w:
         w.write(reply)
     
     with open(
-        os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_hashed}_transcription_w_timestamp.txt"),
+        os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_transcription_w_timestamp.txt"),
         "w",
         encoding="utf-8",
     ) as wt:
@@ -228,12 +227,11 @@ async def invalid_file(client, message):
 
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
-        maintain_chat_id_hashed = hashlib.sha256(maintain_chat_id.encode('utf-8')).hexdigest()
         imagefile = await message.download(
-            f"{maintain_chat_id_hashed}_imagefile.jpg"
+            f"{maintain_chat_id}_imagefile.jpg"
         )
-        with open(f"downloads/{maintain_chat_id_hashed}.py", "w", encoding="utf-8") as w:
-            w.write(f"chat_id = {maintain_chat_id_hashed}\n")
+        with open("downloads/chat_id.py", "w", encoding="utf-8") as w:
+            w.write(f"chat_id = {maintain_chat_id}\n")
             w.write("sent_img = True")
 
         await message.reply("Please, send an audio file and click 'Join'")
@@ -250,9 +248,9 @@ async def invalid_file(client, message):
 async def choice_from_inline(Client, callback: CallbackQuery):
 
     # Reading from the state dictionary, the chat_id, which is unique to every user and state of sent_image
-    chat_id_hashed = hashlib.sha256(str(callback.from_user.id).encode('utf-8')).hexdigest()
+
     with open(
-        f"downloads/{chat_id_hashed}.py", "r", encoding="utf-8"
+        f"downloads/{callback.from_user.id}_chat_id.py", "r", encoding="utf-8"
     ) as f:
         for line in f:
             if line.startswith("chat_id"):
