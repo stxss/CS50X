@@ -228,7 +228,7 @@ async def invalid_file(client, message):
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
         imagefile = await message.download(
-            f"downloads/{maintain_chat_id}/imagefile.jpg"
+            f"downloads/{maintain_chat_id}_imagefile.jpg"
         )
         with open("downloads/chat_id.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {maintain_chat_id}\n")
@@ -331,7 +331,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 )
 
                 # Deleting the file as it is no longer needed and can no longer be accessed
-                os.remove(f"downloads\{chat_id_for_join.strip()}/video.mp4")
+                os.remove(f"downloads\{chat_id_for_join.strip()}_video.mp4")
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
