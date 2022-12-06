@@ -41,6 +41,9 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 # Command handling
 
+@app.on_message(filters.command("path"))
+async def help_command(client, message):
+    await message.reply(f"{__file__}")
 
 @app.on_message(filters.command("start"))
 async def help_command(client, message):
