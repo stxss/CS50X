@@ -335,7 +335,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
-    await pyrogram.
+    await app.listen()
 
 if __name__ == "__main__":
 
