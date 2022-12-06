@@ -88,7 +88,6 @@ async def filter_audio(client, message):
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
-#        audiofile = await message.download(f"downloads/{chat_id}/audiofile.mp3")
         audiofile = await message.download(f"{chat_id}_audiofile.mp3")
         mimetype = "audio/mpeg"
 
@@ -228,7 +227,7 @@ async def invalid_file(client, message):
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
         imagefile = await message.download(
-            f"downloads/{maintain_chat_id}_imagefile.jpg"
+            f"{maintain_chat_id}_imagefile.jpg"
         )
         with open("downloads/chat_id.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {maintain_chat_id}\n")
