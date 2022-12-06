@@ -334,6 +334,8 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 # Deleting the file as it is no longer needed and can no longer be accessed
                 os.remove(f"downloads\{chat_id_for_join.strip()}_video.mp4")
                 os.remove(f"downloads\{chat_id_for_join.strip()}_audiofile.mp3")
+                os.remove(f"downloads\{chat_id_for_join.strip()}_transcription_w_timestamp.txt")
+                os.remove(f"downloads\{chat_id_for_join.strip()}_transcription.txt")
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
