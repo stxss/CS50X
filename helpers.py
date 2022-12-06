@@ -1,7 +1,7 @@
 import re
 import asyncio
 import ffmpeg
-
+from mutagen.mp3 import MP3
 import os
 import datetime
 from os import getenv, listdir, remove
@@ -23,7 +23,7 @@ async def trim_file(message, filetype, user_id):
 
         if filetype == "audio" or filetype == "voice":
 #            probe_res = ffmpeg.probe(f"downloads/{user_id}_audiofile.mp3")
-            probe_res = ffmpeg.duration(f"downloads/{user_id}_audiofile.mp3")
+            probe_res = MP3(f"downloads/{user_id}_audiofile.mp3")
 
             in_file = f"downloads/{user_id}_audiofile.mp3"
 
