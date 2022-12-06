@@ -70,7 +70,7 @@ async def trim_file(message, filetype, user_id):
 
     else:
         reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
-        await message.reply(reply_if_fail)
+        return message.reply(reply_if_fail)
 
 
 async def create(message, filetype, user_id):
