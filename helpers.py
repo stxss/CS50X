@@ -23,11 +23,11 @@ async def trim_file(message, filetype, user_id):
 
         if filetype == "audio" or filetype == "voice":
 #            probe_res = ffmpeg.probe(f"downloads/{user_id}_audiofile.mp3")
-            probe_res = MP3(f"downloads/{user_id}_audiofile.mp3")
+            probe_res = MP3(f"downloads/{user_id}_audiofile.mp3").audio.info.length
 
             in_file = f"downloads/{user_id}_audiofile.mp3"
 
-        #print(probe_res)
+        print(probe_res)
         duration = probe_res.get("format", {}).get("duration", None)
         print(duration)
 
