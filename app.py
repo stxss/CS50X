@@ -1,7 +1,6 @@
 from deepgram import Deepgram  # API for voice recognition
 
 import asyncio
-#import config
 import os
 import datetime
 import time

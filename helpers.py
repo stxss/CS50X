@@ -1,6 +1,7 @@
 import re
 import asyncio
 import ffmpeg
+
 import os
 import datetime
 from os import getenv, listdir, remove
@@ -24,7 +25,9 @@ async def trim_file(message, filetype, user_id):
             probe_res = ffmpeg.probe(f"downloads/{user_id}_audiofile.mp3")
             in_file = f"downloads/{user_id}_audiofile.mp3"
 
+        #print(probe_res)
         duration = probe_res.get("format", {}).get("duration", None)
+        print(duration)
 
         user_duration = check.split("-")
 
