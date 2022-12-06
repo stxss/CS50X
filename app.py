@@ -250,7 +250,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
     # Reading from the state dictionary, the chat_id, which is unique to every user and state of sent_image
 
     with open(
-        f"downloads/{callback.from_user.id}\chat_id.py", "r", encoding="utf-8"
+        f"downloads/{callback.from_user.id}/chat_id.py", "r", encoding="utf-8"
     ) as f:
         for line in f:
             if line.startswith("chat_id"):
