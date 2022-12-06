@@ -250,9 +250,9 @@ async def invalid_file(client, message):
 async def choice_from_inline(Client, callback: CallbackQuery):
 
     # Reading from the state dictionary, the chat_id, which is unique to every user and state of sent_image
-
+    chat_id_hashed = hashlib.sha256((callback.from_user.id).encode('utf-8')).hexdigest()
     with open(
-        f"downloads/{callback.from_user.id}_chat_id.py", "r", encoding="utf-8"
+        f"downloads/{chat_id_hashed}.py", "r", encoding="utf-8"
     ) as f:
         for line in f:
             if line.startswith("chat_id"):
