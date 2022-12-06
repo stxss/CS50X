@@ -1,7 +1,6 @@
 import re
 import asyncio
 import ffmpeg
-#from mutagen.mp3 import MP3
 import os
 import datetime
 from os import getenv, listdir, remove
