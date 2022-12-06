@@ -34,7 +34,6 @@ app = Client(
     bot_token=getenv("API_KEY"),
 )
 
-#path = config.path
 path = getenv("PATH")
 
 deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
