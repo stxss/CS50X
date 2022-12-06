@@ -88,7 +88,7 @@ async def filter_audio(client, message):
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
-#        audiofile = await message.download(f"downloads\\{chat_id}\\audiofile.mp3")
+#        audiofile = await message.download(f"downloads/{chat_id}/audiofile.mp3")
         audiofile = await message.download()
         mimetype = "audio/mpeg"
 
@@ -96,7 +96,7 @@ async def filter_audio(client, message):
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
 
-    if os.path.exists(os.path.join(path, f"{chat_id}\\imagefile.jpg")):
+    if os.path.exists(os.path.join(path, f"{chat_id}/imagefile.jpg")):
         with open(f"downloads\{chat_id}\chat_id.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = True")
@@ -177,17 +177,17 @@ async def filter_audio(client, message):
 
     # Saving the transcriptions to separate files
     #with open(
-    #    os.path.join(getenv("path"), f"{chat_id}\\transcription.txt"),
+    #    os.path.join(getenv("path"), f"{chat_id}/transcription.txt"),
     #    "w",
     #    encoding="utf-8",
     #) as w:
     #    w.write(reply)
 
-    with open(os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id}\\transcription.txt"), "w", encoding="utf-8") as w:
+    with open(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}/transcription.txt"), "w", encoding="utf-8") as w:
         w.write(reply)
     
     with open(
-        os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id}\\transcription_w_timestamp.txt"),
+        os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}/transcription_w_timestamp.txt"),
         "w",
         encoding="utf-8",
     ) as wt:
@@ -228,7 +228,7 @@ async def invalid_file(client, message):
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
         imagefile = await message.download(
-            f"downloads\\{maintain_chat_id}\\imagefile.jpg"
+            f"downloads/{maintain_chat_id}/imagefile.jpg"
         )
         with open("downloads/chat_id.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {maintain_chat_id}\n")
@@ -250,7 +250,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
     # Reading from the state dictionary, the chat_id, which is unique to every user and state of sent_image
 
     with open(
-        f"downloads\\{callback.from_user.id}\chat_id.py", "r", encoding="utf-8"
+        f"downloads/{callback.from_user.id}\chat_id.py", "r", encoding="utf-8"
     ) as f:
         for line in f:
             if line.startswith("chat_id"):
@@ -273,18 +273,18 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             # Sending the trimmed audio back to the user
             await app.send_audio(
                 chat_id=chat_id_for_join.strip(),
-                audio=os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id_for_join.strip()}\\out.mp3"),
+                audio=os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_for_join.strip()}/out.mp3"),
             )
 
             # Removing the file from the folder, because it is of no longer use and so it can no longer be accessed
-            os.remove(f"downloads\{chat_id_for_join.strip()}\\out.mp3")
+            os.remove(f"downloads\{chat_id_for_join.strip()}/out.mp3")
 
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
 
     # Handling the click of the transcription and transcription w/timestamps buttons
     elif callback.data == "transcribe":
-        with open(os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id_for_join.strip()}\\transcription.txt"),
+        with open(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_for_join.strip()}/transcription.txt"),
             "r",
             encoding="utf-8",
         ) as f1:
@@ -292,12 +292,12 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         await callback.message.reply(reply)
 
         # Deleting the file after it is sent to the user and so it can no longer be accessed
-        os.remove(f"downloads\{chat_id_for_join.strip()}\\transcription.txt")
+        os.remove(f"downloads\{chat_id_for_join.strip()}/transcription.txt")
 
     elif callback.data == "timestamp":
         with open(
             os.path.join(os.path.dirname(__file__),
-                f"downloads\\{chat_id_for_join.strip()}\\transcription_w_timestamp.txt",
+                f"downloads/{chat_id_for_join.strip()}/transcription_w_timestamp.txt",
             ),
             "r",
             encoding="utf-8",
@@ -307,7 +307,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
         # Deleting the file after it is sent to the user and so it can no longer be accessed
         os.remove(
-            f"downloads\{chat_id_for_join.strip()}\\transcription_w_timestamp.txt"
+            f"downloads\{chat_id_for_join.strip()}/transcription_w_timestamp.txt"
         )
 
     # Handling the join button
@@ -326,12 +326,12 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 # Sending the video back to the user
                 await app.send_video(
                     chat_id=chat_id_for_join.strip(),
-                    video=os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id_for_join.strip()}\\video.mp4"
+                    video=os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_for_join.strip()}/video.mp4"
                     ),
                 )
 
                 # Deleting the file as it is no longer needed and can no longer be accessed
-                os.remove(f"downloads\{chat_id_for_join.strip()}\\video.mp4")
+                os.remove(f"downloads\{chat_id_for_join.strip()}/video.mp4")
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
