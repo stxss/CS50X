@@ -187,12 +187,12 @@ async def filter_audio(client, message):
     with open(os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id}\\transcription.txt"), "w", encoding="utf-8") as w:
         w.write(reply)
     
-    with open(
-        os.path.join(path, f"{chat_id}\\transcription_w_timestamp.txt"),
-        "w",
-        encoding="utf-8",
-    ) as wt:
-        wt.write(reply_w_timestamp)
+    #with open(
+    #    os.path.join(path, f"{chat_id}\\transcription_w_timestamp.txt"),
+    #    "w",
+    #    encoding="utf-8",
+    #) as wt:
+    #    wt.write(reply_w_timestamp)
 
     # Prompting the user with a choice for what to do with the audiofile, where transcribe is to receive the transcriptions, timestamp for the transcription with timestamps
     # trim_audio for a option of trimming the audio
@@ -285,8 +285,8 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
     # Handling the click of the transcription and transcription w/timestamps buttons
     elif callback.data == "transcribe":
-        with open(
-            os.path.join(path, f"{chat_id_for_join.strip()}\\transcription.txt"),
+        with open(os.path.join(os.path.dirname(__file__), f"downloads\\{chat_id_for_join.strip()}\\transcription.txt"),
+            #os.path.join(path, f"{chat_id_for_join.strip()}\\transcription.txt"),
             "r",
             encoding="utf-8",
         ) as f1:
