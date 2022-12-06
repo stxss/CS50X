@@ -336,6 +336,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 os.remove(f"downloads\{chat_id_for_join.strip()}_audiofile.mp3")
                 os.remove(f"downloads\{chat_id_for_join.strip()}_transcription_w_timestamp.txt")
                 os.remove(f"downloads\{chat_id_for_join.strip()}_transcription.txt")
+                os.remove(f"downloads\{chat_id_for_join.strip()}_chat_id.py")
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
