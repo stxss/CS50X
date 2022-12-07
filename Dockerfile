@@ -5,7 +5,6 @@ WORKDIR /.
 COPY . .
 
 RUN apt-get -y update
-RUN apt-get install -y python3.10
 
 RUN apt-get install -y ffmpeg
 
