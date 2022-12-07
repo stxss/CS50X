@@ -1,8 +1,8 @@
 FROM python:3.10
 
-WORKDIR /app
+WORKDIR /.
 
-COPY . .
+COPY . /.
 
 RUN apt-get -y update
 RUN apt-get install -y ffmpeg
