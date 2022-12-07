@@ -13,6 +13,4 @@ RUN pip3 uninstall -y ffmpeg
 
 RUN pip3 install ffmpeg-python
 
-ENV PYTHONPATH .
-
 ENTRYPOINT ["/usr/bin/python3", "app.py"]
