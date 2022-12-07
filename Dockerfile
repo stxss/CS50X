@@ -2,21 +2,21 @@ FROM python:3.10
 
 WORKDIR /.
 
-COPY . /. 
-EXPOSE 8080
+COPY requirements.txt
+RUN python3 -m pip install --user -r requirements.txt
 
+COPY . .
 
-ENV PATH=/root/.local/bin:$PATH
+#EXPOSE 8080
+
+#ENV PATH=/root/.local/bin:$PATH
 ENV PYTHONPATH "${PYTHONPATH}:/usr/bin/python3"
 
 RUN apt-get -y update
 
-
 RUN apt-get install -y ffmpeg
 #RUN pip install --user -r requirements.txt
-RUN python3 -m pip install --user -r requirements.txt
-
-
+#RUN python3 -m pip install --user -r requirements.txt
 
 RUN pip3 uninstall -y ffmpeg-python
 RUN pip3 uninstall -y ffmpeg
