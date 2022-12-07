@@ -13,6 +13,6 @@ RUN pip3 uninstall -y ffmpeg
 
 RUN pip3 install python-ffmpeg
 
-#ENTRYPOINT [ "python3" ]
+ENTRYPOINT [ "python3" ]
 
 CMD ["app.py"]
