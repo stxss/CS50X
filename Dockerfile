@@ -8,4 +8,4 @@ RUN pip3 install --no-cache-dir --user -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT [ "python3", "./app.py" ]
+ENTRYPOINT ["bin/bash", "python3", "./app.py" ]
