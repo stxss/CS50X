@@ -1,24 +1,11 @@
-FROM python:3.10
+FROM python:3.9
 
+RUN mkdir /app
 WORKDIR /app
 
-COPY . . 
+COPY requirements.txt ./
+RUN pip3 install --no-cache-dir --user -r requirements.txt
 
-RUN apt-get -y update
+COPY . .
 
-
-RUN apt-get install -y ffmpeg
-
-RUN python3 -m pip install --user -r requirements.txt
-
-RUN pip3 uninstall -y ffmpeg-python
-RUN pip3 uninstall -y ffmpeg
-
-RUN pip3 install ffmpeg-python
-
-ENTRYPOINT [ "python3" ]
-
-CMD ["app.py"]
-
-#CMD ["python3", "app.py"]
-#CMD ["/root/.local/lib/python3.10", "app.py"]
+ENTRYPOINT [ "python3", "./app.py" ]
