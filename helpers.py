@@ -5,7 +5,7 @@ import os
 import datetime
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
-from asyncffmpeg import FFmpegCoroutineFactory, StreamSpec
+#from asyncffmpeg import FFmpegCoroutineFactory, StreamSpec
 
 
 path = getenv("path")
