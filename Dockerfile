@@ -7,9 +7,9 @@ COPY . .
 
 RUN apt-get -y update
 
+
 RUN apt-get install -y ffmpeg
 #RUN pip install --user -r requirements.txt
-
 RUN python3 -m pip install --user -r requirements.txt
 
 RUN pip3 uninstall -y ffmpeg-python
