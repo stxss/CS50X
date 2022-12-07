@@ -2,7 +2,7 @@ FROM python:3.10
 
 WORKDIR /.
 
-COPY requirements.txt /./
+COPY requirements.txt /.
 RUN pip3 install --user -r requirements.txt
 COPY . . 
 
