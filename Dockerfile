@@ -4,7 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 
 #----
-ENV FFMPEG_VERSION=4.3.2
+#ENV FFMPEG_VERSION=4.3.2
 RUN apt-get -y update
 RUN apt-get install -y ffmpeg
 #RUN pip3 install ffmpeg-python
