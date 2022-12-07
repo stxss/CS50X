@@ -1,5 +1,13 @@
 FROM python:3.9
 
+#----
+FROM katalonstudio/katalon
+RUN apt-get -y update
+RUN apt-get install -y ffmpeg
+#----
+
+
+
 RUN mkdir /app
 WORKDIR /app
 
