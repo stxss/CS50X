@@ -4,7 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 
 #----
-RUN sudo apt install ffmpeg
+
 #----
 
 
@@ -13,6 +13,7 @@ RUN pip3 install --no-cache-dir --user -r requirements.txt
 
 
 #----
+RUN apt-get install ffmpeg
 RUN pip install ffmpeg-python
 #----
 
