@@ -5,6 +5,4 @@ pyromod==1.5
 schedule==1.1.0
 python-dotenv~=0.21.0
 TgCrypto==1.2.5
-ffmpeg-python==0.2.0 \
-    --hash=sha256:65225db34627c578ef0e11c8b1eb528bb35e024752f6f10b78c011f6f64c4127 \
-    --hash=sha256:ac441a0404e053f8b6a1113a77c0f452f1cfc62f6344a769475ffdc0f56c23c5
+ffmpeg-python==0.2.0 
