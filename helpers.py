@@ -5,8 +5,6 @@ import os
 import datetime
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
-#from asyncffmpeg import FFmpegCoroutineFactory, StreamSpec
-
 
 path = getenv("path")
 # Choices for joining
@@ -21,21 +19,7 @@ async def trim_file(message, filetype, user_id):
     if pattern.match(check):
         if os.path.exists(f"downloads/{user_id}_out.mp3"):
             os.remove(f"downloads/{user_id}_out.mp3")
-
-#        if filetype == "audio" or filetype == "voice":
-#            probe_res = ffmpeg.probe(f"downloads/{user_id}_audiofile.mp3")
-#            try:
-#                audio = MP3(f"downloads/{user_id}_audiofile.mp3")
-#                audio.pprint()
-#            except Exception as err:
-#                print(err)
-
-#            in_file = f"downloads/{user_id}_audiofile.mp3"
         in_file = f"downloads/{user_id}_audiofile.mp3"
-
-        #print(probe_res)
-        #duration = probe_res.get("format", {}).get("duration", None)
-        #print(duration)
 
         user_duration = check.split("-")
 
@@ -66,8 +50,6 @@ async def trim_file(message, filetype, user_id):
         output = ffmpeg.output(
             file_trim, f"downloads/{user_id}_out.mp3", format="mp3"
         ).run()
-        #return output
-        #output.run()
 
     else:
         reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
@@ -77,7 +59,7 @@ async def trim_file(message, filetype, user_id):
 async def create(message, filetype, user_id):
     if os.path.exists(f"downloads/{user_id}_video.mp4"):
         os.remove(f"downloads/{user_id}_video.mp4")
-    
+
     if message == "audio" and filetype == "image":
 
         # Getting the audio and image files

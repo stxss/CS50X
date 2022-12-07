@@ -40,9 +40,11 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 # Command handling
 
+
 @app.on_message(filters.command("path"))
 async def help_command(client, message):
     await message.reply(f"{os.path.dirname(__file__)}")
+
 
 @app.on_message(filters.command("start"))
 async def help_command(client, message):
@@ -89,12 +91,14 @@ async def filter_audio(client, message):
     if message.audio or message.voice:
         audiofile = await message.download(f"{chat_id}_audiofile.mp3")
         mimetype = "audio/mpeg"
-    
+
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
 
-    if os.path.exists(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_imagefile.jpg")):
+    if os.path.exists(
+        os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_imagefile.jpg")
+    ):
         with open(f"downloads/{chat_id}_chat_id.py", "w", encoding="utf-8") as w:
             w.write(f"chat_id = {chat_id}\n")
             w.write("sent_img = True")
@@ -173,19 +177,20 @@ async def filter_audio(client, message):
             except:
                 continue
 
-    # Saving the transcriptions to separate files
-    #with open(
-    #    os.path.join(getenv("path"), f"{chat_id}/transcription.txt"),
-    #    "w",
-    #    encoding="utf-8",
-    #) as w:
-    #    w.write(reply)
-
-    with open(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_transcription.txt"), "w", encoding="utf-8") as w:
-        w.write(reply)
-    
     with open(
-        os.path.join(os.path.dirname(__file__), f"downloads/{chat_id}_transcription_w_timestamp.txt"),
+        os.path.join(
+            os.path.dirname(__file__), f"downloads/{chat_id}_transcription.txt"
+        ),
+        "w",
+        encoding="utf-8",
+    ) as w:
+        w.write(reply)
+
+    with open(
+        os.path.join(
+            os.path.dirname(__file__),
+            f"downloads/{chat_id}_transcription_w_timestamp.txt",
+        ),
         "w",
         encoding="utf-8",
     ) as wt:
@@ -225,10 +230,10 @@ async def invalid_file(client, message):
 
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
-        imagefile = await message.download(
-            f"{maintain_chat_id}_imagefile.jpg"
-        )
-        with open(f"downloads/{maintain_chat_id}_chat_id.py", "w", encoding="utf-8") as w:
+        imagefile = await message.download(f"{maintain_chat_id}_imagefile.jpg")
+        with open(
+            f"downloads/{maintain_chat_id}_chat_id.py", "w", encoding="utf-8"
+        ) as w:
             w.write(f"chat_id = {maintain_chat_id}\n")
             w.write("sent_img = True")
 
@@ -271,8 +276,11 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             # Sending the trimmed audio back to the user
             await app.send_audio(
                 chat_id=chat_id_for_join.strip(),
-                audio=os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_for_join.strip()}_out.mp3"),
-                file_name="trim.mp3"
+                audio=os.path.join(
+                    os.path.dirname(__file__),
+                    f"downloads/{chat_id_for_join.strip()}_out.mp3",
+                ),
+                file_name="trim.mp3",
             )
 
             # Removing the file from the folder, because it is of no longer use and so it can no longer be accessed
@@ -283,7 +291,11 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
     # Handling the click of the transcription and transcription w/timestamps buttons
     elif callback.data == "transcribe":
-        with open(os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_for_join.strip()}_transcription.txt"),
+        with open(
+            os.path.join(
+                os.path.dirname(__file__),
+                f"downloads/{chat_id_for_join.strip()}_transcription.txt",
+            ),
             "r",
             encoding="utf-8",
         ) as f1:
@@ -292,10 +304,11 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 
         # Deleting the file after it is sent to the user and so it can no longer be accessed
         os.remove(f"downloads/{chat_id_for_join.strip()}_transcription.txt")
-        
+
     elif callback.data == "timestamp":
         with open(
-            os.path.join(os.path.dirname(__file__),
+            os.path.join(
+                os.path.dirname(__file__),
                 f"downloads/{chat_id_for_join.strip()}_transcription_w_timestamp.txt",
             ),
             "r",
@@ -305,9 +318,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         await callback.message.reply(reply)
 
         # Deleting the file after it is sent to the user and so it can no longer be accessed
-        os.remove(
-            f"downloads/{chat_id_for_join.strip()}_transcription_w_timestamp.txt"
-        )
+        os.remove(f"downloads/{chat_id_for_join.strip()}_transcription_w_timestamp.txt")
 
     # Handling the join button
     elif callback.data == "join":
@@ -325,7 +336,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 # Sending the video back to the user
                 await app.send_video(
                     chat_id=chat_id_for_join.strip(),
-                    video=os.path.join(os.path.dirname(__file__), f"downloads/{chat_id_for_join.strip()}_video.mp4"
+                    video=os.path.join(
+                        os.path.dirname(__file__),
+                        f"downloads/{chat_id_for_join.strip()}_video.mp4",
                     ),
                 )
 
