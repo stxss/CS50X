@@ -4,7 +4,7 @@ WORKDIR /.
 
 COPY . . 
 
-ENV PYTHONPATH "${PYTHONPATH}:/root/.local/bin"
+ENV PATH "${PATH}:/root/.local/bin"
 
 RUN apt-get -y update
 
