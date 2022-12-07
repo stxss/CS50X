@@ -14,6 +14,6 @@ RUN pip3 uninstall -y ffmpeg
 RUN pip3 install python-ffmpeg
 #RUN pip install asyncffmpeg
 
-ENTRYPOINT [ "python3" ]
+ENTRYPOINT [ "python" ]
 
-CMD ["./app.py"]
+CMD ["app.py"]
