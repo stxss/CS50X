@@ -8,9 +8,9 @@ RUN pip3 install --no-cache-dir --user -r requirements.txt
 
 
 #----
-RUN pip3 uninstall -y ffmpeg-python
+RUN pip install ffmpeg-python
 
-RUN pip3 install ffmpeg-python
+#RUN pip3 install ffmpeg-python
 
 #RUN pip3 install ffmpeg
 #RUN pip3 install ffmpeg-python
