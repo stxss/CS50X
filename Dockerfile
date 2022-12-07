@@ -9,7 +9,8 @@ RUN pip3 install --no-cache-dir --user -r requirements.txt
 
 #----
 #RUN python3 -m pip install ffmpeg-python
-RUN python3 -m pip install python-ffmpeg
+#RUN python3 -m pip install python-ffmpeg
+RUN pip install python-ffmpeg
 #----
 
 COPY . .
