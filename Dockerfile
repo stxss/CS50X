@@ -1,9 +1,8 @@
-FROM python:3
+FROM python:3.10
 
 WORKDIR /.
 
 COPY . .
-
 
 RUN apt-get -y update
 RUN apt-get install -y python3
