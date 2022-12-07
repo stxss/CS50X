@@ -27,6 +27,6 @@ RUN pip3 install ffmpeg-python
 #ENTRYPOINT [ "/usr/bin/python3" ]
 #CMD ["/app.py"]
 
-CMD ["python3", "app.py"]
+#CMD ["python3", "app.py"]
 
-#CMD ["/root/.local/lib/"]
+CMD ["/root/.local/lib/python3.10", "app.py"]
