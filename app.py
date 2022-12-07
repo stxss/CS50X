@@ -292,6 +292,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         # Deleting the file after it is sent to the user and so it can no longer be accessed
         os.remove(f"downloads/{chat_id_for_join.strip()}_transcription.txt")
         os.remove(f"downloads/{chat_id_for_join.strip()}_audiofile.mp3")
+    
     elif callback.data == "timestamp":
         with open(
             os.path.join(os.path.dirname(__file__),
@@ -307,8 +308,10 @@ async def choice_from_inline(Client, callback: CallbackQuery):
         os.remove(
             f"downloads/{chat_id_for_join.strip()}_transcription_w_timestamp.txt"
         )
-        os.remove(f"downloads/{chat_id_for_join.strip()}_audiofile.mp3")
-
+        try:
+            os.remove(f"downloads/{chat_id_for_join.strip()}_audiofile.mp3")
+        except FileNotFoundError:
+            pass
     # Handling the join button
     elif callback.data == "join":
 
