@@ -12,8 +12,8 @@ RUN mkdir /app
 WORKDIR /app
 
 #----
-RUN apt-get -y update
-RUN apt-get install -y ffmpeg
+#RUN apt-get -y update
+#RUN apt-get install -y ffmpeg
 #----
 
 
