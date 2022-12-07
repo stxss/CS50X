@@ -7,7 +7,7 @@ EXPOSE 8080
 
 
 ENV PATH=/root/.local/bin:$PATH
-ENV PYTHONPATH "${PYTHONPATH}:/."
+ENV PYTHONPATH "${PYTHONPATH}:/usr/bin/python3"
 
 RUN apt-get -y update
 
