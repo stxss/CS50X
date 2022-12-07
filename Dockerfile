@@ -2,8 +2,9 @@ FROM python:3.10
 
 WORKDIR /.
 
-
 COPY . . 
+
+#ENV PATH "/root/.local/bin"
 
 RUN apt-get -y update
 
