@@ -1,5 +1,7 @@
 FROM python:3.10
 
+ENV PATH /usr/local/bin:$PATH
+
 WORKDIR /.
 
 COPY . .
