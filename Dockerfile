@@ -13,7 +13,8 @@ RUN apt-get install -y ffmpeg
 #RUN pip install --user -r requirements.txt
 RUN python3 -m pip install --user -r requirements.txt
 
-
+#COPY --from=builder /root/.local /root/.local
+ENV PATH=/root/.local/bin:$PATH
 
 RUN pip3 uninstall -y ffmpeg-python
 RUN pip3 uninstall -y ffmpeg
