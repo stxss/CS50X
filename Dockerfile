@@ -2,8 +2,7 @@ FROM python:3.10
 
 WORKDIR /.
 
-COPY . .
-COPY requirements.txt . 
+COPY . . 
 
 RUN apt-get -y update
 RUN apt-get install -y ffmpeg
