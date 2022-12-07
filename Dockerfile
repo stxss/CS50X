@@ -17,4 +17,4 @@ RUN pip3 install python-ffmpeg
 
 ENTRYPOINT [ "python3" ]
 
-CMD ["app.py"]
+CMD ["./app.py"]
