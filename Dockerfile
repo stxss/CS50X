@@ -5,18 +5,16 @@ WORKDIR /app
 
 #----
 #RUN apt-get -y update
-#RUN apt-get install -y ffmpeg
-RUN apt-get update && apt-get install ffmpeg -y
+RUN apt-get install -y ffmpeg
 #----
-
 
 COPY requirements.txt ./
 RUN pip3 install --no-cache-dir --user -r requirements.txt
 
 
 #----
-RUN pip3 uninstall -y ffmpeg-python
-RUN pip3 install ffmpeg-python
+#RUN pip3 uninstall -y ffmpeg-python
+RUN pip3 install -y ffmpeg-python
 #----
 
 COPY . .
