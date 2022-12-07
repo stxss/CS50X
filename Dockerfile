@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY . . 
 
-ENV PATH=/root/.local/bin:$PATH
+#ENV PATH=/root/.local/bin:$PATH
+ENV PATH=/app:$PATH
+
 
 RUN apt-get -y update
 
