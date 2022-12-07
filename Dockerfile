@@ -2,6 +2,8 @@ FROM python:3.10
 
 WORKDIR /.
 
+ENV PYTHONPATH=.
+
 COPY . . 
 
 RUN apt-get -y update
