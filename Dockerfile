@@ -6,8 +6,10 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip3 install --no-cache-dir --user -r requirements.txt
 
-COPY . .
-RUN pip3 install -y ffmpeg
+RUN pip3 install ffmpeg
 RUN pip3 install ffmpeg-python
+
+COPY . .
+
 
 ENTRYPOINT ["/usr/bin/python3", "./app.py" ]
