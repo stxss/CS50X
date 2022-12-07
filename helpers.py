@@ -49,7 +49,7 @@ async def trim_file(message, filetype, user_id):
         # Outputting the file
         output = ffmpeg.output(
             file_trim, f"downloads/{user_id}_out.mp3", format="mp3"
-        ).run(cmd="/root/.local/lib/python3.9/site-packages/ffmpeg/_run.py")
+        ).run()
 
     else:
         reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
