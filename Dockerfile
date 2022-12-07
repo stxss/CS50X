@@ -14,7 +14,7 @@ RUN pip3 install --no-cache-dir --user -r requirements.txt
 
 
 #----
-
+RUN docker pull jrottenberg/ffmpeg
 #----
 
 COPY . .
