@@ -1,6 +1,5 @@
 FROM python:3.10
 
-
 WORKDIR /.
 
 COPY . .
@@ -14,6 +13,5 @@ RUN pip3 uninstall -y ffmpeg
 
 RUN pip3 install python-ffmpeg
 
-ENTRYPOINT [ " /usr/bin/python3" ]
 
 CMD ["python3","app.py"]
