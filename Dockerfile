@@ -5,7 +5,7 @@ WORKDIR /app
 
 #----
 RUN apt-get -y update
-RUN pip3 install -y ffmpeg
+RUN apt-get install -y ffmpeg
 RUN pip3 install -y ffmpeg-python
 #----
 
