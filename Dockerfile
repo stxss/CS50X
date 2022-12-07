@@ -20,7 +20,6 @@ RUN pip install asyncffmpeg
 
 #RUN apt-get -y upgrade
 #RUN apt-get install -y ffmpeg
-ENTRYPOINT [ "python3" ]
 
-#CMD ["python3", "app.py"]
-CMD ["app.py"]
+
+CMD ["python3", "app.py"]

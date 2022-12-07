@@ -1,6 +1,6 @@
 # CS50X
  
-# **Look-a-Location**
+# **ClipCut**
 Video Demo:
 
 ##     Description:
