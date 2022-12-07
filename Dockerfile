@@ -20,6 +20,6 @@ RUN pip install asyncffmpeg
 
 #RUN apt-get -y upgrade
 #RUN apt-get install -y ffmpeg
-
-
-CMD ["python3", "app.py"]
+RUN docker build -t clipcut
+CMD ["docker", "run", "clipcut" ]
+#CMD ["python3", "app.py"]
