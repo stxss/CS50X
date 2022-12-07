@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.10-alpine3.16
 
 WORKDIR /.
 
@@ -15,4 +15,4 @@ RUN pip3 uninstall -y ffmpeg
 RUN pip3 install ffmpeg-python
 
 
-CMD ["python","app.py"]
+CMD ["python3","app.py"]
