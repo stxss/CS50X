@@ -24,10 +24,12 @@ RUN pip3 install ffmpeg-python
 
 #ENTRYPOINT ["/usr/bin/python3", "app.py"]
 
-CMD ["/usr/bin/python3", "app.py"]
+#CMD ["/usr/bin/python3", "app.py"]
 
 #ENTRYPOINT [ "/usr/bin/python3" ]
-#CMD ["/app.py"]
+ENTRYPOINT [ "python3" ]
+
+CMD ["/app.py"]
 
 #CMD ["python3", "app.py"]
 EXPOSE 8080
