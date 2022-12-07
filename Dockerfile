@@ -16,7 +16,7 @@ RUN pip3 uninstall -y ffmpeg
 
 RUN pip3 install ffmpeg-python
 
-CMD ["/usr/bin/python3", "app/app.py"]
+CMD ["/usr/bin/python3", "app.py"]
 
 EXPOSE 8080
 
