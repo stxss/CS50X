@@ -15,4 +15,4 @@ RUN pip3 uninstall -y ffmpeg
 RUN pip3 install ffmpeg-python
 
 
-CMD ["python3","app.py"]
+CMD ["python","app.py"]
