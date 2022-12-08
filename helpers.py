@@ -4,18 +4,12 @@ import ffmpeg
 import os
 import datetime
 from os import getenv, listdir, remove
-from dotenv import load_dotenv
 import sys
 
-# ----
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import video_metadata, bash
 from ethon.pyutils import rename
 
-# ----
-
-
-path = getenv("path")
 # Choices for joining
 
 
