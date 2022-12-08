@@ -43,6 +43,7 @@ async def trim_file(message, filetype, user_id):
         user_end_sec = int(user_end_time.split(":")[1])
 
         end_trim_time = user_end_mins * 60 + user_end_sec
+        
         input_stream = ffmpeg.input(in_file)
         pts = "PTS-STARTPTS"
         # The actual trim
