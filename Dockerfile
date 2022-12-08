@@ -32,7 +32,4 @@ RUN pip3 install --no-cache-dir ffmpeg-python
 
 COPY . .
 
-
-#ENTRYPOINT ["/usr/bin/python3", "./app.py" ]
-
-ENTRYPOINT ["/usr/bin/python3", "-m", "./app.py" ]
+ENTRYPOINT ["/usr/bin/python3", "./app.py" ]

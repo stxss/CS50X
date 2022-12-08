@@ -5,6 +5,8 @@ import os
 import datetime
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
+import sys
+
 
 path = getenv("path")
 # Choices for joining
