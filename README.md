@@ -1,9 +1,8 @@
 # CS50X
- 
-# **ClipCut**
+# **ClipCut, a Telegram Bot**
 Video Demo:
 
-##     Description:
+#     Description:
 This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). 
 
 This project consists in a multi-purpose bot that uses a voice recognition API and other useful libraries like FFMPEG.
@@ -24,9 +23,8 @@ Starting with the what was needed for this bot:
     - Deepgram
     - Framework to work with the telegram API, which in this case was Pyrogram (or if you want you can use the raw Telegram API).
 
-So first, 
 
-One of the main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations.
+So, one of the first and main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations. And while they seem strange at first they are pretty quick to get used to.
 
 ```
 # functions that are defined synchronously can only run one operation at a time 
@@ -43,3 +41,31 @@ async def func():
     #code
     await result
 ```
+
+Now, onto the code.
+
+First, I want to be able to handle commands that users send. So, some useful commands for this bot would be:
+
+
+    - /start - to start the bot
+    - /help for information on how to use the bot!
+
+
+## **Then, the gist of the app**
+
+    -/transcribe - transcribe the audio or voice file
+    -/trim - trim audio file
+    -/join - create a video from the audio and an image of your choice
+
+
+This bot works as follows:
+
+You can send or forward a voice message, audio file or image.
+When sending a audio/voice message, you are prompted to choose what you want to do with the file:
+
+- Have it transcribed, optionally, with timestamps that are represented as [h : mm : ss : milliseconds]
+
+- Trim the audio in a [mm:ss] format. If choosing a time that goes beyond the length of the recording, it is capped to the end of the file. 
+
+- Join an audio and an image of your choice.
+
