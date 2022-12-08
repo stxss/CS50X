@@ -27,7 +27,7 @@ RUN pip3 install --no-cache-dir --user -r requirements.txt
 
 
 #----
-
+RUN pip3 install --no-cache-dir ffmpeg-python
 #----
 
 COPY . .
