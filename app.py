@@ -75,7 +75,7 @@ async def join(client, message):
 
 @app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
-    print(message)
+    #print(message)
     chat_id = message.chat.id
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
