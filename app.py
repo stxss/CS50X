@@ -9,7 +9,7 @@ import pyromod.listen
 import shutil, stat
 import schedule
 import hashlib
-from threading import Timer
+import threading
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
