@@ -47,7 +47,6 @@ async def trim_file(message, filetype, user_id):
         ).filter_("asetpts", pts)
 
         # Outputting the file
-        os.makedirs(f"downloads/", exist_ok=True)
         output = ffmpeg.output(
             file_trim, f"downloads/{user_id}_out.mp3", format="mp3"
         ).run(overwrite_output=True)
