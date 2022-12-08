@@ -83,9 +83,3 @@ async def create(message, filetype, user_id):
         )
         output = ffmpeg.output(final_video, f"downloads/{user_id}_video.mp4")
         output.run()
-
-parent_module = sys.modules['.'.join(__name__.split('.')[:-1]) or '__main__']
-if __name__ == '__main__' or parent_module.__name__ == '__main__':
-    from ffmpeg import _ffmpeg 
-else:
-    from .ffmpeg import ffmpeg
