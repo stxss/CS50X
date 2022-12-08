@@ -28,11 +28,4 @@ Starting with the what was needed for this bot:
 One of the main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations.
 
 
-
-
-
-
-The `test_project.py` contains tests for each function of the main project file.
-
-
 With this final project I was able to implement almost everything from the CS50P course.
