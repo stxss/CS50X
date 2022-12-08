@@ -4,4 +4,5 @@ pyromod==1.5
 schedule==1.1.0
 python-dotenv~=0.21.0
 TgCrypto==1.2.5
-ffmpeg-python==0.2.0 
+ffmpeg-python==0.2.0
+ethon==1.3.8
