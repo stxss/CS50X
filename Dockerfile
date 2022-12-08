@@ -4,8 +4,12 @@ RUN mkdir /app
 WORKDIR /app
 
 #----
-RUN apt-get -y update && apt-get -y upgrade && apt-get install -y --no-install-recommends ffmpeg
-#RUN apt-get -y update
+RUN set -x \
+    && add-apt-repository ppa:mc3man/trusty-media \
+    && apt-get update \
+    && apt-get dist-upgrade \
+    && apt-get install -y --no-install-recommends \
+        ffmpeg \ #RUN apt-get -y update
 #RUN apt-get install -y ffmpeg
 #RUN pip3 install ffmpeg-python
 #----
