@@ -2,7 +2,7 @@ FROM python:3.9
 
 
 #----
-RUN apk add --update ffmpeg
+
 #----
 
 RUN mkdir /app
