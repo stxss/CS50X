@@ -5,7 +5,7 @@ FROM python:3.9
 
 #jrottenberg version
 ENV LD_LIBRARY_PATH=/usr/local/lib
-COPY --from=jrottenberg/ffmpeg /usr/local /usr/local/
+COPY --from=jrottenberg/ffmpeg /usr/local .
 #----
 
 
