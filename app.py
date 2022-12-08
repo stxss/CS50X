@@ -7,9 +7,6 @@ import time
 import helpers
 import pyromod.listen
 import shutil, stat
-import schedule
-import hashlib
-import threading
 
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
@@ -21,7 +18,6 @@ from pyrogram import (
 
 from pyrogram.types import *
 from pyrogram.raw import *
-from pyrogram.errors import FloodWait
 
 # Loading necessary keys and api data
 load_dotenv()

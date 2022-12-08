@@ -43,5 +43,3 @@ async def func():
     #code
     await result
 ```
-
-With this final project I was able to implement almost everything from the CS50P course.
