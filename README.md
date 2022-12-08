@@ -65,7 +65,8 @@ When sending a audio/voice message, you are prompted to choose what you want to 
 
 - Have it transcribed, optionally, with timestamps that are represented as [h : mm : ss : milliseconds]
 
-- Trim the audio in a [mm:ss] format. If choosing a time that goes beyond the length of the recording, it is capped to the end of the file. 
+- Trim the audio in a [mm : ss] format. If choosing a time that goes beyond the length of the recording, it is capped to the end of the file. 
 
-- Join an audio and an image of your choice.
+- Join an audio and an image of your choice. (Shine with your meme making capabilities)
+
 
