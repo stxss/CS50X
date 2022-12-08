@@ -70,9 +70,7 @@ async def create(message, filetype, user_id):
 
         # Outputting the final video
 
-        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter(
-            "scale", width=1920, height=1080
-        )
+        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1)
         output = ffmpeg.output(final_video, f"downloads/{user_id}_video.mp4")
         output.run()
 
