@@ -21,7 +21,7 @@ from pyrogram import (
 
 from pyrogram.types import *
 from pyrogram.raw import *
-
+from pyrogram.errors import FloodWait
 
 # Loading necessary keys and api data
 load_dotenv()
