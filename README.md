@@ -6,8 +6,8 @@ Video Demo:
 This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). 
 
 This project consists in a multi-purpose bot that uses a voice recognition API and other useful libraries like FFMPEG. 
-<br>\</br>
-\
+<br></br>
+
 ## **A practical use**
 
 You are texting with someone and they have some news you need to hear and they send you an audiofile or a voice message but you're at a loud place and can't hear anything or the voice message is too long and you have no time to just listen and scroll back if you've missed something. 
@@ -15,14 +15,15 @@ You are texting with someone and they have some news you need to hear and they s
 So, instead of either ignoring the message or boringly listen to all of it or posponing and forgetting to listen to it later, you can just redirect this message to the ClipCut Bot in telegram (https://t.me/ClipCutBot) and voilà, in barely any time you can transcribe everything the other person said, even with the option to timestamp the conversation. It also differentiates different speakers, so if the audio had 3 or 4 different people speaking, it will differentiate between all of them!
 
 The other part of the functionality is more of something to have fun, as you can also trim certain parts of said audiofile or just create your kind of meme. Just send the image and the audio you want to join and there you have your own little video in a matter of seconds!
+<br></br>
 
-That was the gist of the app. Now onto the specifics and technicalities.
+## **That was the gist of the app. Now onto the specifics and technicalities.**
 
 Starting with the what was needed for this bot:
 
     - Telegram Bot
-    - Deepgram
-    - Framework to work with the telegram API, which in this case was Pyrogram (or if you want you can use the raw Telegram API).
+    - Deepgram or a Voice Recognition API of your choice
+    - Framework to work with the telegram API, which in this case was Pyrogram (or if you want you can use the raw API).
 
 A quick touch on Deepgram. It is a transcription and speech understanding API. I used this as it was a good and accessible way of transcribing audio files, as I simply didn't have the time nor the resources to train my own Neural Network to recognize human speech.
 
@@ -51,7 +52,7 @@ First, I want to be able to handle commands that users send. So, some useful com
 
     - /start - to start the bot
     - /help for information on how to use the bot!
-
+<br>
 
 ## **Then, the gist of the app**
 
@@ -72,7 +73,7 @@ When sending a audio/voice message, you are prompted to choose what you want to 
 - Join an audio and an image of your choice. (Shine with your meme making capabilities)
 
 
-To start writing this bot without exposing keys and sensitive information, I created a .env file that stored all this information and then loading that info into the main program and a .gitignore file which allowed for this information protection. Had to learn the hard way to avoid creating a config.py instead of a .env file to achieve the same thing, as this later caused problems with paths of files when deploying the application. So, for anyone reading this, use .env.
+To start writing this bot without exposing keys and sensitive information, I created a `.env` file that stored all this information and then loading that info into the main program and a .gitignore file which allowed for this information protection. Had to learn the hard way to avoid creating a `config.py` instead of a `.env` file to achieve the same thing, as this later caused problems with paths of files when deploying the application. So, for anyone reading this, use `.env`.
 
 Starting up a telegram bot session in a form of a pyrogram Client, I import the voice recognition API key, and the Telegram Bot token which I got from BotFather, a bot that allows me to even create my own application on telegram.
 
@@ -80,4 +81,7 @@ Using decorators for message handling, where
 
 ```
 @app.on_message(filters.command("<command of choice>"))
+async def <your_command>(client, message):
+    await message.reply("your message")
 ```
+triggers a message back from the bot when you type a /command and send to the bot. These were used to just invoke the user to send files and help with guiding the user 
