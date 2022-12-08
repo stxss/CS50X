@@ -5,8 +5,9 @@ Video Demo:
 # **Description**:
 This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). 
 
-This project consists in a multi-purpose bot that uses a voice recognition API and other useful libraries like FFMPEG.  
-
+This project consists in a multi-purpose bot that uses a voice recognition API and other useful libraries like FFMPEG. 
+<br>\</br>
+\
 ## **A practical use**
 
 You are texting with someone and they have some news you need to hear and they send you an audiofile or a voice message but you're at a loud place and can't hear anything or the voice message is too long and you have no time to just listen and scroll back if you've missed something. 
