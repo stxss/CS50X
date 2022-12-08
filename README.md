@@ -108,4 +108,15 @@ Here, I make use of FFMPEG a complete, cross-platform solution to record, conver
 
 The trim function begins with checking if the user has written valid trim parameters, which are checked via a regex pattern. If everything is good here, the audiofile is trimmed. and then sent back to the user
 
-The create function is responsible for the "join" button, where the user can join a video and an audio of their choice and this is where the flag which I mentioned earlier is checked (if sent_img is True or False)
+The create function is responsible for the "join" button, where the user can join a video and an audio of their choice and this is where the flag which I mentioned earlier is checked, if ```sent_img``` is True or False. If this variable is False, it prompts the user to send an image. If it is True, it proceeds to create a video and then sends it back to the user.
+
+<br>
+Now, the bot is complete and all that is needed is the option to deploy it. I chose to deploy it and make it useful to the public. But as soon as the credits from the trial on Deepgram and Railway end, the bot unfortunately ends its service as well, or maybe I'll change my mind if it gets used plenty.
+<br></br>
+
+I learned a lot in the process of working with this bot, specifically:
+    
+    - Deepened my knowledge of python
+    - Learned how to work with various API's  
+    - Learned how to create and manage a project through GitHub Desktop
+    -
