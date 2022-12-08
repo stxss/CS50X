@@ -100,6 +100,11 @@ But how are the files sent?
 
 Telegram has inline buttons, which I make use of. When a user sends a valid message (voice, audio or image) this keyboard is prompted, where the user chooses what to do next.
 
-For the transcription options, it's pretty straightforward
+For the transcription options, it's pretty straightforward but for the join and trim options it's a bit trickier.
+
+This is where the helpers come to play. 
+
+Here, I make use of FFMPEG a complete, cross-platform solution to record, convert and stream audio and video. This is a go-to library for media manipulation. Many people even build their own screen/media recording software and programs out of FFMPEG's source code and build.
+
 
 
