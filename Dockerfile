@@ -1,7 +1,17 @@
 FROM python:3.9
 
+#----
+COPY --from=mwader/static-ffmpeg:4.1.4-2 /ffmpeg /ffprobe /usr/local/bin/
+
+#jrottenberg version
+ENV LD_LIBRARY_PATH=/usr/local/lib
+COPY --from=jrottenberg/ffmpeg /usr/local /usr/local/
+#----
+
+
 RUN mkdir /app
 WORKDIR /app
+
 
 #----
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y --no-install-recommends ffmpeg
@@ -15,11 +25,6 @@ RUN pip3 install --no-cache-dir --user -r requirements.txt
 
 
 #----
-RUN pip3 uninstall -y ffmpeg-python
-RUN pip3 uninstall -y ffmpeg
-
-RUN pip3 install ffmpeg
-RUN pip3 install ffmpeg-python
 
 #----
 
