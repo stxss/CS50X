@@ -17,8 +17,8 @@ COPY --from=jrottenberg/ffmpeg /usr/local ./
 
 #----
 #RUN apt-get -y update && apt-get -y upgrade && apt-get install -y --no-install-recommends ffmpeg
-RUN apt-get update
-RUN apt-get install ffmpeg
+RUN apt-get -y update
+RUN apt-get install -y ffmpeg
 #RUN pip3 install ffmpeg-python
 #----
 
