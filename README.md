@@ -18,14 +18,28 @@ The other part of the functionality is more of something to have fun, as you can
 
 That was the gist of the app. Now onto the specifics and technicalities.
 
-
 Starting with the what was needed for this bot:
 
-    - Deepgram
     - Telegram Bot
-    - Framework to work with, which in this case was Pyrogram
+    - Deepgram
+    - Framework to work with the telegram API, which in this case was Pyrogram (or if you want you can use the raw Telegram API).
 
-One of the main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations.
+So first, 
 
+One of the main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations, meaning that while sync operations, for example, usual 
+
+```
+# functions that are defined synchronously can only run one operation at a time 
+
+def func():
+    #code
+    return result
+```
+
+
+
+```async def func()```
+
+Sync is single-thread, so only one operation or program will run at a time. Async is non-blocking, which means it will send multiple requests to a server.
 
 With this final project I was able to implement almost everything from the CS50P course.
