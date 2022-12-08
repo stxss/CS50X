@@ -355,7 +355,7 @@ if __name__ == "__main__":
     # Running the app
     async def main():
         try:
-            app.run()
+            asyncio.run(app.run())
         except FloodWait as e:
             await asyncio.sleep(10)
     
