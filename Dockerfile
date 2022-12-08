@@ -1,7 +1,7 @@
 FROM python:3.9
 
 #----
-COPY --from=mwader/static-ffmpeg:4.1.4-2 /ffmpeg /ffprobe /usr/local/bin/
+#COPY --from=mwader/static-ffmpeg:4.1.4-2 /ffmpeg /ffprobe /usr/local/bin/
 
 #jrottenberg version
 ENV LD_LIBRARY_PATH=/usr/local/lib
