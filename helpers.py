@@ -70,10 +70,10 @@ async def create(message, filetype, user_id):
 
         # Outputting the final video
 
-        #final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter(
-        #    "scale", width, height
-        #)
-        #output = ffmpeg.output(final_video, f"downloads/{user_id}_video.mp4")
-        #output.run()
+        final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1).filter(
+            "scale", width, height
+        )
+        output = ffmpeg.output(final_video, f"downloads/{user_id}_video.mp4")
+        output.run()
 
         bash(f'ffmpeg -y -i {input_image} -i {input_audio} -c:a copy downloads/{user_id}_video.mp4')
