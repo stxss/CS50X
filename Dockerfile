@@ -2,7 +2,7 @@ FROM python:3.9
 
 
 #----
-
+EXPOSE 80
 #----
 
 RUN mkdir /app
