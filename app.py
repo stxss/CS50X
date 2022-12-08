@@ -40,7 +40,6 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 # Command handling
 
-
 @app.on_message(filters.command("path"))
 async def help_command(client, message):
     await message.reply(f"{os.path.dirname(__file__)}")
