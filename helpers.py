@@ -44,12 +44,15 @@ async def trim_file(message, filetype, user_id):
 
         end_trim_time = user_end_mins * 60 + user_end_sec
         
+        # Recreating the audio file
         input_stream = ffmpeg.input(in_file)
         pts = "PTS-STARTPTS"
+        
         # The actual trim
         file_trim = input_stream.filter_(
             "atrim", start=start_trim_time, end=end_trim_time
         ).filter_("asetpts", pts)
+        
         # Outputting the file
         output = ffmpeg.output(
             file_trim, f"downloads/{user_id}_out.mp3", format="mp3"
@@ -86,3 +89,7 @@ async def create(message, filetype, user_id):
         output.run()
 
         #bash(f'ffmpeg -y -i {input_image} -i {input_audio} -c:a copy downloads/{user_id}_video.mp4')
+
+
+# Okay, for some reason, the ffmpeg commands started working in pythonic style in the docker/deployed server only 
+# after installing ethon. I do not know the reason behind this and why, but it works and I am glad it does 
