@@ -26,7 +26,7 @@ Starting with the what was needed for this bot:
 
 So first, 
 
-One of the main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations, meaning that while sync operations, for example, usual 
+One of the main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations.
 
 ```
 # functions that are defined synchronously can only run one operation at a time 
@@ -36,10 +36,12 @@ def func():
     return result
 ```
 
+```
+# functions that are defined asynchronously can run multiple operations at a time, as they are non-blocking, which means they can send multiple requests to a server
 
-
-```async def func()```
-
-Sync is single-thread, so only one operation or program will run at a time. Async is non-blocking, which means it will send multiple requests to a server.
+async def func():
+    #code
+    await result
+```
 
 With this final project I was able to implement almost everything from the CS50P course.
