@@ -70,7 +70,7 @@ When sending a audio/voice message, you are prompted to choose what you want to 
 - Join an audio and an image of your choice. (Shine with your meme making capabilities)
 
 
-For this,
+To start writing this bot without exposing keys and sensitive information, I created a .env file that stored all this information and then loading that info into the main program and 
 
 
 
