@@ -2,12 +2,12 @@
 # **ClipCut, a Telegram Bot**
 Video Demo:
 
-#     Description:
+# **Description**:
 This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). 
 
 This project consists in a multi-purpose bot that uses a voice recognition API and other useful libraries like FFMPEG.
 
-A practical use would be, for example:
+## **A practical use**
 
 You are texting with someone and they have some news you need to hear and they send you an audiofile or a voice message but you're at a loud place and can't hear anything or the voice message is too long and you have no time to just listen and scroll back if you've missed something. 
 
@@ -23,6 +23,7 @@ Starting with the what was needed for this bot:
     - Deepgram
     - Framework to work with the telegram API, which in this case was Pyrogram (or if you want you can use the raw Telegram API).
 
+A quick touch on Deepgram. It is a transcription and speech understanding API. I used this as it was a good and accessible way of transcribing audio files, as I simply didn't have the time nor the resources to train my own Neural Network to recognize human speech.
 
 So, one of the first and main things that at the start made a difference between the approach was the fact that a lot of Telegram Bots run with asynchronous operations. And while they seem strange at first they are pretty quick to get used to.
 
@@ -70,10 +71,9 @@ When sending a audio/voice message, you are prompted to choose what you want to 
 - Join an audio and an image of your choice. (Shine with your meme making capabilities)
 
 
-To start writing this bot without exposing keys and sensitive information, I created a .env file that stored all this information and then loading that info into the main program and 
+To start writing this bot without exposing keys and sensitive information, I created a .env file that stored all this information and then loading that info into the main program and a .gitignore file which allowed for this information protection. Had to learn the hard way to avoid creating a config.py instead of a .env file to achieve the same thing, as this later caused problems with paths of files when deploying the application. So, for anyone reading this, use .env.
 
-
-
+Starting up a telegram bot session in a form of a pyrogram Client, I import the voice recognition API key, and the Telegram Bot token which I got from BotFather, a bot that allows me to even create my own application on telegram.
 
 Using decorators for message handling, where 
 
