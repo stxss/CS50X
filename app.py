@@ -359,7 +359,7 @@ if __name__ == "__main__":
         except FloodWait as e:
             await asyncio.sleep(10)
     
-    asyncio.run(main())
+    #asyncio.run(main())
     # If the app is closed/terminated, delete the downloads folder, which contains the chat_id's of the users
 #    dir = getenv("PATH")
 #
