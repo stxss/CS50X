@@ -6,5 +6,5 @@ test.py
 /downloads
 ClipCutBot.session-journal
 help.txt
-__pycache__
+/__pycache__
 Procfile
