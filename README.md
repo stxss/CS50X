@@ -90,4 +90,6 @@ triggers a message back from the bot when you type a /command and send to the bo
 
 Upon sending a voice or an audiofile, the same type of decorator as before catches it and because I applied filters to the decorator, such as ```(filters.audio | filters.voice)``` it executes the lines for downloading the file and setting the mimetype variable that is necessary for the transcription API.
 
-For ease of use and to avoid complications, because telegram's voice files usually have the ```.ogg``` extension and audiofiles have an ```.mp3``` extension.
+For ease of use and to avoid complications, because telegram's voice files usually have the ```.ogg``` extension and audiofiles have an ```.mp3``` extension, I converted every audio to have the ```.mp3``` extension.
+
+Then, I set a 
