@@ -353,11 +353,13 @@ async def choice_from_inline(Client, callback: CallbackQuery):
 if __name__ == "__main__":
 
     # Running the app
-    async def main():
-        try:
-            asyncio.run(app.run())
-        except FloodWait as e:
-            await asyncio.sleep(10)
+
+    app.run()
+    #async def main():
+    #    try:
+    #        asyncio.run(app.run())
+    #    except FloodWait as e:
+    #        await asyncio.sleep(10)
     
     #asyncio.run(main())
     # If the app is closed/terminated, delete the downloads folder, which contains the chat_id's of the users
