@@ -94,3 +94,10 @@ For ease of use and to avoid complications, because telegram's voice files usual
 
 Then, I set a file to have a ```chat_id``` of a user and a ```set_img``` boolean value. This is to check if a user has sent any image yet, to be able to use the join function later.
 
+Then, the bot transcribes and creates two files, one for a normal transcription and another for a transcription with timestamps. Each file, upon being sent to the user, is deleted from the system.
+
+But how are the files sent? 
+
+Telegram has inline buttons, which I make use of. When a user sends a valid message (voice, audio or image) this keyboard is prompted, where the user chooses what to do next.
+
+
