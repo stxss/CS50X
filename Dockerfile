@@ -4,9 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 
 #----
-RUN apt-get -y update
-RUN apt-get -y upgrade
-RUN apt-get install -y ffmpeg
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y --no-install-recommends ffmpeg
 #RUN apt-get -y update
 #RUN apt-get install -y ffmpeg
 #RUN pip3 install ffmpeg-python
