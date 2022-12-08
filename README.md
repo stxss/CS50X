@@ -92,4 +92,5 @@ Upon sending a voice or an audiofile, the same type of decorator as before catch
 
 For ease of use and to avoid complications, because telegram's voice files usually have the ```.ogg``` extension and audiofiles have an ```.mp3``` extension, I converted every audio to have the ```.mp3``` extension.
 
-Then, I set a 
+Then, I set a file to have a ```chat_id``` of a user and a ```set_img``` boolean value. This is to check if a user has sent any image yet, to be able to use the join function later.
+
