@@ -40,6 +40,7 @@ deepgram = Deepgram(getenv("DEEPGRAM_API_KEY"))
 
 # Command handling
 
+
 @app.on_message(filters.command("path"))
 async def help_command(client, message):
     await message.reply(f"{os.path.dirname(__file__)}")
@@ -354,15 +355,16 @@ if __name__ == "__main__":
     # Running the app
 
     app.run()
-    #async def main():
+
+    # async def main():
     #    try:
     #        asyncio.run(app.run())
     #    except FloodWait as e:
     #        await asyncio.sleep(10)
-    
-    #asyncio.run(main())
+
+    # asyncio.run(main())
     # If the app is closed/terminated, delete the downloads folder, which contains the chat_id's of the users
-#    dir = getenv("PATH")
+#    dir = f"downloads"
 #
 #    def remove_readonly(func, dir, _):
 #        os.chmod(dir, stat.S_IWRITE)

@@ -6,11 +6,13 @@ import datetime
 from os import getenv, listdir, remove
 from dotenv import load_dotenv
 import sys
-#----
+
+# ----
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import video_metadata, bash
 from ethon.pyutils import rename
-#----
+
+# ----
 
 
 path = getenv("path")
@@ -43,22 +45,22 @@ async def trim_file(message, filetype, user_id):
         user_end_sec = int(user_end_time.split(":")[1])
 
         end_trim_time = user_end_mins * 60 + user_end_sec
-        
+
         # Recreating the audio file
         input_stream = ffmpeg.input(in_file)
         pts = "PTS-STARTPTS"
-        
+
         # The actual trim
         file_trim = input_stream.filter_(
             "atrim", start=start_trim_time, end=end_trim_time
         ).filter_("asetpts", pts)
-        
+
         # Outputting the file
         output = ffmpeg.output(
             file_trim, f"downloads/{user_id}_out.mp3", format="mp3"
         ).run()
 
-        #bash(f'ffmpeg -i {in_file} -ss {start_trim_time} -to {end_trim_time} downloads/{user_id}_out.mp3')
+        # bash(f'ffmpeg -i {in_file} -ss {start_trim_time} -to {end_trim_time} downloads/{user_id}_out.mp3')
 
     else:
         reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
@@ -78,9 +80,9 @@ async def create(message, filetype, user_id):
 
         # Setting the width and height of the video
 
-        #probe = ffmpeg.probe(f"downloads/{user_id}_imagefile.jpg")
-        #width = int(probe["streams"][0]["coded_width"])
-        #height = int(probe["streams"][0]["coded_height"])
+        # probe = ffmpeg.probe(f"downloads/{user_id}_imagefile.jpg")
+        # width = int(probe["streams"][0]["coded_width"])
+        # height = int(probe["streams"][0]["coded_height"])
 
         # Outputting the final video
 
@@ -88,8 +90,8 @@ async def create(message, filetype, user_id):
         output = ffmpeg.output(final_video, f"downloads/{user_id}_video.mp4")
         output.run()
 
-        #bash(f'ffmpeg -y -i {input_image} -i {input_audio} -c:a copy downloads/{user_id}_video.mp4')
+        # bash(f'ffmpeg -y -i {input_image} -i {input_audio} -c:a copy downloads/{user_id}_video.mp4')
 
 
-# Okay, for some reason, the ffmpeg commands started working in pythonic style in the docker/deployed server only 
-# after installing ethon. I do not know the reason behind this and why, but it works and I am glad it does 
+# Okay, for some reason, the ffmpeg commands started working in pythonic style in the docker/deployed server only
+# after installing ethon. I do not know the reason behind this and why, but it works and I am glad it does
