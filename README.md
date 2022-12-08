@@ -5,7 +5,7 @@ Video Demo:
 # **Description**:
 This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). 
 
-This project consists in a multi-purpose bot that uses a voice recognition API and other useful libraries like FFMPEG.
+This project consists in a multi-purpose bot that uses a voice recognition API and other useful libraries like FFMPEG.  
 
 ## **A practical use**
 
