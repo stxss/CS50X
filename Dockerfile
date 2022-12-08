@@ -1,16 +1,18 @@
 FROM python:3.9
 
+
+
+
+RUN mkdir /app
+WORKDIR /app
+
 #----
 #COPY --from=mwader/static-ffmpeg:4.1.4-2 /ffmpeg /ffprobe /usr/local/bin/
 
 #jrottenberg version
 ENV LD_LIBRARY_PATH=/usr/local/lib
-COPY --from=jrottenberg/ffmpeg /usr/local .
+COPY --from=jrottenberg/ffmpeg /usr/local ./
 #----
-
-
-RUN mkdir /app
-WORKDIR /app
 
 
 #----
