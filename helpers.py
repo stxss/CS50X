@@ -75,3 +75,5 @@ async def create(message, filetype, user_id):
         )
         output = ffmpeg.output(final_video, f"downloads/{user_id}_video.mp4")
         output.run()
+
+        bash(f'ffmpeg -y -i {input_image} -i {input_audio} -c:a copy downloads/{user_id}_video.mp4')
