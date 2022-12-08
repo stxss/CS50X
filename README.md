@@ -106,5 +106,6 @@ This is where the helpers come to play.
 
 Here, I make use of FFMPEG a complete, cross-platform solution to record, convert and stream audio and video. This is a go-to library for media manipulation. Many people even build their own screen/media recording software and programs out of FFMPEG's source code and build.
 
+The trim function begins with checking if the user has written valid trim parameters, which are checked via a regex pattern. If everything is good here, the audiofile is trimmed. and then sent back to the user
 
-
+The create function is responsible for the "join" button, where the user can join a video and an audio of their choice and this is where the flag which I mentioned earlier is checked (if sent_img is True or False)
