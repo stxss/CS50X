@@ -70,3 +70,13 @@ When sending a audio/voice message, you are prompted to choose what you want to 
 - Join an audio and an image of your choice. (Shine with your meme making capabilities)
 
 
+For this,
+
+
+
+
+Using decorators for message handling, where 
+
+```
+@app.on_message(filters.command("<command of choice>"))
+```
