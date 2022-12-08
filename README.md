@@ -100,4 +100,6 @@ But how are the files sent?
 
 Telegram has inline buttons, which I make use of. When a user sends a valid message (voice, audio or image) this keyboard is prompted, where the user chooses what to do next.
 
+For the transcription options, it's pretty straightforward
+
 
