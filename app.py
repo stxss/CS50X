@@ -78,6 +78,9 @@ async def filter_audio(client, message):
     #print(message)
     chat_id = message.chat.id
 
+    def progress(current, total):
+       print(f"{current * 100 / total:.1f}%")
+
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
         await message.reply("Analyzing your file")
