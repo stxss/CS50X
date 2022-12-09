@@ -61,6 +61,7 @@ async def trim_file(message, filetype, user_id):
                 file_trim, f"downloads/{user_id}_out.mp3", format="mp3"
             ).run()
 
+        # The actual trim for the video
         if filetype == "video":
             video_trim = input_stream.trim(start=start_trim_time, end=end_trim_time
             ).setpts(pts)
