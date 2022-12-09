@@ -112,8 +112,8 @@ async def create(message, filetype, user_id):
 
 
 async def extract(message, user_id):
-    if os.path.exists(f"downloads/{user_id}_video_from_user.mp4"):
-        os.remove(f"downloads/{user_id}_video_from_user.mp4")
+    if os.path.exists(f"downloads/{user_id}_extracted_audio.mp3"):
+        os.remove(f"downloads/{user_id}_extracted_audio.mp3")
     in_file = f"downloads/{user_id}_video_from_user.mp4"
 
     if message == "video_from_user":
@@ -124,12 +124,12 @@ async def extract(message, user_id):
         
         # Outputting the file
         output = ffmpeg.output(
-            extracted_audio, f"downloads/{user_id}_out.mp3", format="mp3"
+            extracted_audio, f"downloads/{user_id}_extracted_audio.mp3", format="mp3"
         ).run()
 
 
-    if message == "video_from_user":
-        bash(f"ffmpeg -i {user_id}_video_from_user.mp4 -vn -acodec copy downloads/{user_id}_extracted_audio.mp3")
+    #if message == "video_from_user":
+    #    bash(f"ffmpeg -i downloads/{user_id}_video_from_user.mp4 -vn -acodec copy downloads/{user_id}_extracted_audio.mp3")
 
 
 
