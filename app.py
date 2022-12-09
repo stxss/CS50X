@@ -73,7 +73,7 @@ async def join(client, message):
 # Transcription for audio and voice messages with inline keyboard prompt for next actions to take
 
 
-@app.on_message(filters.audio | filters.voice)
+@app.on_message(filters.audio | filters.voice | filters.video)
 async def filter_audio(client, message):
     #print(message)
     chat_id = message.chat.id
@@ -83,9 +83,11 @@ async def filter_audio(client, message):
         await message.reply("Analysing your file...")
         audiofile = await message.download(f"{chat_id}_audiofile.mp3")
         mimetype = "audio/mpeg"
+
+    # But if it is a video, it extracts it's audio beforehand
     elif message.video:
         await message.reply("Analysing your file...")
-        videofile = await message.download(f"{chat_id}_videofile.mp4")
+        videofile = await message.download(f"{chat_id}_video_from_user.mp4")
         audiofile = helpers.extract(audiofile)
         mimetype = "audio/mpeg"
 
