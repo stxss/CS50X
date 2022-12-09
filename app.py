@@ -243,7 +243,7 @@ async def filter_audio(client, message):
 
 
 # Handling of any type of file that isn't an audiofile, a voice message or a photo
-@app.on_message(~filters.audio | ~filters.voice | filters.media)
+@app.on_message(~filters.audio | ~filters.voice | -filters.video | filters.media)
 async def invalid_file(client, message):
 
     if str(message.media) == "MessageMediaType.PHOTO":

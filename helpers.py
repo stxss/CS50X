@@ -92,7 +92,7 @@ async def extract(message, user_id):
         os.remove(f"downloads/{user_id}_video_from_user.mp4")
 
     if message == "video_from_user":
-        
+        bash(f"ffmpeg -i video_from_user.mp4 -vn -acodec copy out.mp3")
 
 
 
