@@ -20,10 +20,15 @@ async def trim_file(message, filetype, user_id):
     check = message.text
     reply_if_fail = ""
     if pattern.match(check):
-        if os.path.exists(f"downloads/{user_id}_out.mp3"):
-            os.remove(f"downloads/{user_id}_out.mp3")
-        in_file = f"downloads/{user_id}_audiofile.mp3"
-
+        if filetype == "audio":
+            if os.path.exists(f"downloads/{user_id}_out.mp3"):
+                os.remove(f"downloads/{user_id}_out.mp3")
+            in_file = f"downloads/{user_id}_audiofile.mp3"
+        elif filetype == "video":
+            if os.path.exists(f"downloads/{user_id}_trimmed_video.mp4"):
+                os.remove(f"downloads/{user_id}_trimmed_video.mp4")
+            in_file = f"downloads/{user_id}_video_from_user.mp4"
+            
         user_duration = check.split("-")
 
         # User input start of trim time
