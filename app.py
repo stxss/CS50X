@@ -80,13 +80,14 @@ async def filter_audio(client, message):
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
-        await message.reply("Analysing your file")
+        await message.reply("Analysing your file...")
         audiofile = await message.download(f"{chat_id}_audiofile.mp3")
         mimetype = "audio/mpeg"
     elif message.video:
-        await message.reply("Analysing your file")
+        await message.reply("Analysing your file...")
         videofile = await message.download(f"{chat_id}_videofile.mp4")
-        
+        audiofile = helpers.extract(audiofile)
+        mimetype = "audio/mpeg"
 
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
