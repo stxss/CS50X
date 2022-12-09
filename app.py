@@ -253,8 +253,8 @@ async def filter_video(client, message):
         reply_markup=choices,
     )
 
-#    sound = open(audiofile, "rb")
-#    source = {"buffer": sound, "mimetype": mimetype}
+    sound = open(videofile, "rb")
+    source = {"buffer": sound, "mimetype": "video/mp4"}
 #
 #    # Punctuate is for punctuation of the recognized voice
 #    # Utterances is for the separation of phrases, into meaningful semantic units
