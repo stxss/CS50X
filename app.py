@@ -73,7 +73,7 @@ async def join(client, message):
 # Transcription for audio and voice messages with inline keyboard prompt for next actions to take
 
 
-@app.on_message(filters.audio | filters.voice | filters.video)
+@app.on_message(filters.audio | filters.voice)
 async def filter_audio(client, message):
     #print(message)
     chat_id = message.chat.id
@@ -84,17 +84,9 @@ async def filter_audio(client, message):
         await message.reply("Analysing your file...")
         audiofile = await message.download(f"{chat_id}_audiofile.mp3")
         mimetype = "audio/mpeg"
-
-    # But if it is a video, it extracts it's audio beforehand
-    elif message.video:
-        await message.reply("Analysing your file...")
-        videofile = await message.download(f"{chat_id}_video_from_user.mp4")
-        extracted_audio = await helpers.extract("videofile_from_user", chat_id)
-        #audiofile = f"downloads/{chat_id}_extracted_audio.mp3"
-        #mimetype = "audio/mpeg"
     else:
         await message.reply("Something went wrong or you sent an invalid type of file, please try again")
-        
+
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
@@ -220,7 +212,24 @@ async def filter_audio(client, message):
             ]
         )
 
-    elif message.video:
+    await message.reply_text(
+        "Please choose what you want to do with the file",
+        quote=True,
+        reply_markup=choices,
+    )
+
+
+@app.on_message(filters.video)
+async def filter_video(client, message):
+    chat_id = message.chat.id
+
+    if message.video:
+        await message.reply("Analysing your file...")
+        videofile = await message.download(f"{chat_id}_video_from_user.mp4")
+        extracted_audio = await helpers.extract("videofile_from_user", chat_id)
+        audiofile = f"downloads/{chat_id}_extracted_audio.mp3"
+        mimetype = "audio/mpeg"
+
         choices = InlineKeyboardMarkup(
             [
                 [
@@ -235,13 +244,99 @@ async def filter_audio(client, message):
                     InlineKeyboardButton("Extract audio", callback_data="extract"),
                 ],
             ]
+        )        
+
+    else:
+        await message.reply("Something went wrong or you sent an invalid type of file, please try again")
+
+    sound = open(audiofile, "rb")
+    source = {"buffer": sound, "mimetype": mimetype}
+
+    # Punctuate is for punctuation of the recognized voice
+    # Utterances is for the separation of phrases, into meaningful semantic units
+    # utt_split is the time sensibility of said utterances
+    # Paragraphs is similar to utterances but it is to separate in a more appealing appearance
+    # Diarize is for the differentiation of speakers, i.e if there are different voices in an audiofile, there is a separation between speaker 0, speaker 1, etc.
+    # Detect_language is for the detection of all languages supported by Deepgram, which can be verified here: https://developers.deepgram.com/documentation/features/language/
+
+    response = await asyncio.create_task(
+        deepgram.transcription.prerecorded(
+            source,
+            {
+                "punctuate": True,
+                "utterances": False,
+                "utt_split": 0.8,
+                "paragraphs": True,
+                "diarize": True,
+                "detect_language": True,
+            },
+        )
+    )
+
+    # This try except block just fetches the transcription from the audiofile
+    try:
+        reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
+            "transcript"
+        ]
+    except KeyError:
+        pass
+
+    reply_w_timestamp = ""
+
+    # Same as above, but for paragraphs
+    try:
+        list_range = len(
+            response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
+                "paragraphs"
+            ]
+        )
+    except KeyError:
+        await message.reply(
+            "Something went wrong or your audio was invalid/corrupt.\nPlease try again"
         )
 
-    await message.reply_text(
-        "Please choose what you want to do with the file",
-        quote=True,
-        reply_markup=choices,
-    )
+    # Printing the transcriptions with timestamps
+    for i in range(0, list_range + 1):
+        for j in range(0, list_range + 2):
+            try:
+                start_time = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["start"]
+                start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
+
+                end_time = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["end"]
+                end = str(datetime.timedelta(seconds=round(end_time, 3)))[:-3]
+
+                text = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["text"]
+
+                reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
+            except:
+                continue
+
+    with open(
+        os.path.join(
+            os.path.dirname(__file__), f"downloads/{chat_id}_transcription.txt"
+        ),
+        "w",
+        encoding="utf-8",
+    ) as w:
+        w.write(reply)
+
+    with open(
+        os.path.join(
+            os.path.dirname(__file__),
+            f"downloads/{chat_id}_transcription_w_timestamp.txt",
+        ),
+        "w",
+        encoding="utf-8",
+    ) as wt:
+        wt.write(reply_w_timestamp)
+
+
 
 
 # Handling of any type of file that isn't an audiofile, a voice message or a photo
