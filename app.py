@@ -263,82 +263,82 @@ async def filter_video(client, message):
 #    # Diarize is for the differentiation of speakers, i.e if there are different voices in an audiofile, there is a separation between speaker 0, speaker 1, etc.
 #    # Detect_language is for the detection of all languages supported by Deepgram, which can be verified here: https://developers.deepgram.com/documentation/features/language/
 #
-#    response = await asyncio.create_task(
-#        deepgram.transcription.prerecorded(
-#            source,
-#            {
-#                "punctuate": True,
-#                "utterances": False,
-#                "utt_split": 0.8,
-#                "paragraphs": True,
-#                "diarize": True,
-#                "detect_language": True,
-#            },
-#        )
-#    )
-#
-#    # This try except block just fetches the transcription from the audiofile
-#    try:
-#        reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
-#            "transcript"
-#        ]
-#    except KeyError:
-#        pass
-#
-#    reply_w_timestamp = ""
-#
-#    # Same as above, but for paragraphs
-#    try:
-#        list_range = len(
-#            response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
-#                "paragraphs"
-#            ]
-#        )
-#    except KeyError:
-#        await message.reply(
-#            "Something went wrong or your audio was invalid/corrupt.\nPlease try again"
-#        )
-#
-#    # Printing the transcriptions with timestamps
-#    for i in range(0, list_range + 1):
-#        for j in range(0, list_range + 2):
-#            try:
-#                start_time = response["results"]["channels"][0]["alternatives"][0][
-#                    "paragraphs"
-#                ]["paragraphs"][i]["sentences"][j]["start"]
-#                start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
-#
-#                end_time = response["results"]["channels"][0]["alternatives"][0][
-#                    "paragraphs"
-#                ]["paragraphs"][i]["sentences"][j]["end"]
-#                end = str(datetime.timedelta(seconds=round(end_time, 3)))[:-3]
-#
-#                text = response["results"]["channels"][0]["alternatives"][0][
-#                    "paragraphs"
-#                ]["paragraphs"][i]["sentences"][j]["text"]
-#
-#                reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
-#            except:
-#                continue
-#
-#    with open(
-#        os.path.join(
-#            os.path.dirname(__file__), f"downloads/{chat_id}_transcription.txt"
-#        ),
-#        "w",
-#        encoding="utf-8",
-#    ) as w:
-#        w.write(reply)
-#
-#    with open(
-#        os.path.join(
-#            os.path.dirname(__file__),
-#            f"downloads/{chat_id}_transcription_w_timestamp.txt",
-#        ),
-#        "w",
-#        encoding="utf-8",
-#    ) as wt:
-#        wt.write(reply_w_timestamp)
+    response = await asyncio.create_task(
+        deepgram.transcription.prerecorded(
+            source,
+            {
+                "punctuate": True,
+                "utterances": False,
+                "utt_split": 0.8,
+                "paragraphs": True,
+                "diarize": True,
+                "detect_language": True,
+            },
+        )
+    )
+
+    # This try except block just fetches the transcription from the audiofile
+    try:
+        reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
+            "transcript"
+        ]
+    except KeyError:
+        pass
+
+    reply_w_timestamp = ""
+
+    # Same as above, but for paragraphs
+    try:
+        list_range = len(
+            response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
+                "paragraphs"
+            ]
+        )
+    except KeyError:
+        await message.reply(
+            "Something went wrong or your audio was invalid/corrupt.\nPlease try again"
+        )
+
+    # Printing the transcriptions with timestamps
+    for i in range(0, list_range + 1):
+        for j in range(0, list_range + 2):
+            try:
+                start_time = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["start"]
+                start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
+
+                end_time = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["end"]
+                end = str(datetime.timedelta(seconds=round(end_time, 3)))[:-3]
+
+                text = response["results"]["channels"][0]["alternatives"][0][
+                    "paragraphs"
+                ]["paragraphs"][i]["sentences"][j]["text"]
+
+                reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
+            except:
+                continue
+
+    with open(
+        os.path.join(
+            os.path.dirname(__file__), f"downloads/{chat_id}_transcription.txt"
+        ),
+        "w",
+        encoding="utf-8",
+    ) as w:
+        w.write(reply)
+
+    with open(
+        os.path.join(
+            os.path.dirname(__file__),
+            f"downloads/{chat_id}_transcription_w_timestamp.txt",
+        ),
+        "w",
+        encoding="utf-8",
+    ) as wt:
+        wt.write(reply_w_timestamp)
 
 
 
