@@ -208,7 +208,21 @@ async def filter_audio(client, message):
             ]
         )
     elif message.video:
-        
+        choices = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("Transcribe", callback_data="transcribe"),
+                    InlineKeyboardButton(
+                        "Transcribe w/ timestamps",
+                        callback_data="timestamp",
+                    ),
+                ],
+                [
+                    InlineKeyboardButton("Trim audio", callback_data="trim_audio"),
+                    InlineKeyboardButton("Join", callback_data="join"),
+                ],
+            ]
+        )
 
     await message.reply_text(
         "Please choose what you want to do with the file",
