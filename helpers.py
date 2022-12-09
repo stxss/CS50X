@@ -94,8 +94,6 @@ async def extract(message, user_id):
     if message == "video_from_user":
         bash(f"ffmpeg -i video_from_user.mp4 -vn -acodec copy downloads/{user_id}_extracted_audio.mp3")
 
-    await (f"downloads/{user_id}_extracted_audio.mp3")
-
 
 
 # Okay, for some reason, the ffmpeg commands started working in pythonic style in the docker/deployed server only
