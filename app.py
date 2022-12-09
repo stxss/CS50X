@@ -89,7 +89,8 @@ async def filter_audio(client, message):
         elif message.video:
             await message.reply("Analysing your file...")
             videofile = await message.download(f"{chat_id}_video_from_user.mp4")
-            audiofile = helpers.extract("videofile_from_user", chat_id)
+            extracted_audio = await helpers.extract("videofile_from_user", chat_id)
+            audiofile = f"downloads/{chat_id}_extracted_audio.mp3"
             mimetype = "audio/mpeg"
     except:
         await message.reply("Something went wrong, please try again")
@@ -243,7 +244,7 @@ async def filter_audio(client, message):
 
 
 # Handling of any type of file that isn't an audiofile, a voice message or a photo
-@app.on_message(~filters.audio | ~filters.voice | -filters.video | filters.media)
+@app.on_message(~filters.audio | ~filters.voice | ~filters.video | filters.media)
 async def invalid_file(client, message):
 
     if str(message.media) == "MessageMediaType.PHOTO":
