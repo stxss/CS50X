@@ -80,7 +80,9 @@ async def filter_audio(client, message):
     
     #----------------
     async def progress(current, total):
-       print(f"{current * 100 / total:.1f}%")
+        bar = f"{current * 100 / total:.1f}%"
+        await message.reply(bar)
+        
     #----------------
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
