@@ -345,9 +345,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 ),
                 file_name="extracted_audio.mp3",
             )
+            os.remove(f"downloads/{chat_id_for_join.strip()}_extracted_audio.mp4")           
         except:
             await callback.message.reply("Something went wrong, please try again")
-
 
 
     # Handling the click of the transcription and transcription w/timestamps buttons
