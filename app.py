@@ -89,7 +89,7 @@ async def filter_audio(client, message):
 
     #----------------        
 
-        audiofile = await message.download(f"{chat_id}_audiofile.mp3", progress=progress)
+        audiofile = await message.download(f"{chat_id}_audiofile.mp3", progress=progress, progress_args=message)
         mimetype = "audio/mpeg"
 
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
