@@ -87,5 +87,14 @@ async def create(message, filetype, user_id):
         # bash(f'ffmpeg -y -i {input_image} -i {input_audio} -c:a copy downloads/{user_id}_video.mp4')
 
 
+async def extract(message, videofile, user_id)
+
+
+
+
+
+
+
+
 # Okay, for some reason, the ffmpeg commands started working in pythonic style in the docker/deployed server only
 # after installing ethon. I do not know the reason behind this and why, but it works and I am glad it does
