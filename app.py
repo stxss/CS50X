@@ -399,7 +399,6 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
-
 if __name__ == "__main__":
 
     # Running the app
