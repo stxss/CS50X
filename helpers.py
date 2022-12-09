@@ -50,20 +50,36 @@ async def trim_file(message, filetype, user_id):
         pts = "PTS-STARTPTS"
 
         # The actual trim
-        file_trim = input_stream.filter_(
-            "atrim", start=start_trim_time, end=end_trim_time
-        ).filter_("asetpts", pts)
-
-        # Outputting the file
         if filetype == "audio":
+            file_trim = input_stream.filter_(
+                "atrim", start=start_trim_time, end=end_trim_time
+            ).filter_("asetpts", pts)
+
+            # Outputting the file
+        
             output = ffmpeg.output(
                 file_trim, f"downloads/{user_id}_out.mp3", format="mp3"
             ).run()
+
         if filetype == "video":
-            output = ffmpeg.output(
-                file_trim, f"downloads/{user_id}_trimmed_video.mp4", format="mp4"
-            ).run()            
+            video_trim = input_stream.trim(start=start_trim_time, end=end_trim_time
+            ).setpts(pts)
+
+            audio_trim = input_stream.filter_(
+                "atrim", start=start_trim_time, end=end_trim_time
+            ).filter_("asetpts", pts)
+
+            video_and_audio = ffmpeg.concat(video_trim, audio_trim, v=1, a=1)
+
+            # Outputting the file
             
+            output = ffmpeg.output(
+                video_and_audio, f"downloads/{user_id}_trimmed_video.mp4", format="mp4"
+            ).run()
+
+        
+
+
         # bash(f'ffmpeg -i {in_file} -ss {start_trim_time} -to {end_trim_time} downloads/{user_id}_out.mp3')
 
     else:
