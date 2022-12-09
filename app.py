@@ -73,7 +73,7 @@ async def join(client, message):
 # Transcription for audio and voice messages with inline keyboard prompt for next actions to take
 
 
-@app.on_message(filters.audio | filters.voice)
+@app.on_message(filters.audio | filters.voice | filters.video)
 async def filter_audio(client, message):
     #print(message)
     chat_id = message.chat.id
@@ -84,6 +84,9 @@ async def filter_audio(client, message):
         await message.reply("Analysing your file...")
         audiofile = await message.download(f"{chat_id}_audiofile.mp3")
         mimetype = "audio/mpeg"
+    elif message.video:
+        await message.reply("Analysing your file...")
+        videofile = await message.download(f"{chat_id}_video_from_user.mp4")
     else:
         await message.reply("Something went wrong or you sent an invalid type of file, please try again")
 
@@ -103,9 +106,12 @@ async def filter_audio(client, message):
             w.write("sent_img = False")
 
     # Making use of the Deepgram API, where a mimetype and an audiofile are set
-
-    sound = open(audiofile, "rb")
-    source = {"buffer": sound, "mimetype": mimetype}
+    if message.voice or message.audio:
+        sound = open(audiofile, "rb")
+        source = {"buffer": sound, "mimetype": mimetype}
+    elif message.video:
+        sound = open(videofile, "rb")
+        source = {"buffer": sound, "mimetype": "video/mp4"}        
 
     # Punctuate is for punctuation of the recognized voice
     # Utterances is for the separation of phrases, into meaningful semantic units
@@ -212,22 +218,7 @@ async def filter_audio(client, message):
             ]
         )
 
-    await message.reply_text(
-        "Please choose what you want to do with the file",
-        quote=True,
-        reply_markup=choices,
-    )
-
-
-@app.on_message(filters.video)
-async def filter_video(client, message):
-    chat_id = message.chat.id
-
-    if message.video:
-        await message.reply("Analysing your file...")
-        videofile = await message.download(f"{chat_id}_video_from_user.mp4")
-
-
+    elif message.video:
         choices = InlineKeyboardMarkup(
             [
                 [
@@ -244,103 +235,11 @@ async def filter_video(client, message):
             ]
         )        
 
-    else:
-        await message.reply("Something went wrong or you sent an invalid type of file, please try again")
-
     await message.reply_text(
         "Please choose what you want to do with the file",
         quote=True,
         reply_markup=choices,
     )
-
-    sound = open(videofile, "rb")
-    source = {"buffer": sound, "mimetype": "video/mp4"}
-#
-#    # Punctuate is for punctuation of the recognized voice
-#    # Utterances is for the separation of phrases, into meaningful semantic units
-#    # utt_split is the time sensibility of said utterances
-#    # Paragraphs is similar to utterances but it is to separate in a more appealing appearance
-#    # Diarize is for the differentiation of speakers, i.e if there are different voices in an audiofile, there is a separation between speaker 0, speaker 1, etc.
-#    # Detect_language is for the detection of all languages supported by Deepgram, which can be verified here: https://developers.deepgram.com/documentation/features/language/
-#
-    response = await asyncio.create_task(
-        deepgram.transcription.prerecorded(
-            source,
-            {
-                "punctuate": True,
-                "utterances": False,
-                "utt_split": 0.8,
-                "paragraphs": True,
-                "diarize": True,
-                "detect_language": True,
-            },
-        )
-    )
-
-    # This try except block just fetches the transcription from the audiofile
-    try:
-        reply = response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
-            "transcript"
-        ]
-    except KeyError:
-        pass
-
-    reply_w_timestamp = ""
-
-    # Same as above, but for paragraphs
-    try:
-        list_range = len(
-            response["results"]["channels"][0]["alternatives"][0]["paragraphs"][
-                "paragraphs"
-            ]
-        )
-    except KeyError:
-        await message.reply(
-            "Something went wrong or your audio was invalid/corrupt.\nPlease try again"
-        )
-
-    # Printing the transcriptions with timestamps
-    for i in range(0, list_range + 1):
-        for j in range(0, list_range + 2):
-            try:
-                start_time = response["results"]["channels"][0]["alternatives"][0][
-                    "paragraphs"
-                ]["paragraphs"][i]["sentences"][j]["start"]
-                start = str(datetime.timedelta(seconds=round(start_time, 3)))[:-3]
-
-                end_time = response["results"]["channels"][0]["alternatives"][0][
-                    "paragraphs"
-                ]["paragraphs"][i]["sentences"][j]["end"]
-                end = str(datetime.timedelta(seconds=round(end_time, 3)))[:-3]
-
-                text = response["results"]["channels"][0]["alternatives"][0][
-                    "paragraphs"
-                ]["paragraphs"][i]["sentences"][j]["text"]
-
-                reply_w_timestamp += start + " to " + end + "\n" + text + "\n\n"
-            except:
-                continue
-
-    with open(
-        os.path.join(
-            os.path.dirname(__file__), f"downloads/{chat_id}_transcription.txt"
-        ),
-        "w",
-        encoding="utf-8",
-    ) as w:
-        w.write(reply)
-
-    with open(
-        os.path.join(
-            os.path.dirname(__file__),
-            f"downloads/{chat_id}_transcription_w_timestamp.txt",
-        ),
-        "w",
-        encoding="utf-8",
-    ) as wt:
-        wt.write(reply_w_timestamp)
-
-
 
 
 # Handling of any type of file that isn't an audiofile, a voice message or a photo
@@ -407,6 +306,38 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             os.remove(f"downloads/{chat_id_for_join.strip()}_audiofile.mp3")
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
+
+    elif callback.data == "trim_video":
+        try:
+            trim_length = await app.ask(
+                text="Please send the times of the desired trim in [mm:ss - mm:ss].\nFor example: 00:13-01:40",
+                chat_id=chat_id_for_join.strip(),
+                timeout=30,
+            )
+
+            # Calling a helper function for trimming the audio
+            await helpers.trim_file(trim_length, "video", chat_id_for_join.strip())
+
+            # Sending the trimmed audio back to the user
+            await app.send_video(
+                chat_id=chat_id_for_join.strip(),
+                video=os.path.join(
+                    os.path.dirname(__file__),
+                    f"downloads/{chat_id_for_join.strip()}_trimmed_video.mp4",
+                ),
+                file_name="trimmed_video.mp4",
+            )
+
+            # Removing the file from the folder, because it is of no longer use and so it can no longer be accessed
+            os.remove(f"downloads/{chat_id_for_join.strip()}_trimmed_video.mp4")
+            os.remove(f"downloads/{chat_id_for_join.strip()}_video_from_user.mp4")
+        except asyncio.exceptions.TimeoutError:
+            await callback.message.reply("Something went wrong, please try again")
+
+    elif callback.data == "extract":
+        ...
+
+
 
     # Handling the click of the transcription and transcription w/timestamps buttons
     elif callback.data == "transcribe":
