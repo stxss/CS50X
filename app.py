@@ -253,11 +253,6 @@ async def filter_video(client, message):
         reply_markup=choices,
     )
 
-
-
-
-
-
 #    sound = open(audiofile, "rb")
 #    source = {"buffer": sound, "mimetype": mimetype}
 #
