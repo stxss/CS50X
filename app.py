@@ -80,6 +80,7 @@ async def filter_audio(client, message):
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
+        await message.reply("Analyzing your file")
         audiofile = await message.download(f"{chat_id}_audiofile.mp3")
         mimetype = "audio/mpeg"
 
