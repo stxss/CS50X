@@ -87,10 +87,12 @@ async def create(message, filetype, user_id):
         # bash(f'ffmpeg -y -i {input_image} -i {input_audio} -c:a copy downloads/{user_id}_video.mp4')
 
 
-async def extract(message, user_id)
+async def extract(message, user_id):
+    if os.path.exists(f"downloads/{user_id}_video_from_user.mp4"):
+        os.remove(f"downloads/{user_id}_video_from_user.mp4")
 
-
-
+    if message == "video_from_user":
+        
 
 
 

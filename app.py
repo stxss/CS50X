@@ -79,18 +79,20 @@ async def filter_audio(client, message):
     chat_id = message.chat.id
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
-    if message.audio or message.voice:
-        await message.reply("Analysing your file...")
-        audiofile = await message.download(f"{chat_id}_audiofile.mp3")
-        mimetype = "audio/mpeg"
+    try:
+        if message.audio or message.voice:
+            await message.reply("Analysing your file...")
+            audiofile = await message.download(f"{chat_id}_audiofile.mp3")
+            mimetype = "audio/mpeg"
 
-    # But if it is a video, it extracts it's audio beforehand
-    elif message.video:
-        await message.reply("Analysing your file...")
-        videofile = await message.download(f"{chat_id}_video_from_user.mp4")
-        audiofile = helpers.extract("videofile", chat_id)
-        mimetype = "audio/mpeg"
-
+        # But if it is a video, it extracts it's audio beforehand
+        elif message.video:
+            await message.reply("Analysing your file...")
+            videofile = await message.download(f"{chat_id}_video_from_user.mp4")
+            audiofile = helpers.extract("videofile_from_user", chat_id)
+            mimetype = "audio/mpeg"
+    except:
+        await message.reply("Something went wrong, please try again")
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
     # So I opted for a state dictionary in the form of a .py file that contains a chat_id and the boolean value of a sent_img flag.
