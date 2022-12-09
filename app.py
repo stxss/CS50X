@@ -335,7 +335,18 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             await callback.message.reply("Something went wrong, please try again")
 
     elif callback.data == "extract":
-        ...
+        try:
+            await helpers.extract("video_from_user", chat_id_for_join.strip())
+            await app.send_audio(
+                chat_id=chat_id_for_join.strip(),
+                audio=os.path.join(
+                    os.path.dirname(__file__),
+                    f"downloads/{chat_id_for_join.strip()}_extracted_audio.mp3",
+                ),
+                file_name="extracted_audio.mp3",
+            )
+        except:
+            await callback.message.reply("Something went wrong, please try again")
 
 
 

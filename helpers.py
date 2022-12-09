@@ -114,9 +114,22 @@ async def create(message, filetype, user_id):
 async def extract(message, user_id):
     if os.path.exists(f"downloads/{user_id}_video_from_user.mp4"):
         os.remove(f"downloads/{user_id}_video_from_user.mp4")
+    in_file = f"downloads/{user_id}_video_from_user.mp4"
 
     if message == "video_from_user":
-        bash(f"ffmpeg -i video_from_user.mp4 -vn -acodec copy downloads/{user_id}_extracted_audio.mp3")
+        input_stream = ffmpeg.input(in_file)
+        pts = "PTS-STARTPTS"       
+
+        extracted_audio = input_stream.filter_("atrim").filter_("asetpts", pts)
+        
+        # Outputting the file
+        output = ffmpeg.output(
+            extracted_audio, f"downloads/{user_id}_out.mp3", format="mp3"
+        ).run()
+
+
+    if message == "video_from_user":
+        bash(f"ffmpeg -i {user_id}_video_from_user.mp4 -vn -acodec copy downloads/{user_id}_extracted_audio.mp3")
 
 
 
