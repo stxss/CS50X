@@ -88,7 +88,7 @@ async def filter_audio(client, message):
     elif message.video:
         await message.reply("Analysing your file...")
         videofile = await message.download(f"{chat_id}_video_from_user.mp4")
-        audiofile = helpers.extract(audiofile)
+        audiofile = helpers.extract("videofile", chat_id)
         mimetype = "audio/mpeg"
 
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False

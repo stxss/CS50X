@@ -87,7 +87,7 @@ async def create(message, filetype, user_id):
         # bash(f'ffmpeg -y -i {input_image} -i {input_audio} -c:a copy downloads/{user_id}_video.mp4')
 
 
-async def extract(message, videofile, user_id)
+async def extract(message, user_id)
 
 
 
