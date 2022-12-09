@@ -79,7 +79,7 @@ async def filter_audio(client, message):
     chat_id = message.chat.id
     
     #----------------
-    def progress(current, total):
+    async def progress(current, total):
        print(f"{current * 100 / total:.1f}%")
     #----------------
 
