@@ -78,15 +78,17 @@ async def filter_audio(client, message):
     #print(message)
     chat_id = message.chat.id
     
-    #----------------
-    async def progress(current, total):
-        bar = f"{current * 100 / total:.1f}%"
-        await message.reply(f"Analysing your file - {bar}")
-        
-    #----------------
+
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
     if message.audio or message.voice:
+    #----------------
+        async def progress(current, total):
+            bar = f"{current * 100 / total:.1f}%"
+            await message.reply(f"Analysing your file - {bar}")
+
+        #----------------        
+        
         audiofile = await message.download(f"{chat_id}_audiofile.mp3", progress=progress)
         mimetype = "audio/mpeg"
 
