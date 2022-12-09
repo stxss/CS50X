@@ -85,7 +85,7 @@ async def filter_audio(client, message):
     #----------------
         async def progress(current, total, message):
             bar = f"{current * 100 / total:.1f}%"
-            await message.edit_text(f"Analysing your file - {bar}")
+            await message.reply(f"Analysing your file - {bar}")
 
     #----------------        
 
