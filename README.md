@@ -97,7 +97,9 @@ Then, I set a file to have a ```chat_id``` of a user and a ```set_img``` boolean
 
 Then, the bot transcribes and creates two files, one for a normal transcription and another for a transcription with timestamps. Each file, upon being sent to the user, is deleted from the system.
 
-But how are the files sent? 
+<br>
+
+## **But how are the files sent?**
 
 Telegram has inline buttons, which I make use of. When a user sends a valid message (voice, audio or image) this keyboard is prompted, where the user chooses what to do next.
 
@@ -107,7 +109,9 @@ This is where the helpers come to play.
 
 Here, I make use of FFMPEG a complete, cross-platform solution to record, convert and stream audio and video. This is a go-to library for media manipulation. Many people even build their own screen/media recording software and programs out of FFMPEG's source code and build.
 
-The trim function begins with checking if the user has written valid trim parameters, which are checked via a regex pattern. If everything is good here, the audiofile is trimmed. and then sent back to the user
+The trim function begins with checking if the user has written valid trim parameters, which are checked via a regex pattern. If everything is good here, the audio or video file is trimmed and then sent back to the user
+
+In the case of the user sending a video file, I allow for basically the same options, but I also offer the possibility to extract the audio from the video rather than joining it with something else, which wouldn't really make sense.
 
 The create function is responsible for the "join" button, where the user can join a video and an audio of their choice and this is where the flag which I mentioned earlier is checked, if ```sent_img``` is True or False. If this variable is False, it prompts the user to send an image. If it is True, it proceeds to create a video and then sends it back to the user.
 
