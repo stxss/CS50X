@@ -255,7 +255,7 @@ async def invalid_file(client, message):
 
     if str(message.media) == "MessageMediaType.PHOTO":
         maintain_chat_id = str(message.chat.id)
-        imagefile = await message.download(f"{maintain_chat_id}_imagefile.jpg")
+        imagefile = await message.download(f"downloads/{maintain_chat_id}_imagefile.jpg")
         with open(
             f"downloads/{maintain_chat_id}_chat_id.py", "w", encoding="utf-8"
         ) as w:
