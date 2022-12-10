@@ -1,6 +1,6 @@
 # CS50X
 # **ClipCut, a Telegram Bot**
-Video Demo:
+Video Demo: https://youtu.be/rjCBLUduMQQ
 
 # **Description**:
 This was created specifically as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/x/2022/). 
