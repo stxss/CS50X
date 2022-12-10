@@ -79,7 +79,7 @@ async def trim_file(message, filetype, user_id):
                 video_and_audio, f"downloads/{user_id}_trimmed_video.mp4", format="mp4"
             ).run()
 
-        # bash(f'ffmpeg -i {in_file} -ss {start_trim_time} -to {end_trim_time} downloads/{user_id}_out.mp3')
+            bash(f'ffmpeg -i {in_file} -ss {start_trim_time} -to {end_trim_time} downloads/{user_id}_trimmed_video.mp4')
 
     else:
         reply_if_fail = "Invalid range\n\nPlease resend the audio (or forward it again to me) and when selecting the trim option, input a valid range of the times of the desired trim in [mm:ss - mm:ss].\n\nFor example: 00:13-01:40"
