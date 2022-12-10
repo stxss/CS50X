@@ -75,9 +75,9 @@ async def trim_file(message, filetype, user_id):
 
             # Outputting the file
 
-            output = ffmpeg.output(
-                video_and_audio, f"downloads/{user_id}_trimmed_video.mp4", format="mp4"
-            ).run()
+            #output = ffmpeg.output(
+            #    video_and_audio, f"downloads/{user_id}_trimmed_video.mp4", format="mp4"
+            #).run()
 
             bash(f'ffmpeg -i {in_file} -ss {start_trim_time} -to {end_trim_time} downloads/{user_id}_trimmed_video.mp4')
 
