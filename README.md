@@ -72,6 +72,7 @@ When sending a audio/voice message, you are prompted to choose what you want to 
 
 - Join an audio and an image of your choice. (Shine with your meme making capabilities)
 
+- Extract the audio from a video of your choice
 
 To start writing this bot without exposing keys and sensitive information, I created a `.env` file that stored all this information and then loading that info into the main program and a .gitignore file which allowed for this information protection. Had to learn the hard way to avoid creating a `config.py` instead of a `.env` file to achieve the same thing, as this later caused problems with paths of files when deploying the application. So, for anyone reading this, use `.env`.
 
