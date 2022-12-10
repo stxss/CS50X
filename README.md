@@ -116,11 +116,11 @@ Now, the bot is complete and all that is needed is the option to deploy it. I ch
 
 I learned a lot in the process of working with this bot, specifically:
     
-    - Deepened my knowledge of python
-    - Learned how to work with various API's  
-    - Learned how to create and manage a project through GitHub Desktop
-    - Learned Docker
-    - Learned how to deploy an app
+- Deepened my knowledge of python
+- Learned how to work with various API's  
+- Learned how to create and manage a project through GitHub Desktop
+- Learned Docker
+- Learned how to deploy an app
 
 It is worth mentioning, that I am by far a seasoned professional with any of these tools, as a lot of what I've learned was on a rudimentary level but it wes a lot of fun and I'll definetely want to learn and get more knowledgeable in these topics, softwares and systems.
 

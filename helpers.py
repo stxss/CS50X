@@ -28,7 +28,7 @@ async def trim_file(message, filetype, user_id):
             if os.path.exists(f"downloads/{user_id}_trimmed_video.mp4"):
                 os.remove(f"downloads/{user_id}_trimmed_video.mp4")
             in_file = f"downloads/{user_id}_video_from_user.mp4"
-            
+
         user_duration = check.split("-")
 
         # User input start of trim time
@@ -56,14 +56,15 @@ async def trim_file(message, filetype, user_id):
             ).filter_("asetpts", pts)
 
             # Outputting the file
-        
+
             output = ffmpeg.output(
                 file_trim, f"downloads/{user_id}_out.mp3", format="mp3"
             ).run()
 
         # The actual trim for the video
         if filetype == "video":
-            video_trim = input_stream.trim(start=start_trim_time, end=end_trim_time
+            video_trim = input_stream.trim(
+                start=start_trim_time, end=end_trim_time
             ).setpts(pts)
 
             audio_trim = input_stream.filter_(
@@ -73,7 +74,7 @@ async def trim_file(message, filetype, user_id):
             video_and_audio = ffmpeg.concat(video_trim, audio_trim, v=1, a=1)
 
             # Outputting the file
-            
+
             output = ffmpeg.output(
                 video_and_audio, f"downloads/{user_id}_trimmed_video.mp4", format="mp4"
             ).run()
@@ -96,12 +97,6 @@ async def create(message, filetype, user_id):
         input_audio = ffmpeg.input(f"downloads/{user_id}_audiofile.mp3")
         input_image = ffmpeg.input(f"downloads/{user_id}_imagefile.jpg")
 
-        # Setting the width and height of the video
-
-        # probe = ffmpeg.probe(f"downloads/{user_id}_imagefile.jpg")
-        # width = int(probe["streams"][0]["coded_width"])
-        # height = int(probe["streams"][0]["coded_height"])
-
         # Outputting the final video
 
         final_video = ffmpeg.concat(input_image, input_audio, v=1, a=1)
@@ -118,19 +113,17 @@ async def extract(message, user_id):
 
     if message == "video_from_user":
         input_stream = ffmpeg.input(in_file)
-        pts = "PTS-STARTPTS"       
+        pts = "PTS-STARTPTS"
 
         extracted_audio = input_stream.filter_("atrim").filter_("asetpts", pts)
-        
+
         # Outputting the file
         output = ffmpeg.output(
             extracted_audio, f"downloads/{user_id}_extracted_audio.mp3", format="mp3"
         ).run()
 
-
-    #if message == "video_from_user":
+    # if message == "video_from_user":
     #    bash(f"ffmpeg -i downloads/{user_id}_video_from_user.mp4 -vn -acodec copy downloads/{user_id}_extracted_audio.mp3")
-
 
 
 # Okay, for some reason, the ffmpeg commands started working in pythonic style in the docker/deployed server only

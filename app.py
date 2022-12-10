@@ -59,13 +59,18 @@ async def transcribe(client, message):
 @app.on_message(filters.command("trim"))
 async def trim(client, message):
     await message.reply(
-        "Please, send an audio file or a voice message and click 'Trim audio'!"
+        "Please, send an audio, voice or video message and click 'Trim audio' or 'Trim video'!"
     )
 
 
 @app.on_message(filters.command("join"))
 async def join(client, message):
     await message.reply("Please, send an image and an audiofile and then click 'Join'")
+
+
+@app.on_message(filters.command("extract"))
+async def trim(client, message):
+    await message.reply("Please, send a video file 'Extract audio'!")
 
 
 "File handling"
@@ -75,11 +80,11 @@ async def join(client, message):
 
 @app.on_message(filters.audio | filters.voice | filters.video)
 async def filter_audio(client, message):
-    #print(message)
+    # print(message)
     chat_id = message.chat.id
 
     # If a message is an audio or voice file, it downloads the files into the respective folder
-    
+
     if message.audio or message.voice:
         await message.reply("Analysing your file...")
         audiofile = await message.download(f"{chat_id}_audiofile.mp3")
@@ -88,7 +93,9 @@ async def filter_audio(client, message):
         await message.reply("Analysing your file...")
         videofile = await message.download(f"{chat_id}_video_from_user.mp4")
     else:
-        await message.reply("Something went wrong or you sent an invalid type of file, please try again")
+        await message.reply(
+            "Something went wrong or you sent an invalid type of file, please try again"
+        )
 
     # A flag for the existence of an image is set. If there is already an image sent from a certain user, the flag is set to True, if not, it is set to False
     # This helps when calling the join function, as if there wasn't an image I couldn't solve a input verification like one does with synchronous functions (aka try except block)
@@ -111,7 +118,7 @@ async def filter_audio(client, message):
         source = {"buffer": sound, "mimetype": mimetype}
     elif message.video:
         sound = open(videofile, "rb")
-        source = {"buffer": sound, "mimetype": "video/mp4"}        
+        source = {"buffer": sound, "mimetype": "video/mp4"}
 
     # Punctuate is for punctuation of the recognized voice
     # Utterances is for the separation of phrases, into meaningful semantic units
@@ -233,7 +240,7 @@ async def filter_audio(client, message):
                     InlineKeyboardButton("Extract audio", callback_data="extract"),
                 ],
             ]
-        )        
+        )
 
     await message.reply_text(
         "Please choose what you want to do with the file",
@@ -345,10 +352,9 @@ async def choice_from_inline(Client, callback: CallbackQuery):
                 ),
                 file_name="extracted_audio.mp3",
             )
-            os.remove(f"downloads/{chat_id_for_join.strip()}_extracted_audio.mp4")           
+            os.remove(f"downloads/{chat_id_for_join.strip()}_extracted_audio.mp4")
         except asyncio.exceptions.TimeoutError:
             await callback.message.reply("Something went wrong, please try again")
-
 
     # Handling the click of the transcription and transcription w/timestamps buttons
     elif callback.data == "transcribe":
@@ -410,6 +416,7 @@ async def choice_from_inline(Client, callback: CallbackQuery):
             except:
                 await callback.message.reply("Something went wrong, please try again")
 
+
 if __name__ == "__main__":
 
     # Running the app
@@ -423,6 +430,7 @@ if __name__ == "__main__":
     #        await asyncio.sleep(10)
 
     # asyncio.run(main())
+
     # If the app is closed/terminated, delete the downloads folder, which contains the chat_id's of the users
 #    dir = f"downloads"
 #
