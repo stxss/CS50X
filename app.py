@@ -70,7 +70,7 @@ async def join(client, message):
 
 @app.on_message(filters.command("extract"))
 async def trim(client, message):
-    await message.reply("Please, send a video file 'Extract audio'!")
+    await message.reply("Please, send a video file and click 'Extract audio'!")
 
 
 "File handling"
