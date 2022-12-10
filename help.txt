@@ -1,0 +1,20 @@
+Please, send an audio, voice or photo message!
+Type /help for information on how to use this bot!
+
+/start - to start the bot
+/help - to prompt the help menu
+
+/transcribe - transcribe the audio,voice or video file
+/join - create a video from the audio and an image of your choice
+/trim - trim audio or video file
+/extract - extract audio
+
+This bot works as follows:
+
+You can forward or send a voice message, audio file or image.
+When sending a audio/voice or video message, you are prompted to choose what you want to do with the file:
+
+- Have it transcribed (optionally, with timestamps, represented as h:mm:ss:milliseconds)
+- Trim the audio in a mm:ss format. If choosing a time that goes beyond the length of the recording, it is capped to the end of the file. 
+- Join an audio and an image of your choice.
+- Extract the audio in case you sent a video file
